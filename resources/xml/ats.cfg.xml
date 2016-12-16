@@ -45,15 +45,15 @@
 		<property name="format_sql">true</property>
 		
 	   <!-- List of XML mapping files -->
-	   <mapping resource="../resources/Candidate.hbm.xml"/>
-	   <mapping resource="../resources/PositionType.hbm.xml"/>
-	   <mapping resource="../resources/JobSourceType.hbm.xml"/>
-	   <mapping resource="../resources/AttachmentType.hbm.xml"/>
-	   <mapping resource="../resources/ApplicationStatusType.hbm.xml"/>
-	   <mapping resource="../resources/Application.hbm.xml"/>
-	   <mapping resource="../resources/ApplicationAttachment.hbm.xml"/>
-	   <mapping resource="../resources/ApplicationComment.hbm.xml"/>
-	   <mapping resource="../resources/ApplicationContact.hbm.xml"/>
+	   <mapping resource="http://localhost:8080/ats/resources/xml/Candidate.hbm.xml"/>
+	   <mapping resource="http://localhost:8080/ats/resources/xml/PositionType.hbm.xml"/>
+	   <mapping resource="http://localhost:8080/ats/resources/xml/JobSourceType.hbm.xml"/>
+	   <mapping resource="http://localhost:8080/ats/resources/xml/AttachmentType.hbm.xml"/>
+	   <mapping resource="http://localhost:8080/ats/resources/xml/ApplicationStatusType.hbm.xml"/>
+	   <mapping resource="http://localhost:8080/ats/resources/xml/Application.hbm.xml"/>
+	   <mapping resource="http://localhost:8080/ats/resources/xml/ApplicationAttachment.hbm.xml"/>
+	   <mapping resource="http://localhost:8080/ats/resources/xml/ApplicationComment.hbm.xml"/>
+	   <mapping resource="http://localhost:8080/ats/resources/xml/ApplicationContact.hbm.xml"/>
    
    </session-factory>
 </hibernate-configuration>

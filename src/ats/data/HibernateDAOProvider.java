@@ -1,4 +1,4 @@
-package ats.biz;
+package ats.data;
 
 import java.util.Iterator;
 
@@ -11,23 +11,28 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import example.hibernate.Candidate;
 import example.hibernate.CandidateManager;
-import ats.util.HibernateUtil;
 
-public class ApplicationManager {
-	static final Logger logger = LogManager.getLogger(ApplicationManager.class.getName());
-	
+@Component("hibernateDAOProvider")
+@Scope("request")
+public class HibernateDAOProvider {
+	static final Logger logger = LogManager.getLogger(HibernateDAOProvider.class.getName());
+
+
 	List candidates = new ArrayList();
 
 	public static void main(String[] args) {
-		ApplicationManager hw = new ApplicationManager();
+		HibernateDAOProvider hw = new HibernateDAOProvider();
 	}
 
 
 	public List getCandidates() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = HibernateSessionProvider.getSessionFactory().openSession();
 		Transaction tx = null;
 		try
 		{
@@ -63,7 +68,7 @@ public class ApplicationManager {
 	public Candidate getCandidate(Integer candidateId)
 	{
 		Candidate candidate = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = HibernateSessionProvider.getSessionFactory().openSession();
 		Transaction tx = null;
 		try
 		{
@@ -94,7 +99,7 @@ public class ApplicationManager {
 	public Integer addCandidate(Candidate candidate)
 	{
 		Integer candidateId = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = HibernateSessionProvider.getSessionFactory().openSession();
 		Transaction tx = null;
 		try
 		{
@@ -116,7 +121,5 @@ public class ApplicationManager {
 		}
 		return candidateId;		
 	}
-
-
 
 }

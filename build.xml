@@ -102,7 +102,7 @@
 	
 	
 	<!-- Build ATS Application Jar file -->
-	<target name="buildATSJar" depends="test" description="Build application jar file">
+	<target name="buildATSJar" depends="compile" description="Build application jar file">
 		<jar destfile="${dist.dir}/${name}.jar" basedir="${build.dir}">
 			<fileset dir="${build.dir}">
 				<exclude name="example/**/*.*"/>
@@ -128,19 +128,20 @@
 	</target>
 	
 	<!-- Build ATS Application War File -->
-	<target name="buildATSWar" depends="test" description="Build application war file">
+	<target name="buildATSWar" depends="compile" description="Build application war file">
 		<war destfile="${dist.dir}/${name}.war" webxml="${web.dir}/WEB-INF/web.xml">
+			<fileset dir="${basedir}">
+				<include name="**/resources/xml/*.xml"/>
+				<include name="**/resources/jsp/*.jsp"/>
+				<include name="**/resources/i18/*.properties"/>
+			</fileset>			
 			<fileset dir="${web.dir}">
 				<include name="**/index.html"/>
 				<include name="**/dispatcher-servlet.xml"/>
-				<include name="**/*.xml"/>
-				<include name="**/*.jsp"/>
 				<include name="**/*.css"/>
 				<include name="**/*.MF"/>
-				<include name="**/*.xml"/>
-				<include name="**/*.properties"/>
-			</fileset>			
-			<lib dir="${web.dir}/WEB-INF/lib">
+			</fileset>
+			<lib dir="${lib.dir}">
 				<include name="*.jar"/>
 			</lib>
 			<classes dir="${build.dir}" includes="**/*.class"/>

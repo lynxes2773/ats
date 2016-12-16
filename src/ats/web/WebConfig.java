@@ -27,7 +27,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	public ViewResolver viewResolver()
 	{
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/WEB-INF/jsp/");
+		resolver.setPrefix("/resources/jsp/");
 		resolver.setSuffix(".jsp");
 		resolver.setViewClass(org.springframework.web.servlet.view.JstlView.class);
 		return resolver;
@@ -38,8 +38,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setDefaultEncoding("UTF-8");
         String[] strBaseNames = {
-                "WEB-INF/resources/i18/labels",
-                "WEB-INF/resources/i18/validations",
+                "resources/i18/labels",
+                "resources/i18/validations",
         };
         
         messageSource.setBasenames(strBaseNames);

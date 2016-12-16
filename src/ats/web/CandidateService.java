@@ -5,7 +5,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import ats.biz.ApplicationManager;
 import example.hibernate.Candidate;
 import example.util.HibernateExampleUtil;
 
@@ -16,17 +15,19 @@ import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import ats.data.HibernateDAOProvider;
+
 @Component("atsService")
 @Service
 @Scope("request")
 public class CandidateService implements java.io.Serializable{
 	
 	private List candidates = new ArrayList();
-	ApplicationManager manager = null;
+	HibernateDAOProvider manager = null;
 	
 	public CandidateService()
 	{
-		manager = new ApplicationManager();
+		manager = new HibernateDAOProvider();
 		candidates = manager.getCandidates();
 	}
 
@@ -40,7 +41,7 @@ public class CandidateService implements java.io.Serializable{
 	
 	public Candidate addCandidate(Candidate candidate)
 	{
-		manager = new ApplicationManager();
+		manager = new HibernateDAOProvider();
 		Integer candidateId = manager.addCandidate(candidate);
 		Candidate fetchedCandidate = manager.getCandidate(candidateId);
 		

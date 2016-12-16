@@ -10,7 +10,7 @@ import java.util.Iterator;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 
-import ats.util.HibernateDAOProvider;
+import ats.data.HibernateSessionProvider;
 
 import javax.persistence.*;
 
@@ -59,7 +59,7 @@ public class CandidateManager {
 	}
 	
 	public List getCandidates() {
-		Session session = HibernateDAOProvider.getSessionFactory().openSession();
+		Session session = HibernateSessionProvider.getSessionFactory().openSession();
 		Transaction tx = null;
 		try
 		{
