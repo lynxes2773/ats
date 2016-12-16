@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="example.hibernate.Candidate" table="Candidate">
+		<id name="candidateId" column="candidate_id">
+			<generator class="increment"/>
+		</id>
+		<property name="firstName" column="first_name"/>
+		<property name="lastName" column="last_name"/>
+		<property name="dob" column="date_of_birth"/>
+		<property name="gender" column="gender"/>
+		<property name="email" column="email"/>
+		<property name="phone" column="phone"/>
+		<property name="intlDialingCode" column="intl_dialing_code"/>
+		<property name="streetAddress1" column="street_address_1"/>
+		<property name="streetAddress2" column="street_address_2"/>
+		<property name="city" column="city"/>
+		<property name="state" column="state"/>
+		<property name="zipCode" column="zipcode"/>
+		<property name="country" column="country"/>
+		<property name="status" column="status"/>
+		<property name="summary" column="summary"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+<!-- configuration details go here -->
+
+
+	<context:component-scan base-package="ats.web" />
+	
+	<!-- Mapping URLs to their Controllers-->
+	<bean id="simpleUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/candidates.htm">candidateController</prop>
+				<prop key="/addNewCandidate.htm">candidateController</prop>
+				<prop key="/addSubmittedCandidate.htm">candidateController</prop>
+			</props>
+		</property>
+	</bean>	
+	
+ 
+ 	<!--  Beans related to reading messages from property files -->	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+  		<property name="validationMessageSource" ref="messageSource"/>
+	</bean>
+	
+	<mvc:annotation-driven validator="validator"/>
+	
+	
+	<!--  
+	<bean id="atsService" class="ats.web.CandidateService" scope="request"/>
+	
+	<bean id="atsController" class="ats.web.CandidateController" scope="request">
+		<property name="atsService" ref="atsService"/>
+	</bean>
+	-->
+
+	<!--  
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	-->
+</beans>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="ats.entity">
+	<class name="ApplicationStatusType" table="application_status_master" mutable="false">
+		<id name="id" column="application_status_id">
+			<generator class="increment"/>
+		</id>
+		<property name="applicationStstusTypeName" column="application_status_description" not-null="true"/>
+	</class>	
+</hibernate-mapping>

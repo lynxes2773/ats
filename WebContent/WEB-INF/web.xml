@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>Application Tracking System</display-name>
+
+	
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+	    <param-value>
+	     /WEB-INF/dispatcher-servlet.xml
+		</param-value>
+  </context-param>
+  
+  <listener>
+    <listener-class>
+	  		org.springframework.web.context.ContextLoaderListener
+	  	</listener-class>
+  </listener>
+  
+  
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>
+	    org.springframework.web.servlet.DispatcherServlet
+	</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>*.htm</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>candidateService</servlet-name>
+   	<servlet-class>
+	    ats.web.servlets.CandidateServiceServlet
+	</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>candidateService</servlet-name>
+    <url-pattern>/candidateService</url-pattern>
+  </servlet-mapping>  
+  
+  <jsp-config>
+  	<taglib>
+  		<taglib-uri>/spring</taglib-uri>
+  		<taglib-location>/WEB-INF/tld/spring-form.tld</taglib-location>
+  	</taglib>
+  </jsp-config>
+  
+  
+</web-app>

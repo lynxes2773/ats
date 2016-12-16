@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="ats.entity">
+	<class name="ApplicationAttachment" table="APPLICATION_ATTACHMENTS">
+		<id name="id" column="attachment_id">
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="application" column="APPLICATION_ID" class="Application" not-null="true"/>
+		<property name="attachmentFilename" column="ATTACHMENT_FILENAME"/>
+		<property name="attachmentType" column="ATTACHMENT_TYPE_NAME"/>
+		<property name="attachmentContent" column="ATTACHMENT_CONTENT"/>
+	</class>
+</hibernate-mapping>

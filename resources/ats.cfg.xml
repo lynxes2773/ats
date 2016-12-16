@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">
+     		 org.hibernate.dialect.MySQLDialect
+  		</property>
+  		<property name="hibernate.connection.driver_class">
+      		com.mysql.jdbc.Driver
+   		</property>
+   		<property name="hibernate.connection.url">
+      		jdbc:mysql://127.0.0.1:3306/test
+   		</property>
+   		<property name="hibernate.connection.username">
+      		test
+   		</property>
+   		<property name="hibernate.connection.password">
+      		password
+   		</property>
+   		
+  		
+		<property name="hibernate.connection.provider_class">
+			org.hibernate.connection.C3P0ConnectionProvider
+		</property>
+		
+		<!--  Hibernate Cache Settings-->
+		<property name="hibernate.cache.use_second_level_cache">false</property>
+		<property name="hibernate.cache.use_query_cache">false</property> 
+   		
+		<!--  Hibernate Connection Pool Settings-->   		 
+   		<property name="hibernate.c3p0.min_size">5</property>
+		<property name="hibernate.c3p0.max_size">50</property>
+		<property name="hibernate.c3p0.timeout">300</property>
+		<property name="hibernate.c3p0.max_statements">50</property>
+		<property name="hibernate.c3p0.idle_test_period">600</property>
+
+    	<property name="preferredTestQuery">SELECT 1 FROM DUAL</property>
+    	<property name="testConnectionOnCheckin">true</property>
+    	<property name="testConnectionOnCheckout">false</property>
+    	<property name="idleConnectionTestPeriod">300</property> <!-- 5 minutes -->
+
+		<!-- Show and print nice SQL on stdout -->
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		
+	   <!-- List of XML mapping files -->
+	   <mapping resource="../resources/Candidate.hbm.xml"/>
+	   <mapping resource="../resources/PositionType.hbm.xml"/>
+	   <mapping resource="../resources/JobSourceType.hbm.xml"/>
+	   <mapping resource="../resources/AttachmentType.hbm.xml"/>
+	   <mapping resource="../resources/ApplicationStatusType.hbm.xml"/>
+	   <mapping resource="../resources/Application.hbm.xml"/>
+	   <mapping resource="../resources/ApplicationAttachment.hbm.xml"/>
+	   <mapping resource="../resources/ApplicationComment.hbm.xml"/>
+	   <mapping resource="../resources/ApplicationContact.hbm.xml"/>
+   
+   </session-factory>
+</hibernate-configuration>
