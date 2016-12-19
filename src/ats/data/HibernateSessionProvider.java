@@ -8,31 +8,30 @@ import org.hibernate.cfg.Configuration;
  
 public class HibernateSessionProvider
 {
-     
-    private static SessionFactory sessionFactory;
+	private static String PROD_CONFIG_LOCATION = "http://localhost:8080/ats/resources/xml/ats.cfg.xml";
+	private static String TEST_CONFIG_LOCATION = "../resources/xml/ats.cfg.xml";
+
+	private static SessionFactory sessionFactory;
+
     static final Logger logger = LogManager.getLogger(HibernateSessionProvider.class.getName());
     
     static
     {
         try 
         {
-            sessionFactory = new Configuration().configure("http://localhost:8080/ats/resources/xml/ats.cfg.xml").buildSessionFactory();
+        	sessionFactory = new Configuration().configure(PROD_CONFIG_LOCATION).buildSessionFactory();
         } 
-        catch (Throwable e) 
+        catch (Exception e) 
         {
-        	throw new ExceptionInInitializerError(e);
+        	e.printStackTrace();
         }
     }
- 
-    public static void setSessionFactory(SessionFactory sessionFactory) {
-		HibernateSessionProvider.sessionFactory = sessionFactory;
+     
+    public static SessionFactory getSessionFactory() {
+		return sessionFactory;
 	}
 
-	public static SessionFactory getSessionFactory(){
-        return sessionFactory;
-    }
-     
-    public static void shutDown(){
+	public static void shutDown(){
         //closes caches and connections
         getSessionFactory().close();
     }

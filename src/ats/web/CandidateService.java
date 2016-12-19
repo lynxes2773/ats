@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import ats.data.HibernateDAOProvider;
+import ats.data.DAOProviderHibernateImpl;
 
 @Component("atsService")
 @Service
@@ -23,11 +23,11 @@ import ats.data.HibernateDAOProvider;
 public class CandidateService implements java.io.Serializable{
 	
 	private List candidates = new ArrayList();
-	HibernateDAOProvider manager = null;
+	DAOProviderHibernateImpl manager;
 	
 	public CandidateService()
 	{
-		manager = new HibernateDAOProvider();
+		manager = new DAOProviderHibernateImpl();
 		candidates = manager.getCandidates();
 	}
 
@@ -41,7 +41,7 @@ public class CandidateService implements java.io.Serializable{
 	
 	public Candidate addCandidate(Candidate candidate)
 	{
-		manager = new HibernateDAOProvider();
+		manager = new DAOProviderHibernateImpl();
 		Integer candidateId = manager.addCandidate(candidate);
 		Candidate fetchedCandidate = manager.getCandidate(candidateId);
 		

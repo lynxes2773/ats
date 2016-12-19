@@ -9,18 +9,18 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import ats.data.HibernateDAOProvider;
+import ats.data.DAOProviderHibernateImpl;
 import ats.data.HibernateSessionProvider;
 import example.hibernate.Candidate;
 
 public class HibernateDAOProviderTest extends TestCase{
 	
-	private HibernateDAOProvider manager;
+	private DAOProviderHibernateImpl manager;
 	private static SessionFactory sessionFactory;
 	
 	protected void setUp() throws Exception
 	{
-        manager = new HibernateDAOProvider();
+        manager = new DAOProviderHibernateImpl();
 	}
 	
 	public void testGetCandidates()
@@ -32,7 +32,7 @@ public class HibernateDAOProviderTest extends TestCase{
 	
 	public void testAddCanddiate()
 	{
-		HibernateDAOProvider manager = new HibernateDAOProvider();
+		DAOProviderHibernateImpl manager = new DAOProviderHibernateImpl();
 		Candidate candidate = new Candidate();
 		candidate.setFirstName("John");
 		candidate.setLastName("Doe");
@@ -45,7 +45,7 @@ public class HibernateDAOProviderTest extends TestCase{
 	
 	public void testGetCandidate()
 	{
-		HibernateDAOProvider manager = new HibernateDAOProvider();
+		DAOProviderHibernateImpl manager = new DAOProviderHibernateImpl();
 		Candidate candidate = manager.getCandidate(new Integer(1));
 		assertNotNull(candidate);
 		assertNotNull(candidate.getCandidateId());

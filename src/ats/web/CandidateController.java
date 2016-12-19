@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
-import ats.data.HibernateDAOProvider;
+import ats.data.DAOProviderHibernateImpl;
 import example.hibernate.Candidate;
 
 import java.util.List;

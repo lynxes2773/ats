@@ -4,16 +4,20 @@
 
 	
   <context-param>
-    <param-name>contextConfigLocation</param-name>
+    	<param-name>contextConfigLocation</param-name>
 	    <param-value>
-	     /WEB-INF/dispatcher-servlet.xml
+		     /WEB-INF/dispatcher-servlet.xml
 		</param-value>
+  </context-param>
+  <context-param>
+    <param-name>spring.profiles.active</param-name>
+    <param-value>dev, test, prod</param-value>
   </context-param>
   
   <listener>
     <listener-class>
 	  		org.springframework.web.context.ContextLoaderListener
-	  	</listener-class>
+	</listener-class>
   </listener>
   
   

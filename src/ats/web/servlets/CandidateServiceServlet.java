@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ats.data.HibernateDAOProvider;
+import ats.data.DAOProviderHibernateImpl;
 
 import javax.servlet.ServletContext;
 import javax.servlet.RequestDispatcher;
@@ -42,7 +42,7 @@ public class CandidateServiceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		HibernateDAOProvider manager = new HibernateDAOProvider();
+		DAOProviderHibernateImpl manager = new DAOProviderHibernateImpl();
 		List candidates = manager.getCandidates();
 		request.setAttribute("candidates", candidates);
 		

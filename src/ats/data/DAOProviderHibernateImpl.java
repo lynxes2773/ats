@@ -3,6 +3,7 @@ package ats.data;
 import java.util.Iterator;
 
 
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,18 +21,18 @@ import example.hibernate.CandidateManager;
 
 @Component("hibernateDAOProvider")
 @Scope("request")
-public class HibernateDAOProvider {
-	static final Logger logger = LogManager.getLogger(HibernateDAOProvider.class.getName());
-
-
+public class DAOProviderHibernateImpl {
+	static final Logger logger = LogManager.getLogger(DAOProviderHibernateImpl.class.getName());
+	
 	List candidates = new ArrayList();
 
 	public static void main(String[] args) {
-		HibernateDAOProvider hw = new HibernateDAOProvider();
+		DAOProviderHibernateImpl hw = new DAOProviderHibernateImpl();
 	}
 
 
 	public List getCandidates() {
+
 		Session session = HibernateSessionProvider.getSessionFactory().openSession();
 		Transaction tx = null;
 		try
