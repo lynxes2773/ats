@@ -12,7 +12,7 @@
 		    padding: 0;
 		}
 	</style>
-	<link rel="stylesheet" href="ats.css">
+	<link rel="stylesheet" href="resources/styles/ats.css">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title><spring:message code="label.browser.title"/></title>
 </head>
