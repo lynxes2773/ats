@@ -1,11 +1,9 @@
-	<tr><td>&nbsp;</td></tr>
-	<tr>
-		<td colspan='100%' align='center'>
-			<table cellpadding=0 cellspacing=0>
-				<tr><td>All Rights Reserved &copy; ATS Systems Inc.</td></tr>
-			</table>
-		</td>
-	</tr>
-</table>
+			<div id="footer">
+				<table cellpadding=0 cellspacing=0 width=100%>
+					<tr><td align='center' valign='center' height=50><p class="footer-text">All Rights Reserved &copy; ATS Systems Inc.</p></td></tr>
+				</table>
+				
+			</div>
+	</div>
 </body>
 </html>

@@ -45,7 +45,7 @@ public class CandidateController extends AbstractController  {
 	{
 		return new ModelAndView("newcandidate", "candidate", new Candidate());
 	}
-	
+		
 	//Validation not happening; empty values going to database
 	@RequestMapping(value="/addSubmittedCandidate.htm", method=RequestMethod.POST)
 	public ModelAndView addSubmittedCandidate(@Valid @ModelAttribute("candidate") Candidate candidate, BindingResult errors)
