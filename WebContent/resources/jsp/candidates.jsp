@@ -27,5 +27,8 @@
 					</c:forEach>
 				</table>
 			</div>	
+			<div class="post-content-spacing">
+				&nbsp;
+			</div>
 		</div>
 <%@ include file="/resources/jsp/footer.jsp" %>
