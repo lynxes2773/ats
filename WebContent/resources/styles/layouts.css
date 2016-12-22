@@ -19,10 +19,9 @@ body {
   position: relative;
   margin: 0;
   min-height: 100%;
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: 12px;
   background-color: #EFEFEF;
-
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 10px;
 }
 
 #main {
@@ -45,6 +44,7 @@ body {
 	max-width: 1280px;
 	height: 30px;
 	margin: 0 auto;
+	padding-top: 3px;
 	float: top;
 }
 
@@ -68,7 +68,7 @@ body {
 	width: 85%;
 	height: 35px;
 	margin-left: 50px;
-    padding-top: 10px;  
+    padding-top: 5px;  
     padding-right: 0px;  
     padding-left: 0px;  
 	
@@ -92,15 +92,18 @@ body {
 }
 
 #footer-box {
-	background-color: #368BC1;
-	height: 50px;
+	background-color: #5E676B;
+	height: 35px;
 	max-width: 1280px;
 	margin: 0 auto;
-	margin-bottom: 0px;
-	float: bottom, center;
+	padding-top: 10px;
 }
 
 .footer {
-  position: relative;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
   margin-bottom: 0;
+  margin: 0 auto;
 }

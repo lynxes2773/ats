@@ -25,7 +25,7 @@
 				<p class="heading1"><spring:message code="label.header.title"/></p>
 			</div>
 			<div id="nav">
-				<table cellpadding=0 cellspacing=0>
+				<table class="nav-menu" cellpadding=0 cellspacing=0>
 					<tr>
 						<td><a class="headerLinks" href="http://localhost:8080/ats/candidates.htm"><spring:message code="label.header.menu.candidates"/></a></td>
 						<td width=10>|</td>

@@ -3,17 +3,17 @@
 			<div id="page-title-area">
 				<table border=0 cellspacing=0 cellpadding=0>
 					<tr>
-						<td valign='bottom'><p class="heading2"><spring:message code="label.candidates.header"/></p></td>
+						<td valign='bottom'><span class="heading2"><spring:message code="label.candidates.header"/></span></td>
 						<td width=25>&nbsp;</td>
 						<td valign='bottom'><a href="http://localhost:8080/ats/addNewCandidate.htm" class="free"><spring:message code="label.candidates.link.add"/></a></td>
 					</tr>
 				</table>
 			</div>
 			<div class="list-content-box">
-				<table border=1 bordercolor='#D1D0CE' cellpadding=2 cellspacing=0 width=75%>
+				<table class="listing" border=1 bordercolor='#EFEEEC' cellpadding=2 cellspacing=0 width=75%>
 						<tr bgcolor='#F0F8FF'>
 							<td><spring:message code="label.candidates.listcolumnheader.name"/></td>
-							<td><spring:message code="label.candidates.listcolumnheader.gender"/></td>
+							<td align='center'><spring:message code="label.candidates.listcolumnheader.gender"/></td>
 							<td><spring:message code="label.candidates.listcolumnheader.email"/></td>
 							<td><spring:message code="label.candidates.listcolumnheader.id"/></td>
 						</tr>
