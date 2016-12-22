@@ -48,7 +48,7 @@ a.free:hover{
 
 a.headerLinks:link, a.headerLinks:visited, a.headerLinks:active {
     color: #368BC1;
-    padding: 10px 15px;
+    padding: 0px 10px;
     text-align: left;
     text-decoration: none;
     display: inline-block;    

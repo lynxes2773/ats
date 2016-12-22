@@ -5,6 +5,8 @@
 <html margin-top=0 padding=0>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Cache-Control" content="no-cache"><meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="0">
 	<style>
 	html, body
 	{
@@ -23,7 +25,7 @@
 				<p class="heading1"><spring:message code="label.header.title"/></p>
 			</div>
 			<div id="nav">
-				<table cellpadding=0 cellspacing=4>
+				<table cellpadding=0 cellspacing=0>
 					<tr>
 						<td><a class="headerLinks" href="http://localhost:8080/ats/candidates.htm"><spring:message code="label.header.menu.candidates"/></a></td>
 						<td width=10>|</td>

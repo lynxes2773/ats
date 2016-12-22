@@ -1,42 +1,65 @@
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 html, body
 {
     margin: 0;
     padding: 0;
 }
 
-body
-{
-	background-color: #CDCDCD;
+body {
+  position: relative;
+  margin: 0;
+  min-height: 100%;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 12px;
+  background-color: #EFEFEF;
+
 }
 
 #main {
-	max-width: 1280px;
+	max-width: 100%;
 	margin:0 auto;
-	background-color: #CDCDCD;
+	background-color: #EFEFEF;
+	align-items: center;
 }
 
 #header {
 	background-color: #368BC1;
 	height: 50px;
+	max-width: 1280px;
+	margin: 0 auto;
 }
+
 
 #nav {
 	background-color: #F0F8FF;
-	height: 50px;
 	max-width: 1280px;
+	height: 30px;
+	margin: 0 auto;
 	float: top;
 }
 
 #content-area {
 	background-color: #FFFFFF;
-	border-width: 1;
-	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #DDDDDD;
 	max-width: 1280px;
-	margin-left: 0px;
-	margin-right: 0px;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	height: auto;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	float: top, center;
+    box-shadow: 5px 5px 5px #DDDDDD;
 }
 
 #page-title-area {
@@ -51,6 +74,15 @@ body
 	
 }
 
+#post-content-spacing {
+	background-color: #FFFFFF;
+	border-collapse: collapse;
+	border-color: #FFFFFF;
+	width: 85%;
+	height: 35px;
+	margin-left: 50px;
+}
+
 .list-content-box {
 	background-color: #FFFFFF;
 	width: 85%;
@@ -59,10 +91,16 @@ body
 	margin-bottom: 5px;
 }
 
-#footer {
+#footer-box {
 	background-color: #368BC1;
 	height: 50px;
 	max-width: 1280px;
-	margin-top: 0px;
-	float: top;
+	margin: 0 auto;
+	margin-bottom: 0px;
+	float: bottom, center;
+}
+
+.footer {
+  position: relative;
+  margin-bottom: 0;
 }
