@@ -21,7 +21,7 @@ body {
   min-height: 100%;
   background-color: #EFEFEF;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 #main {
@@ -32,7 +32,7 @@ body {
 }
 
 #header {
-	background-color: #368BC1;
+	background-color: #276F77;
 	height: 50px;
 	max-width: 1280px;
 	margin: 0 auto;
@@ -40,7 +40,7 @@ body {
 
 
 #nav {
-	background-color: #F0F8FF;
+	background-color: #DBDAD8;
 	max-width: 1280px;
 	height: 30px;
 	margin: 0 auto;
@@ -79,7 +79,7 @@ body {
 	border-collapse: collapse;
 	border-color: #FFFFFF;
 	width: 85%;
-	height: 35px;
+	height: 100px;
 	margin-left: 50px;
 }
 
@@ -93,7 +93,7 @@ body {
 
 #footer-box {
 	background-color: #5E676B;
-	height: 35px;
+	height: 55px;
 	max-width: 1280px;
 	margin: 0 auto;
 	padding-top: 10px;

@@ -6,12 +6,12 @@
 }
 
 .heading1 {
-	color: #FEFCFF;
+	color: #D6A128;
 	padding: 5px 15px;
     text-align: left;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     font-style: normal;
-    font-size: 26px;
+    font-size: 24px;
 }
 
 .heading2 {
@@ -54,22 +54,35 @@ table.listing {
     font-variant: normal normal;
 }
 
+tr.listing {
+	transition: background 0.2s ease-in;
+}
+
+tr.listing:hover {
+  background-color: #F9F8F6;
+}
+
+td.listing-header {
+	font-color: #2C3539;
+	font-weight: bold;	
+}
+
 a.free:link, a.free:visited, a.free:active {
-	color: #368BC1;
+	color: #3B838B;
     text-decoration: none;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     font-size: 12px;
 }	
 
 a.free:hover{
-	color: #003B71;
+	color: #00474F;
 	text-decoration: none;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     font-size: 12px;
 }
 
 a.headerLinks:link, a.headerLinks:visited, a.headerLinks:active {
-    color: #368BC1;
+    color: #3B838B;
     padding: 5px 15px;
     text-align: left;
     text-decoration: none;
@@ -78,7 +91,7 @@ a.headerLinks:link, a.headerLinks:visited, a.headerLinks:active {
 }
 
 a.headerLinks:hover {
-    color: #003B71;
+    color: #00474F;
     padding: 5px 15px;
     text-align: left;
     text-decoration: none;
