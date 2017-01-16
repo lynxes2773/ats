@@ -47,7 +47,7 @@ table.listing {
     white-space: normal;
     line-height: normal;
     font-weight: normal;
-    font-size: 10px;
+    font-size: 12px;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     color: -internal-quirk-inherit;
     text-align: start;
@@ -59,7 +59,7 @@ tr.listing {
 }
 
 tr.listing:hover {
-  background-color: #F9F8F6;
+  background-color: #BCC6CC;
 }
 
 td.listing-header {

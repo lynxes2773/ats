@@ -9,7 +9,7 @@ html {
   box-sizing: inherit;
 }
 
-html, body
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td
 {
     margin: 0;
     padding: 0;
@@ -34,14 +34,14 @@ body {
 #header {
 	background-color: #276F77;
 	height: 50px;
-	max-width: 1280px;
+	max-width: 60%;
 	margin: 0 auto;
 }
 
 
 #nav {
 	background-color: #DBDAD8;
-	max-width: 1280px;
+	max-width: 60%;
 	height: 30px;
 	margin: 0 auto;
 	padding-top: 3px;
@@ -53,7 +53,7 @@ body {
 	border-style: solid;
 	border-width: 1px;
 	border-color: #DDDDDD;
-	max-width: 1280px;
+	max-width: 55%;
 	height: auto;
 	margin: 0 auto;
 	margin-top: 20px;
@@ -94,7 +94,7 @@ body {
 #footer-box {
 	background-color: #5E676B;
 	height: 55px;
-	max-width: 1280px;
+	max-width: 60%;
 	margin: 0 auto;
 	padding-top: 10px;
 }
