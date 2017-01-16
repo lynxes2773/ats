@@ -9,7 +9,7 @@
 					</tr>
 				</table>
 			</div>
-			<div class="list-content-box">
+			<div class="main-content-box">
 				<table class="listing" border=1 bordercolor='#EFEEEC' cellpadding=2 cellspacing=0 width=75%>
 						<tr bgcolor='#EFEEEC'>
 							<td><spring:message code="label.candidates.listcolumnheader.name"/></td>

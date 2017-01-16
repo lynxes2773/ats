@@ -67,6 +67,17 @@ td.listing-header {
 	font-weight: bold;	
 }
 
+table.form {
+    white-space: normal;
+    line-height: normal;
+    font-weight: normal;
+    font-size: 12px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    color: -internal-quirk-inherit;
+    text-align: start;
+    font-variant: normal normal;
+}
+
 a.free:link, a.free:visited, a.free:active {
 	color: #3B838B;
     text-decoration: none;

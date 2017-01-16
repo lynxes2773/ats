@@ -7,6 +7,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Cache-Control" content="no-cache"><meta http-equiv="Pragma" content="no-cache">
 	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
 	html, body
 	{
@@ -14,8 +16,10 @@
 	    padding: 0;
 	}
 	</style>
+	<link rel="stylesheet" href="resources/styles/bootstrap.min.css">
 	<link rel="stylesheet" href="resources/styles/content.css">
 	<link rel="stylesheet" href="resources/styles/layouts.css">
+	<link rel="stylesheet" href="resources/styles/formcontrols.css">
 	<link rel="stylesheet" href="resources/styles/untested.css">
 	<title><spring:message code="label.browser.title"/></title>
 </head>
