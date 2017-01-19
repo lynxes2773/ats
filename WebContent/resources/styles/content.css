@@ -54,6 +54,18 @@ table.listing {
     font-variant: normal normal;
 }
 
+table.entity-detail {
+    white-space: normal;
+    line-height: normal;
+    font-weight: normal;
+    font-size: 12px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    color: -internal-quirk-inherit;
+    text-align: start;
+    font-variant: normal normal;
+}
+
+
 tr.listing {
 	transition: background 0.2s ease-in;
 }

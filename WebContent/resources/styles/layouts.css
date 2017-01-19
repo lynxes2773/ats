@@ -86,6 +86,8 @@ body {
 .main-content-box {
 	background-color: #FFFFFF;
 	width: 85%;
+	min-height: 450px;
+	height: auto;
 	margin-left: 50px;
 	margin-top: 5px;
 	margin-bottom: 5px;
