@@ -40,15 +40,15 @@ public class CandidateServiceServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		DAOProviderHibernateImpl manager = new DAOProviderHibernateImpl();
-		List candidates = manager.getCandidates();
-		request.setAttribute("candidates", candidates);
-		
-		ServletContext ctx = this.getServletContext();
-		RequestDispatcher dispatcher = ctx.getRequestDispatcher(this.CANDIDATES_PAGE);
-		dispatcher.forward(request, response);
+//		// TODO Auto-generated method stub
+//		
+//		DAOProviderHibernateImpl manager = new DAOProviderHibernateImpl();
+//		List candidates = manager.getCandidates();
+//		request.setAttribute("candidates", candidates);
+//		
+//		ServletContext ctx = this.getServletContext();
+//		RequestDispatcher dispatcher = ctx.getRequestDispatcher(this.CANDIDATES_PAGE);
+//		dispatcher.forward(request, response);
 	}
 
 	/**

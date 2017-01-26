@@ -133,8 +133,8 @@
 	<target name="buildATSWar" depends="compile" description="Build application war file">
 		<war destfile="${dist.dir}/${name}.war" webxml="${web.dir}/WEB-INF/web.xml">
 			<fileset dir="${basedir}">
-				<include name="**/resources/xml/*.xml"/>
 				<include name="**/resources/i18/*.properties"/>
+				<include name="**/resources/config/*.properties"/>
 			</fileset>			
 			<fileset dir="${web.dir}">
 				<include name="**/resources/jsp/*.jsp"/>
@@ -147,7 +147,9 @@
 			<lib dir="${lib.dir}">
 				<include name="*.jar"/>
 			</lib>
-			<classes dir="${build.dir}" includes="**/*.class"/>
+			<classes dir="${build.dir}">
+				<include name="**/*.class"/>
+			</classes>
 		</war>
 		<copy todir="${tomcat.deploy.dir}">
 		    <fileset dir="${dist.dir}">

@@ -3,6 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
+		<!--  
 		<property name="hibernate.dialect">
      		 org.hibernate.dialect.MySQLDialect
   		</property>
@@ -24,11 +25,9 @@
 			org.hibernate.connection.C3P0ConnectionProvider
 		</property>
 		
-		<!--  Hibernate Cache Settings-->
 		<property name="hibernate.cache.use_second_level_cache">false</property>
 		<property name="hibernate.cache.use_query_cache">false</property> 
    		
-		<!--  Hibernate Connection Pool Settings-->   		 
    		<property name="hibernate.c3p0.min_size">5</property>
 		<property name="hibernate.c3p0.max_size">50</property>
 		<property name="hibernate.c3p0.timeout">300</property>
@@ -36,13 +35,13 @@
 		<property name="hibernate.c3p0.idle_test_period">600</property>
 
     	<property name="preferredTestQuery">SELECT 1 FROM DUAL</property>
-    	<property name="testConnectionOnCheckin">true</property>
+    	<property name="testConnectionOnCheckin">false</property>
     	<property name="testConnectionOnCheckout">false</property>
-    	<property name="idleConnectionTestPeriod">300</property> <!-- 5 minutes -->
+    	<property name="idleConnectionTestPeriod">300</property>
 
-		<!-- Show and print nice SQL on stdout -->
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
+		-->
 		
 	   <!-- List of XML mapping files -->
 	   <mapping resource="http://localhost:8080/ats/resources/xml/Candidate.hbm.xml"/>

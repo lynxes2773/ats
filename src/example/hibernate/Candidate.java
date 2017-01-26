@@ -4,41 +4,79 @@ import javax.validation.constraints.Size;
 import javax.enterprise.inject.Default;
 import javax.validation.GroupSequence;
 import javax.validation.constraints.Pattern;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.GenerationType;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import ats.util.RegexProvider;
 import ats.web.validation.*;
 
+@Entity
+@Table(name = "CANDIDATE")
 @GroupSequence({Required.class, Length.class, Format.class, Candidate.class})
 public class Candidate implements java.io.Serializable {
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
+	@Column(name = "candidate_id", updatable = false, nullable = false)
 	private Integer candidateId;
 
+	@Column(name = "first_name", updatable = true, nullable = false)
 	@NotEmpty(message="{required}", groups=Required.class)
 	@Size(min=1, max=20, message="{candidate.name.size}", groups=Length.class)
 	private String firstName;
 
+	@Column(name = "last_name", updatable = true, nullable = false)
 	@NotEmpty(message="{required}", groups=Required.class)
 	@Size(min=1, max=20, message="{candidate.name.size}", groups=Length.class)
 	private String lastName;
+	
+	@Column(name = "date_of_birth", updatable = true, nullable = true)
 	private java.sql.Date dob;
 
+	@Column(name = "gender", updatable = true, nullable = false)
 	private Character gender;
 
+	@Column(name = "email", updatable = true, nullable = false)
 	@NotEmpty(message="{required}", groups=Required.class)
 	@Size(min=7, max=50, message="{candidate.email.size}", groups=Length.class)
 	@Email(message="{candidate.email.format}", groups=Format.class)
 	private String email;
 
+	@Column(name = "phone", updatable = true, nullable = true)
 	private String phone;
+
+	@Column(name = "intl_dialing_code", updatable = true, nullable = true)
 	private String intlDialingCode;
+
+	@Column(name = "street_address_1", updatable = true, nullable = true)
 	private String streetAddress1;
+
+	@Column(name = "street_address_2", updatable = true, nullable = true)
 	private String streetAddress2;
+
+	@Column(name = "city", updatable = true, nullable = true)
 	private String city;
+
+	@Column(name = "state", updatable = true, nullable = true)
 	private String state;
+
+	@Column(name = "zipcode", updatable = true, nullable = true)
 	private String zipCode;
+
+	@Column(name = "country", updatable = true, nullable = true)
 	private String country;
+
+	@Column(name = "status", updatable = true, nullable = true)
 	private Character status;
+
+	@Column(name = "summary", updatable = true, nullable = true)
 	private String summary;
 	
 	//empty constructor
@@ -51,6 +89,8 @@ public class Candidate implements java.io.Serializable {
 	public void setCandidateId(Integer candidateId) {
 		this.candidateId = candidateId;
 	}
+	
+	
 	public String getFirstName() {
 		return firstName;
 	}

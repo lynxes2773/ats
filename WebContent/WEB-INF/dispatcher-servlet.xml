@@ -12,7 +12,6 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 <!-- configuration details go here -->
 
-
 	<context:component-scan base-package="ats.web, ats.data" />
 	
 	<!-- Mapping URLs to their Controllers-->
@@ -26,29 +25,64 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 			</props>
 		</property>
 	</bean>	
-	
- 
+
  	<!--  Beans related to reading messages from property files -->	
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
   		<property name="validationMessageSource" ref="messageSource"/>
 	</bean>
 	
 	<mvc:annotation-driven validator="validator"/>
-	
-	
-	<!--  
-	<bean id="atsService" class="ats.web.CandidateService" scope="request"/>
-	
-	<bean id="atsController" class="ats.web.CandidateController" scope="request">
-		<property name="atsService" ref="atsService"/>
-	</bean>
-	-->
 
-	<!--  
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-		<property name="prefix" value="/resources/jsp/"/>
-		<property name="suffix" value=".jsp"/>
+	<!-- Beans related to database access through Hibernate -->
+	<bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location">
+            <value>resources/config/db.properties</value>
+        </property>
+    </bean>
+
+	<context:property-placeholder properties-ref="configProperties" />
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${hibernate.connection.driver_class}"/>
+		<property name="jdbcUrl" value="${hibernate.connection.url}"/>
+		<property name="user" value="${hibernate.connection.username}"/>
+		<property name="password" value="${hibernate.connection.password}"/>
 	</bean>
-	-->
+		
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+ 		<property name="dataSource" ref="dataSource"/>
+		<property name="packagesToScan" value="ats.web, ats.data, example.hibernate"/>
+    	<property name="hibernateProperties">
+        	<props>
+ 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+				<prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+				<prop key="show_sql">${show_sql}</prop>
+				<prop key="format_sql">${format_sql}</prop>
+				<!--  
+				<prop key="hibernate.connection.provider_class">${hibernate.connection.provider_class}</prop>
+				-->
+				<prop key="hibernate.c3p0.min_size">${hibernate.c3p0.min_size}</prop>
+				<prop key="hibernate.c3p0.max_size">${hibernate.c3p0.max_size}</prop>
+				<prop key="hibernate.c3p0.timeout">${hibernate.c3p0.timeout}</prop>
+				<prop key="hibernate.c3p0.max_statements">${hibernate.c3p0.max_statements}</prop>
+				<prop key="hibernate.c3p0.idle_test_period">${hibernate.c3p0.idle_test_period}</prop>
+				<prop key="preferredTestQuery">${preferredTestQuery}</prop>
+				<prop key="testConnectionOnCheckin">${testConnectionOnCheckin}</prop>
+				<prop key="testConnectionOnCheckout">${testConnectionOnCheckout}</prop>
+				<prop key="idleConnectionTestPeriod">${idleConnectionTestPeriod}</prop>
+        	</props>
+    	</property>
+    </bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    	<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+	
+	<bean id="hibernateDAOProvider" class="ats.data.DAOProviderHibernateImpl" scope="request">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+
 </beans>

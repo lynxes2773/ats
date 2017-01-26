@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan("ats.web")
+@ComponentScan("ats.web, ats.data")
 @EnableWebMvc //mvc:annotation-driven
 public class WebConfig extends WebMvcConfigurerAdapter {
 	
@@ -40,6 +40,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         String[] strBaseNames = {
                 "resources/i18/labels",
                 "resources/i18/validations",
+                "resources/system/config"
         };
         
         messageSource.setBasenames(strBaseNames);

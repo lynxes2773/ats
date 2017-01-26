@@ -1,39 +1,46 @@
 package ats.data;
 
 import java.util.Iterator;
-
-
-
 import java.util.List;
 import java.util.ArrayList;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Bean;
+
+import javax.sql.DataSource;
 
 import example.hibernate.Candidate;
-import example.hibernate.CandidateManager;
+import org.springframework.stereotype.Repository;
 
-@Component("hibernateDAOProvider")
-@Scope("request")
-public class DAOProviderHibernateImpl {
+@Repository("hibernateDAOProvider")
+public class DAOProviderHibernateImpl implements DAOProvider{
 	static final Logger logger = LogManager.getLogger(DAOProviderHibernateImpl.class.getName());
+	private SessionFactory sessionFactory;
 	
 	List candidates = new ArrayList();
 
-	public static void main(String[] args) {
-		DAOProviderHibernateImpl hw = new DAOProviderHibernateImpl();
+	@Autowired
+	public DAOProviderHibernateImpl(SessionFactory sessionFactory)
+	{
+		this.sessionFactory = sessionFactory;
 	}
-
-
+	
+	@Autowired
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}	
+	
 	public List getCandidates() {
 
-		Session session = HibernateSessionProvider.getSessionFactory().openSession();
+//		Session session = HibernateSessionProvider.getSessionFactory().openSession();
+		Session session = sessionFactory.openSession();
 		Transaction tx = null;
 		try
 		{
@@ -69,7 +76,8 @@ public class DAOProviderHibernateImpl {
 	public Candidate getCandidate(Integer candidateId)
 	{
 		Candidate candidate = null;
-		Session session = HibernateSessionProvider.getSessionFactory().openSession();
+//		Session session = HibernateSessionProvider.getSessionFactory().openSession();
+		Session session = sessionFactory.openSession();
 		Transaction tx = null;
 		try
 		{
@@ -100,7 +108,8 @@ public class DAOProviderHibernateImpl {
 	public Integer addCandidate(Candidate candidate)
 	{
 		Integer candidateId = null;
-		Session session = HibernateSessionProvider.getSessionFactory().openSession();
+//		Session session = HibernateSessionProvider.getSessionFactory().openSession();
+		Session session = sessionFactory.openSession();
 		Transaction tx = null;
 		try
 		{
@@ -122,5 +131,4 @@ public class DAOProviderHibernateImpl {
 		}
 		return candidateId;		
 	}
-
 }

@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class CandidateController extends AbstractController  {
 
 	private CandidateService service;
+	
 	@Override	
 	@RequestMapping("/candidates.htm")
 	public ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -46,7 +47,6 @@ public class CandidateController extends AbstractController  {
 		return new ModelAndView("newcandidate", "candidate", new Candidate());
 	}
 		
-	//Validation not happening; empty values going to database
 	@RequestMapping(value="/addSubmittedCandidate.htm", method=RequestMethod.POST)
 	public ModelAndView addSubmittedCandidate(@Valid @ModelAttribute("candidate") Candidate candidate, BindingResult errors)
 	{
@@ -60,7 +60,6 @@ public class CandidateController extends AbstractController  {
 			return new ModelAndView("candidateadded", "candidate", newlyAddedCandidate);
 		}
 	}
-	
 
 	@Autowired
 	public void setService(CandidateService service) {

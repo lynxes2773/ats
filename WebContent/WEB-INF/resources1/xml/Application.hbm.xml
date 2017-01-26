@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="ats.entity">
+	<class name="Application" table="application">
+		<id name="id" column="application_id">
+			<generator class="increment"/>
+		</id>
+		<property name="applicationDate" column="application_date" not-null="true"/>
+		<property name="positionName" column="position_name" not-null="true"/>
+		<property name="positionId" column="positionid"/>
+		<property name="jobDescription" column="job_description"/>
+		<property name="endClient" column="end_client"/>
+		<property name="location" column="location"/>
+		<property name="jobSourceName" column="job_source_name"/>
+		<property name="jobSourceType" column="job_source_type_description"/>
+		<property name="positionType" column="position_type_description"/>
+		<property name="applicationStatus" column="application_status_description"/>		
+		<set name="attachments" inverse="true" cascade="save-update, delete, delete-orphan">
+			<key column="APPLICATION_ID"/>
+			<one-to-many class="ApplicationAttachment"/>
+		</set>		
+		<set name="contacts" inverse="true" cascade="save-update, delete, delete-orphan">
+			<key column="APPLICATION_ID"/>
+			<one-to-many class="ApplicationContact"/>
+		</set>		
+		<set name="comments" inverse="true" cascade="save-update, delete, delete-orphan">
+			<key column="APPLICATION_ID"/>
+			<one-to-many class="ApplicationComment"/>
+		</set>		
+
+	</class>
+</hibernate-mapping>
