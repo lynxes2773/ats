@@ -7,8 +7,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.http.MediaType;
+import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -19,9 +22,15 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan("ats.web, ats.data")
+@ComponentScan("ats.web, ats.data, ats.entity")
 @EnableWebMvc //mvc:annotation-driven
 public class WebConfig extends WebMvcConfigurerAdapter {
+
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer)
+    {
+    	configurer.defaultContentType(MediaType.APPLICATION_JSON);
+    }
 	
 	@Bean(name="viewResolver")
 	public ViewResolver viewResolver()
@@ -32,6 +41,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		resolver.setViewClass(org.springframework.web.servlet.view.JstlView.class);
 		return resolver;
 	}
+	
 	
     @Bean(name="messageSource")
     public MessageSource messageSource() {

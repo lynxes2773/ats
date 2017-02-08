@@ -24,7 +24,7 @@
 	<title><spring:message code="label.browser.title"/></title>
 </head>
 <body>
-	<div id="main">
+	<div id="outer-container">
 			<div id="header">
 				<p class="heading1"><spring:message code="label.header.title"/></p>
 			</div>
@@ -33,7 +33,7 @@
 					<tr>
 						<td><a class="headerLinks" href="http://localhost:8080/ats/candidates.htm"><spring:message code="label.header.menu.candidates"/></a></td>
 						<td width=10>|</td>
-						<td><a class="headerLinks" href="http://localhost:8080/ats/candidateService"><spring:message code="label.header.menu.applications"/></a></td>
+						<td><a class="headerLinks" href="http://localhost:8080/ats/applications.htm"><spring:message code="label.header.menu.applications"/></a></td>
 					</tr>
 				</table>
 			</div>

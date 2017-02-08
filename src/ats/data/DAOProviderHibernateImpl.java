@@ -14,10 +14,18 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.Bean;
 
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.sql.DataSource;
 
 import example.hibernate.Candidate;
 import org.springframework.stereotype.Repository;
+
+import ats.entity.Application;
+import ats.entity.ApplicationStatusType;
+import ats.entity.PositionType;
 
 @Repository("hibernateDAOProvider")
 public class DAOProviderHibernateImpl implements DAOProvider{
@@ -25,6 +33,7 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 	private SessionFactory sessionFactory;
 	
 	List candidates = new ArrayList();
+	List applications = new ArrayList();
 
 	@Autowired
 	public DAOProviderHibernateImpl(SessionFactory sessionFactory)
@@ -37,9 +46,100 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		this.sessionFactory = sessionFactory;
 	}	
 	
+	public List getApplications()
+	{
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try
+		{
+			tx = session.beginTransaction();
+			List list = session.createQuery("from Application a order by a.applicationDate").getResultList();
+			for (Iterator iter = list.iterator(); iter.hasNext();)
+			{
+					Application loadedApplication = (Application) iter.next();
+					applications.add(loadedApplication);
+			}
+			tx.commit();
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+
+		return applications;
+	}
+	
+	public void setApplications(List applications)
+	{
+		this.applications=applications;
+	}
+	
+	public Integer addApplication(Application application)
+	{
+		Integer applicationId = null;
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try
+		{
+			tx = session.getTransaction();
+			tx.begin();
+			applicationId = (Integer)session.save(application);
+			tx.commit();
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+		return applicationId;		
+	}
+	
+	public Application getApplication(Integer applicationId)
+	{
+		Application application = null;
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try
+		{
+			tx = session.getTransaction();
+			tx.begin();
+			List list = session.createQuery("from Application a where a.applicationId="+applicationId.toString()).getResultList();
+			
+			if(list!=null)
+			{	
+				application = (Application)list.get(0);
+			}
+			tx.commit();
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+		return application;
+	}
+	
 	public List getCandidates() {
 
-//		Session session = HibernateSessionProvider.getSessionFactory().openSession();
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
 		try
@@ -76,7 +176,6 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 	public Candidate getCandidate(Integer candidateId)
 	{
 		Candidate candidate = null;
-//		Session session = HibernateSessionProvider.getSessionFactory().openSession();
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
 		try
@@ -130,5 +229,72 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 			session.close();
 		}
 		return candidateId;		
+	}
+	
+	public List getPositionTypes()
+	{
+		List<PositionType> positionTypeList = null;
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		
+		try
+		{
+			tx = session.getTransaction();
+			tx.begin();
+			String query = "from " + PositionType.class.getName();
+			positionTypeList = session.createQuery(query).getResultList();
+			tx.commit();
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+		
+		return positionTypeList;
+	}
+	
+	public List getApplicationStatuses()
+	{
+		List<ApplicationStatusType> statusList = null;
+		ApplicationStatusType statusType = null;
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try
+		{
+			tx = session.getTransaction();
+			tx.begin();
+			String query = "from " + ApplicationStatusType.class.getName();
+			
+			statusList = session.createQuery(query).getResultList();
+			
+//			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+//			CriteriaQuery<ApplicationStatusType> criteriaQuery = criteriaBuilder.createQuery(ApplicationStatusType.class);
+//			Root<ApplicationStatusType> root = criteriaQuery.from(ApplicationStatusType.class);
+//			Query query = session.createQuery(criteriaQuery);
+//			statusList = query.getResultList();
+			
+			tx.commit();
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+		
+		return statusList;
 	}
 }

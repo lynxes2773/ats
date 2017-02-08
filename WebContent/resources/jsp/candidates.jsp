@@ -5,7 +5,7 @@
 					<tr>
 						<td valign='bottom'><span class="heading2"><spring:message code="label.candidates.header"/></span></td>
 						<td width=25>&nbsp;</td>
-						<td valign='bottom'><a href="http://localhost:8080/ats/addNewCandidate.htm" class="free"><spring:message code="label.candidates.link.add"/></a></td>
+						<td valign='bottom'><a href="http://localhost:8080/ats/addNewCandidate.htm" class="free"><spring:message code="label.common.link.addnew"/></a></td>
 					</tr>
 				</table>
 			</div>

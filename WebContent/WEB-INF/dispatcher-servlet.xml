@@ -12,7 +12,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 <!-- configuration details go here -->
 
-	<context:component-scan base-package="ats.web, ats.data" />
+	<context:component-scan base-package="ats.web, ats.data, ats.entity" />
 	
 	<!-- Mapping URLs to their Controllers-->
 	<bean id="simpleUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -22,6 +22,11 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 				<prop key="/addNewCandidate.htm">candidateController</prop>
 				<prop key="/addSubmittedCandidate.htm">candidateController</prop>
 				<prop key="/layout.htm">candidateController</prop>
+				<prop key="/applications.htm">applicationController</prop>
+				<prop key="/addNewApplication.htm">applicationController</prop>
+				<prop key="/addSubmittedApplication.htm">applicationController</prop>
+				<prop key="/updateApplication.htm">applicationController</prop>
+				<prop key="/removeApplication.htm">applicationController</prop>
 			</props>
 		</property>
 	</bean>	
@@ -51,7 +56,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 		
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
  		<property name="dataSource" ref="dataSource"/>
-		<property name="packagesToScan" value="ats.web, ats.data, example.hibernate"/>
+		<property name="packagesToScan" value="ats.web, ats.data, ats.entity, example.hibernate"/>
     	<property name="hibernateProperties">
         	<props>
  				<prop key="hibernate.dialect">${hibernate.dialect}</prop>

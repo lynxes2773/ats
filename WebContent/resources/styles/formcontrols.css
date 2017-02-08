@@ -2,6 +2,7 @@ button, html input[type=button], input[type=reset], input[type=submit] {
     -webkit-appearance: button;
     cursor: pointer;
 }
+
 .btn-default {
     color: #333;
     background-color: #fff;
@@ -21,3 +22,4 @@ button, html input[type=button], input[type=reset], input[type=submit] {
     border: 1px solid initial;
     border-radius: 0px;
 }
+

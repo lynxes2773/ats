@@ -1,9 +1,35 @@
 package ats.entity;
 
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.GroupSequence;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import ats.web.validation.Format;
+import ats.web.validation.Length;
+import ats.web.validation.Required;
+import example.hibernate.Candidate;
+
 import java.util.HashSet;
 
-public class Application {
+@Entity
+@Table(name = "APPLICATION")
+@GroupSequence({Required.class, Length.class, Format.class, Candidate.class})
+public class Application implements java.io.Serializable {
 
 	private Integer id;
 	private java.sql.Date applicationDate;
@@ -16,11 +42,13 @@ public class Application {
 	private String jobSourceType;
 	private String positionType;
 	private String applicationStatus;
+	private Set<ApplicationAttachment> attachments = new HashSet();
+	private Set<ApplicationContact> contacts = new HashSet();
+	private Set<ApplicationComment> comments = new HashSet();
 
-	private Set attachments = new HashSet();
-	private Set contacts = new HashSet();
-	private Set comments = new HashSet();
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
+	@Column(name = "application_id", updatable = false, nullable = false)
 	public Integer getId() {
 		return id;
 	}
@@ -29,6 +57,8 @@ public class Application {
 		this.id = id;
 	}
 
+	@Column(name = "application_date", updatable = true, nullable = false)
+	@DateTimeFormat(pattern="MMM dd, yyyy")
 	public java.sql.Date getApplicationDate() {
 		return applicationDate;
 	}
@@ -37,6 +67,9 @@ public class Application {
 		this.applicationDate = applicationDate;
 	}
 
+	@Column(name = "position_name", updatable = true, nullable = false)
+	@NotEmpty(message="{required}", groups=Required.class)
+	@Size(min=1, max=255, message="{application.positionname.size}", groups=Length.class)
 	public String getPositionName() {
 		return positionName;
 	}
@@ -45,6 +78,8 @@ public class Application {
 		this.positionName = positionName;
 	}
 
+	@Column(name = "positionId", updatable = true, nullable = true)
+	@Size(min=1, max=20, message="{application.positionid.size}", groups=Length.class)
 	public String getPositionId() {
 		return positionId;
 	}
@@ -53,6 +88,8 @@ public class Application {
 		this.positionId = positionId;
 	}
 
+	@Column(name = "job_description", updatable = true, nullable = true)
+	@Size(min=1, max=5000, message="{application.jobdescription.size}", groups=Length.class)
 	public String getJobDescription() {
 		return jobDescription;
 	}
@@ -61,6 +98,8 @@ public class Application {
 		this.jobDescription = jobDescription;
 	}
 
+	@Column(name = "end_client", updatable = true, nullable = true)
+	@Size(min=1, max=255, message="{application.endclientname.size}", groups=Length.class)
 	public String getEndClient() {
 		return endClient;
 	}
@@ -69,6 +108,8 @@ public class Application {
 		this.endClient = endClient;
 	}
 
+	@Column(name = "location", updatable = true, nullable = true)
+	@Size(min=1, max=50, message="{application.location.size}", groups=Length.class)
 	public String getLocation() {
 		return location;
 	}
@@ -77,6 +118,9 @@ public class Application {
 		this.location = location;
 	}
 
+	@Column(name = "job_source_name", updatable = true, nullable = false)
+	@NotEmpty(message="{required}", groups=Required.class)
+	@Size(min=1, max=50, message="{application.jobsourcename.size}", groups=Length.class)
 	public String getJobSourceName() {
 		return jobSourceName;
 	}
@@ -85,6 +129,8 @@ public class Application {
 		this.jobSourceName = jobSourceName;
 	}
 
+	@Column(name = "job_source_type_description", updatable = true, nullable = false)
+	@NotEmpty(message="{required}", groups=Required.class)
 	public String getJobSourceType() {
 		return jobSourceType;
 	}
@@ -93,6 +139,8 @@ public class Application {
 		this.jobSourceType = jobSourceType;
 	}
 
+	@Column(name = "position_type_description", updatable = true, nullable = false)
+	@NotEmpty(message="{required}", groups=Required.class)
 	public String getPositionType() {
 		return positionType;
 	}
@@ -101,6 +149,8 @@ public class Application {
 		this.positionType = positionType;
 	}
 
+	@Column(name = "application_status_description", updatable = true, nullable = false)
+	@NotEmpty(message="{required}", groups=Required.class)
 	public String getApplicationStatus() {
 		return applicationStatus;
 	}
@@ -109,6 +159,8 @@ public class Application {
 		this.applicationStatus = applicationStatus;
 	}
 
+	@OneToMany(targetEntity=ApplicationAttachment.class)
+	@JoinColumn(name="application_id")
 	public Set getAttachments() {
 		return attachments;
 	}
@@ -122,6 +174,8 @@ public class Application {
 		attachments.add(attachment);
 	}
 
+	@OneToMany(targetEntity=ApplicationContact.class)
+	@JoinColumn(name="application_id")
 	public Set getContacts() {
 		return contacts;
 	}
@@ -135,6 +189,8 @@ public class Application {
 		contacts.add(contact);
 	}
 
+	@OneToMany(targetEntity=ApplicationComment.class)
+	@JoinColumn(name="application_id")
 	public Set getComments() {
 		return comments;
 	}
