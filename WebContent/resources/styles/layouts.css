@@ -131,13 +131,10 @@ body {
 
 #main-content-box {
 	background-color: #FFFFFF;
-	width: 90%;
+	width: 92%;
 	min-height: 500px;
 	height: auto;
-	margin-left: 25px;
-	margin-right: 25px;
-	margin-top: 10px;
-	margin-bottom: 5px;
+	margin: auto;
 }
 
 #footer-area {

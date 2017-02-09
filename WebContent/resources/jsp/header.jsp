@@ -20,7 +20,7 @@
 	<link rel="stylesheet" href="resources/styles/content.css">
 	<link rel="stylesheet" href="resources/styles/layouts.css">
 	<link rel="stylesheet" href="resources/styles/formcontrols.css">
-	<link rel="stylesheet" href="resources/styles/untested.css">
+	<link rel="stylesheet" href="resources/styles/font-awesome.css">
 	<title><spring:message code="label.browser.title"/></title>
 </head>
 <body>
