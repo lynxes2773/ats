@@ -79,7 +79,7 @@
 					</div>
 					<div class="row" style="padding-top: 15px;">
 						 <div class="col-lg-4">
-						 	&nbsp;
+						 	&nbs
 						</div>
 						 <div class="col-lg-4">
 						 	&nbsp;
