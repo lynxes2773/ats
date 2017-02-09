@@ -17,7 +17,7 @@ body {
   background-color: #EFEFEF;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-size: 11px;
-/*padding-bottom: 50px;*/
+  padding-bottom: 50px;
   overflow: auto;
 }
 
@@ -129,7 +129,7 @@ body {
 	margin-left: 50px;
 }
 
-.main-content-box {
+#main-content-box {
 	background-color: #FFFFFF;
 	width: 90%;
 	min-height: 500px;
@@ -141,7 +141,7 @@ body {
 }
 
 #footer-area {
-	position: relative;
+	position: fixed;
 	top: auto;
 	bottom: 0;
 	right: 0;

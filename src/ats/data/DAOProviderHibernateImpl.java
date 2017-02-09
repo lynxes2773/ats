@@ -25,6 +25,7 @@ import org.springframework.stereotype.Repository;
 
 import ats.entity.Application;
 import ats.entity.ApplicationStatusType;
+import ats.entity.JobSourceType;
 import ats.entity.PositionType;
 
 @Repository("hibernateDAOProvider")
@@ -53,7 +54,7 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		try
 		{
 			tx = session.beginTransaction();
-			List list = session.createQuery("from Application a order by a.applicationDate").getResultList();
+			List list = session.createQuery("from " + Application.class.getName()).getResultList();
 			for (Iterator iter = list.iterator(); iter.hasNext();)
 			{
 					Application loadedApplication = (Application) iter.next();
@@ -90,6 +91,7 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		{
 			tx = session.getTransaction();
 			tx.begin();
+			application.setApplicationDate(new java.sql.Date(System.currentTimeMillis()));
 			applicationId = (Integer)session.save(application);
 			tx.commit();
 		}
@@ -116,7 +118,11 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		{
 			tx = session.getTransaction();
 			tx.begin();
-			List list = session.createQuery("from Application a where a.applicationId="+applicationId.toString()).getResultList();
+			Query query = session.createQuery("from Application a where a.id = :applicationId");
+			query.setParameter("applicationId", applicationId);
+			
+			List list = query.getResultList();
+					
 			
 			if(list!=null)
 			{	
@@ -207,7 +213,6 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 	public Integer addCandidate(Candidate candidate)
 	{
 		Integer candidateId = null;
-//		Session session = HibernateSessionProvider.getSessionFactory().openSession();
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
 		try
@@ -230,6 +235,7 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		}
 		return candidateId;		
 	}
+	
 	
 	public List getPositionTypes()
 	{
@@ -260,6 +266,37 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		
 		return positionTypeList;
 	}
+
+	public List getJobSourceTypes()
+	{
+		List<JobSourceType> jobSourceTypeList = null;
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		
+		try
+		{
+			tx = session.getTransaction();
+			tx.begin();
+			String query = "from " + JobSourceType.class.getName();
+			jobSourceTypeList = session.createQuery(query).getResultList();
+			tx.commit();
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+		
+		return jobSourceTypeList;
+	}
+	
 	
 	public List getApplicationStatuses()
 	{

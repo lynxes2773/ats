@@ -49,21 +49,30 @@ public class ApplicationController extends AbstractController {
 		ModelAndView modelAndView = new ModelAndView("NewApplication", "application", new Application());
 		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
 		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
-		
+		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
 		return modelAndView;
 	}
 	
+	@RequestMapping(value="/addSubmittedApplication.htm", method=RequestMethod.POST)
 	public ModelAndView addSubmittedApplication(@Valid @ModelAttribute("application") Application application, BindingResult errors)
 	{
+		ModelAndView modelAndView = null;
 		if(errors!=null && errors.hasErrors())
 		{
-			return new ModelAndView("NewApplication", "application", application); 
+			modelAndView =  new ModelAndView("NewApplication", "application", application); 
+			modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
+			modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
+			modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
 		}
 		else
 		{	
-			Application newlyAddedApplication = null; //service.addCandidate(candidate);
-			return new ModelAndView("ApplicationDetail", "application", newlyAddedApplication);
+			Application newlyAddedApplication = applicationService.addApplication(application);
+			modelAndView =  new ModelAndView("ApplicationDetail", "application", newlyAddedApplication);
+			modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
+			modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
+			modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
 		}
+		return modelAndView;
 	}
 	
 	@Autowired

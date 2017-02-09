@@ -7,7 +7,7 @@
 					</tr>
 				</table>
 			</div>
-			<div class="main-content-box">			
+			<div id="main-content-box">			
 				<table class="entity-detail" border=1 bordercolor='#D1D0CE' cellpadding=2 cellspacing=0 width=75%>
 						<tr>
 							<td>Candidate ID</td><td>${candidate.candidateId}</td>

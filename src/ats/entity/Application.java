@@ -28,7 +28,7 @@ import java.util.HashSet;
 
 @Entity
 @Table(name = "APPLICATION")
-@GroupSequence({Required.class, Length.class, Format.class, Candidate.class})
+@GroupSequence({Required.class, Length.class, Format.class, Application.class})
 public class Application implements java.io.Serializable {
 
 	private Integer id;
@@ -46,6 +46,9 @@ public class Application implements java.io.Serializable {
 	private Set<ApplicationContact> contacts = new HashSet();
 	private Set<ApplicationComment> comments = new HashSet();
 
+	public Application()
+	{}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	@Column(name = "application_id", updatable = false, nullable = false)
@@ -89,6 +92,7 @@ public class Application implements java.io.Serializable {
 	}
 
 	@Column(name = "job_description", updatable = true, nullable = true)
+	@NotEmpty(message="{required}", groups=Required.class)
 	@Size(min=1, max=5000, message="{application.jobdescription.size}", groups=Length.class)
 	public String getJobDescription() {
 		return jobDescription;

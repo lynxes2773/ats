@@ -28,6 +28,7 @@ public class ApplicationService implements Serializable {
 	private List applications = new ArrayList();
 	private List applicationStatusTypes = new ArrayList();
 	private List positionTypes = new ArrayList();
+	private List jobSourceTypes = new ArrayList();
 	
 	@Autowired
 	public void setManager(DAOProvider manager) {
@@ -56,6 +57,7 @@ public class ApplicationService implements Serializable {
 		//applications = manager.getApplications();
 		setApplicationStatusTypes(manager.getApplicationStatuses());
 		setPositionTypes(manager.getPositionTypes());
+		setJobSourceTypes(manager.getJobSourceTypes());
 	}
 	
 	public List getApplicationStatusTypes() {
@@ -72,6 +74,14 @@ public class ApplicationService implements Serializable {
 
 	public void setPositionTypes(List positionTypes) {
 		this.positionTypes = positionTypes;
+	}
+
+	public List getJobSourceTypes() {
+		return jobSourceTypes;
+	}
+
+	public void setJobSourceTypes(List jobSourceTypes) {
+		this.jobSourceTypes = jobSourceTypes;
 	}
 
 
