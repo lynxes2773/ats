@@ -1,13 +1,13 @@
 html {
   min-height: 100%;
 }
+
 * {
 	margin: 0;
 }
 
-html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td
-{
-	hright: 100%;
+html, body {
+	height: 100%;        /* footer positioning related */
     padding: 0;
 }
 
@@ -23,8 +23,9 @@ body {
 
 #outer-container {
 	max-width: 100%;
-	min-height: calc(100vh - 130px);
-	margin:0 auto -40px; 
+	min-height: 100%;        /* footer positioning related */
+	overflow: auto;       /* footer positioning related */
+	margin:0 auto 50px; 
 	padding: 0;
 	background-color: #EFEFEF;
 	align-items: center;
@@ -52,10 +53,28 @@ body {
 	background-color: #EFEFEF;
 	max-width: 65%;
 	height: auto;
+	overflow: auto;       /* footer positioning related */
+	padding-bottom: 50px; /* must be same height as the footer */
 	margin: 0 auto;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	float: top, center;
+}
+
+#content-area {
+	background-color: #FFFFFF;
+	max-width: 65%;
+	height: auto;
+	overflow: auto;       /* footer positioning related */
+	padding-bottom: 50px; /* must be same height as the footer */
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	float: top, center;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #DDDDDD;
+    box-shadow: 5px 5px 5px #DDDDDD;
 }
 
 #left-column-wide-box, #right-column-narrow-box, #card-sized-box {
@@ -95,20 +114,6 @@ body {
 	margin-bottom: 20px;
 }
 
-#content-area {
-	background-color: #FFFFFF;
-	border-style: solid;
-	border-width: 1px;
-	border-color: #DDDDDD;
-	max-width: 65%;
-	height: auto;
-	margin: 0 auto;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	float: top, center;
-    box-shadow: 5px 5px 5px #DDDDDD;
-}
-
 #page-title-area {
 	background-color: #FFFFFF;
 	border-collapse: collapse;
@@ -137,18 +142,19 @@ body {
 	margin: auto;
 }
 
-#footer-area {
-	position: fixed;
-	top: auto;
+#footer {
+	position: relative; /* footer positioning related */
 	bottom: 0;
 	right: 0;
 	left: 0;
 	max-width: 70%;
 	height: 50px;
 	background-color: #343434;
-	margin-top: 15px;
-	margin-bottom: 0; 
-	margin: 0 auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-top: -50px; /* negative value of footer height */
+	clear: both;	   /* footer positioning related */
 	padding: 6px;
 	z-index: 99;
 }
