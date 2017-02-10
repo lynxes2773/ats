@@ -19,8 +19,7 @@
 	<link rel="stylesheet" href="resources/styles/bootstrap.min.css">
 	<link rel="stylesheet" href="resources/styles/content.css">
 	<link rel="stylesheet" href="resources/styles/layouts.css">
-	<link rel="stylesheet" href="resources/styles/formcontrols.css">
-	<link rel="stylesheet" href="resources/styles/font-awesome.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title><spring:message code="label.browser.title"/></title>
 </head>
 <body>

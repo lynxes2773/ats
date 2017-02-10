@@ -79,7 +79,7 @@
 					</div>
 					<div class="row" style="padding-top: 15px;">
 						 <div class="col-lg-4">
-						 	&nbs
+						 	&nbsp;
 						</div>
 						 <div class="col-lg-4">
 						 	&nbsp;
@@ -98,13 +98,49 @@
 			</div>
 			<div id="right-column-narrow-box" class="col-lg-3"> 
 				<div id="card-sized-box">
-					Contact Person 
+					<div id="card-title-area">
+						<div class="row">
+							<div class="col-sm-7">
+								<span class="heading3"><spring:message code="label.application.card_header.contact_person"/></span>
+							</div>
+							<div class="col-sm-3">
+								&nbsp;
+							</div>
+							<div class="col-sm-1">
+								<span class="card-icon-area"><i class="fa fa-user-o fa-lg" color:#888888;></i></span>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div id="card-sized-box">
-					Attachments
+					<div id="card-title-area">
+						<div class="row">
+							<div class="col-sm-7">
+								<span class="heading3"><spring:message code="label.application.card_header.attachments"/></span>
+							</div>
+							<div class="col-sm-3">
+								&nbsp;
+							</div>
+							<div class="col-sm-1">
+								<span class="card-icon-area"><i class="fa fa-file-text-o fa-lg" style="color:#888888;"></i></span>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div id="card-sized-box">
-					Comments
+					<div id="card-title-area">
+						<div class="row">
+							<div class="col-sm-7">
+								<span class="heading3"><spring:message code="label.application.card_header.comments"/></span>
+							</div>
+							<div class="col-sm-3">
+								&nbsp;
+							</div>
+							<div class="col-sm-1">
+								<span class="card-icon-area"><i class="fa fa-comments-o fa-lg" style="color:#888888;"></i></span>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>			

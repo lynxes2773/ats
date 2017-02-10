@@ -114,15 +114,34 @@ body {
 	margin-bottom: 20px;
 }
 
+#card-title-area {
+	background-color: #DAF1F3;
+	border-bottom-color: #DDDDDD;
+    border-bottom-width: 1px;
+	width: 100%;
+	height: 26px;
+	margin-left: 0px;
+    padding-left: 10px;  
+    padding-top: 3px;  
+    padding-right: 0px;  
+}
+
+.card-icon-area {
+    width: 100%;
+    margin-right: 0px;
+	text-align: right;
+    float: right;
+}
+
 #page-title-area {
 	background-color: #FFFFFF;
 	border-collapse: collapse;
 	width: 90%;
 	height: 35px;
-	margin-left: 25px;
-    padding-top: 10px;  
+	margin-left: 26px;
+    padding-left: 10px;  
+    padding-top: 3px;  
     padding-right: 0px;  
-    padding-left: 0px;  
 }
 
 #post-content-spacing {
@@ -157,4 +176,17 @@ body {
 	clear: both;	   /* footer positioning related */
 	padding: 6px;
 	z-index: 99;
+}
+
+/* Bootstrap CSS Overrides */
+
+.row {
+	margin-right: 0;
+}
+
+.col-sm-1 {
+	padding-top: 5px;
+	padding-left: 0px;
+	padding-right: 0px;
+	width: 15%;
 }
