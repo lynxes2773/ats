@@ -106,7 +106,7 @@
 							<div class="col-sm-3">
 								&nbsp;
 							</div>
-							<div class="col-sm-1">
+							<div class="col-xs-1">
 								<span class="card-icon-area"><i class="fa fa-user-o fa-lg" color:#888888;></i></span>
 							</div>
 						</div>
@@ -121,7 +121,7 @@
 							<div class="col-sm-3">
 								&nbsp;
 							</div>
-							<div class="col-sm-1">
+							<div class="col-xs-1">
 								<span class="card-icon-area"><i class="fa fa-file-text-o fa-lg" style="color:#888888;"></i></span>
 							</div>
 						</div>
@@ -136,7 +136,7 @@
 							<div class="col-sm-3">
 								&nbsp;
 							</div>
-							<div class="col-sm-1">
+							<div class="col-xs-1">
 								<span class="card-icon-area"><i class="fa fa-comments-o fa-lg" style="color:#888888;"></i></span>
 							</div>
 						</div>

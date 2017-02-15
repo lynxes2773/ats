@@ -1,13 +1,17 @@
 <%@ include file="/resources/jsp/header.jsp" %>
 		<div id="content-area">
 			<div id="page-title-area">
-				<table border=0 cellspacing=0 cellpadding=0>
-					<tr>
-						<td valign='bottom'><span class="heading2"><spring:message code="label.applications.header"/></span></td>
-						<td width=25>&nbsp;</td>
-						<td valign='bottom'><a href="http://localhost:8080/ats/addNewApplication.htm" class="free"><spring:message code="label.common.link.addnew"/></a></td>
-					</tr>
-				</table>
+				<div class="row" style="padding-top: 0px; padding-bottom: 0px;">
+					<div class="col-sm-2">
+						<span class="heading2"><spring:message code="label.applications.header"/></span>
+					</div>
+					<div class="col-xs-9">
+						<a href="http://localhost:8080/ats/addNewApplication.htm" class="free"><spring:message code="label.common.link.addnew"/></a>
+					</div>
+					<div class="col-sm-8">
+						&nbsp;
+					</div>
+				</div>
 			</div>
 			<div id="main-content-box">
 			</div>	
