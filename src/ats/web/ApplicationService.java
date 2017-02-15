@@ -83,6 +83,11 @@ public class ApplicationService implements Serializable {
 	public void setJobSourceTypes(List jobSourceTypes) {
 		this.jobSourceTypes = jobSourceTypes;
 	}
+	
+	public Integer getDummyHandle()
+	{
+		return manager.addDummyApplication();
+	}
 
 
 }

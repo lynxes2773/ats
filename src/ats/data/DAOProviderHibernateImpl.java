@@ -23,10 +23,7 @@ import javax.sql.DataSource;
 import example.hibernate.Candidate;
 import org.springframework.stereotype.Repository;
 
-import ats.entity.Application;
-import ats.entity.ApplicationStatusType;
-import ats.entity.JobSourceType;
-import ats.entity.PositionType;
+import ats.entity.*;
 
 @Repository("hibernateDAOProvider")
 public class DAOProviderHibernateImpl implements DAOProvider{
@@ -35,6 +32,8 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 	
 	List candidates = new ArrayList();
 	List applications = new ArrayList();
+	
+	
 
 	@Autowired
 	public DAOProviderHibernateImpl(SessionFactory sessionFactory)
@@ -333,5 +332,31 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		}
 		
 		return statusList;
+	}
+	
+	public Integer addDummyApplication()
+	{
+		Integer applicationId = null;
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try
+		{
+			tx = session.getTransaction();
+			tx.begin();
+			applicationId = (Integer)session.save(new DummyApplication());
+			tx.commit();
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+		return applicationId;
 	}
 }

@@ -90,19 +90,27 @@ table.form {
     font-variant: normal normal;
 }
 
-a.free:link, a.free:visited, a.free:active {
-	color: #3B838B;
+a {
     text-decoration: none;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    font-size: 12px;
+}
+
+a.free:link, a.free:visited, a.free:active, a.card:link, a.card:visited, a.card:active {
+	color: #3B838B;
 }	
 
-a.free:hover{
+a.free:hover, a.card:hover{
 	color: #00474F;
-	text-decoration: none;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+a.free:link, a.free:visited, a.free:active, a.free:hover {
     font-size: 12px;
 }
+
+a.card:link, a.card:visited, a.card:active, a.card:hover {
+    font-size: 9px;
+}
+
 
 a.headerLinks:link, a.headerLinks:visited, a.headerLinks:active {
     color: #3B838B;

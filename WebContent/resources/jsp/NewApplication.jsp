@@ -100,11 +100,11 @@
 				<div id="card-sized-box">
 					<div id="card-title-area">
 						<div class="row">
-							<div class="col-sm-7">
+							<div class="col-sm-9">
 								<span class="heading3"><spring:message code="label.application.card_header.contact_person"/></span>
 							</div>
-							<div class="col-sm-3">
-								&nbsp;
+							<div class="col-xs-1">
+								<a href="http://localhost:8080/ats/addNewApplication.htm" class="card"><spring:message code="label.common.link.add"/></a>
 							</div>
 							<div class="col-xs-1">
 								<span class="card-icon-area"><i class="fa fa-user-o fa-lg" color:#888888;></i></span>
@@ -115,11 +115,11 @@
 				<div id="card-sized-box">
 					<div id="card-title-area">
 						<div class="row">
-							<div class="col-sm-7">
+							<div class="col-sm-9">
 								<span class="heading3"><spring:message code="label.application.card_header.attachments"/></span>
 							</div>
-							<div class="col-sm-3">
-								&nbsp;
+							<div class="col-xs-1">
+								<a href="http://localhost:8080/ats/addNewApplication.htm" class="card"><spring:message code="label.common.link.add"/></a>
 							</div>
 							<div class="col-xs-1">
 								<span class="card-icon-area"><i class="fa fa-file-text-o fa-lg" style="color:#888888;"></i></span>
@@ -130,11 +130,11 @@
 				<div id="card-sized-box">
 					<div id="card-title-area">
 						<div class="row">
-							<div class="col-sm-7">
+							<div class="col-sm-9">
 								<span class="heading3"><spring:message code="label.application.card_header.comments"/></span>
 							</div>
-							<div class="col-sm-3">
-								&nbsp;
+							<div class="col-xs-1">
+								<a href="http://localhost:8080/ats/addNewApplication.htm" class="card"><spring:message code="label.common.link.add"/></a>
 							</div>
 							<div class="col-xs-1">
 								<span class="card-icon-area"><i class="fa fa-comments-o fa-lg" style="color:#888888;"></i></span>

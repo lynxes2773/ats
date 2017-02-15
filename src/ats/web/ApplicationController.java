@@ -50,6 +50,7 @@ public class ApplicationController extends AbstractController {
 		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
 		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
 		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
+		modelAndView.addObject("dummyHandle", applicationService.getDummyHandle());
 		return modelAndView;
 	}
 	

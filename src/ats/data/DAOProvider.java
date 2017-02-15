@@ -3,6 +3,7 @@ package ats.data;
 import java.util.List;
 
 import ats.entity.Application;
+import ats.entity.DummyApplication;
 import ats.util.Provider;
 import example.hibernate.Candidate;
 
@@ -29,6 +30,8 @@ public interface DAOProvider extends Provider{
 	public List getPositionTypes();
 	
 	public List getJobSourceTypes();
+	
+	public Integer addDummyApplication();
 	
 
 }
