@@ -1,17 +1,14 @@
 package ats.web;
 
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
-
-import example.hibernate.Candidate;
-import ats.entity.Application;
-import ats.entity.ApplicationStatusType;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -28,13 +25,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import ats.entity.*;
+import ats.web.validation.ApplicationValidator;
+import example.hibernate.Candidate;
 
 @RestController
 @Component("applicationController")
 @Scope("request")
 public class ApplicationController extends AbstractController {
 	
-	private ApplicationService applicationService; 
+	private ApplicationService applicationService;
+	
+	@Autowired
+	ApplicationValidator validator;
 
 	@Override	
 	@RequestMapping("/applications.htm")
@@ -43,38 +46,70 @@ public class ApplicationController extends AbstractController {
 		return new ModelAndView("Applications", "applications", applications);
 	}
 	
+	//shows brand new screen with application and sub-forms loaded for first time
 	@RequestMapping(value="/addNewApplication.htm", method=RequestMethod.GET)
 	public ModelAndView addNewApplication()
 	{
-		ModelAndView modelAndView = new ModelAndView("NewApplication", "application", new Application());
+		ModelAndView modelAndView = new ModelAndView("NewApplication", "applicationData", new ApplicationData());
 		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
 		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
 		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
 		modelAndView.addObject("dummyHandle", applicationService.getDummyHandle());
+		modelAndView.addObject("showContactForm", false);
 		return modelAndView;
 	}
 	
+	//submits the entries to add new application and sub-form data 
 	@RequestMapping(value="/addSubmittedApplication.htm", method=RequestMethod.POST)
-	public ModelAndView addSubmittedApplication(@Valid @ModelAttribute("application") Application application, BindingResult errors)
+	public ModelAndView addSubmittedApplication(@ModelAttribute("applicationData") ApplicationData applicationData, BindingResult errors)
 	{
+		validator.validate(applicationData.getApplication(), errors);
+		//returns with errors if form has errors
 		ModelAndView modelAndView = null;
 		if(errors!=null && errors.hasErrors())
 		{
-			modelAndView =  new ModelAndView("NewApplication", "application", application); 
+			modelAndView =  new ModelAndView("NewApplication", "applicationData", applicationData); 
 			modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
 			modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
 			modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
 		}
 		else
-		{	
-			Application newlyAddedApplication = applicationService.addApplication(application);
-			modelAndView =  new ModelAndView("ApplicationDetail", "application", newlyAddedApplication);
+		{
+			//returns successfully added application details back to front-end on detail screen 
+			Application newlyAddedApplication = applicationService.addApplication(applicationData.getApplication());
+			applicationData.setApplication(newlyAddedApplication);
+			modelAndView =  new ModelAndView("ApplicationDetail", "applicationData", applicationData);
 			modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
 			modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
 			modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
 		}
 		return modelAndView;
 	}
+	
+	//User has clicked Add link on Contacts card; we need to show the Contact entry form on the card.
+	@RequestMapping(value="/newApplicationContact.htm", method=RequestMethod.POST)
+	public ModelAndView addApplicationContact(@ModelAttribute("applicationData") ApplicationData applicationData)
+	{
+		ModelAndView modelAndView = new ModelAndView("NewApplication", "applicationData", applicationData);
+		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
+		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
+		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
+		modelAndView.addObject("showContactForm", true);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/saveApplicationContact.htm", method=RequestMethod.POST)
+	public ModelAndView saveApplicationContact(@Valid @ModelAttribute("applicationData") ApplicationData applicationData, BindingResult errors)
+	{
+		ModelAndView modelAndView = null;
+		modelAndView = new ModelAndView("NewApplication", "applicationData", applicationData);
+		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
+		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
+		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
+		return modelAndView;
+	}
+
+
 	
 	@Autowired
 	public void setApplicationService(ApplicationService applicationService) {

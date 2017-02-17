@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="application_contacts")
-public class ApplicationContact {
+public class ApplicationContact implements Contact{
 	private Integer id;
 	private Application application;
 	private String contactName;

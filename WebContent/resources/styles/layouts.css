@@ -126,6 +126,21 @@ body {
     padding-right: 0px;  
 }
 
+#card-content-area {
+	width: 100%;
+	min-height: 200px;
+	margin-left: 10px;
+	margin-right: 10px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+#card-form-box {
+	width: 95%;
+	height: 80%;
+	border-color: #DEDEDE;
+} 
+
 .card-icon-area {
     width: 100%;
     margin-right: 5px;
@@ -204,3 +219,5 @@ body {
     padding-right: 0px;
     width: 10%;
 }
+
+

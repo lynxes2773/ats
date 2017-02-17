@@ -146,6 +146,14 @@ background-color: #ffcccc;
 border: 2px solid red;
 }
 
+.card-empty-placeholder {
+    color: #DEDEDE;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: bolder;
+}
+
 .footer-text {
     color: #E5E4E2;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;

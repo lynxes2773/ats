@@ -27,6 +27,8 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 				<prop key="/addSubmittedApplication.htm">applicationController</prop>
 				<prop key="/updateApplication.htm">applicationController</prop>
 				<prop key="/removeApplication.htm">applicationController</prop>
+				<prop key="/newApplicationContact.htm">applicationController</prop>
+				<prop key="/saveApplicationContact.htm">applicationController</prop>
 			</props>
 		</property>
 	</bean>	
