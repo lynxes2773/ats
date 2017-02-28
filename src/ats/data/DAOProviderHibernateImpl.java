@@ -143,6 +143,71 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		return application;
 	}
 	
+	public ApplicationContact getApplicationContact(Integer contactId)
+	{
+		ApplicationContact contact = null;
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try
+		{
+			tx = session.getTransaction();
+			tx.begin();
+			Query query = session.createQuery("from ApplicationContact ac where ac.id = :contactId");
+			query.setParameter("contactId", contactId);
+			
+			List list = query.getResultList();
+					
+			
+			if(list!=null && list.size()>0)
+			{	
+				contact = (ApplicationContact)list.get(0);
+			}
+			tx.commit();
+		}
+		catch(HibernateException he)
+		{
+			he.printStackTrace();	
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+		return contact;
+	}
+	
+	public Integer addApplicationContact(Application application, ApplicationContact contact)
+	{
+		contact.setApplication(application);
+		application.getContacts().add(contact);
+		Integer contactId = null;
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try
+		{
+			tx = session.getTransaction();
+			tx.begin();
+			
+			contactId = (Integer)session.save(contact);
+			tx.commit();
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+		return contactId;		
+	}
+	
 	public List getCandidates() {
 
 		Session session = sessionFactory.openSession();
@@ -332,31 +397,5 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		}
 		
 		return statusList;
-	}
-	
-	public Integer addDummyApplication()
-	{
-		Integer applicationId = null;
-		Session session = sessionFactory.openSession();
-		Transaction tx = null;
-		try
-		{
-			tx = session.getTransaction();
-			tx.begin();
-			applicationId = (Integer)session.save(new DummyApplication());
-			tx.commit();
-		}
-		catch(HibernateException he)
-		{
-			if(tx!=null){
-				tx.rollback();
-				he.printStackTrace();
-			}
-		}
-		finally
-		{
-			session.close();
-		}
-		return applicationId;
 	}
 }

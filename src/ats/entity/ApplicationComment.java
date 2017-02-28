@@ -21,7 +21,7 @@ public class ApplicationComment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
-	@Column(name = "attachment_type_id", updatable = false, nullable = false)
+	@Column(name = "comment_id", updatable = false, nullable = false)
 	public Integer getId() {
 		return id;
 	}

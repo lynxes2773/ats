@@ -1,5 +1,5 @@
 CREATE TABLE application_contacts (
-	contact_id INTEGER(8) PRIMARY KEY,
+	contact_id INTEGER(8) auto_increment PRIMARY KEY,
 	application_id INTEGER(8) NOT NULL, 
 	FOREIGN KEY fk_app_contacts (application_id) REFERENCES application(application_id),
 	contact_name VARCHAR(50) NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE application_contacts (
 );
 
 CREATE TABLE application_attachments (
-	attachment_id INTEGER(10) PRIMARY KEY,
+	attachment_id INTEGER(10) auto_increment PRIMARY KEY,
 	application_id INTEGER(8) NOT NULL, 
 	FOREIGN KEY fk_app_attach (application_id) REFERENCES application(application_id),
 	attachment_filename VARCHAR(255) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE application_attachments (
 );
 
 CREATE TABLE application_comments (
-	comment_id INTEGER(10) PRIMARY KEY,
+	comment_id INTEGER(10) auto_increment PRIMARY KEY,
 	application_id INTEGER(8) NOT NULL, 
 	FOREIGN KEY fk_app_comment (application_id) REFERENCES application(application_id),
 	comment_text VARCHAR(255) NOT NULL,

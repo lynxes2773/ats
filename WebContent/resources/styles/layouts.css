@@ -66,7 +66,7 @@ body {
 	max-width: 65%;
 	height: auto;
 	overflow: auto;       /* footer positioning related */
-	padding-bottom: 50px; /* must be same height as the footer */
+/*	padding-bottom: 50px;  must be same height as the footer */
 	margin: 0 auto;
 	margin-top: 20px;
 	margin-bottom: 20px;
@@ -75,6 +75,8 @@ body {
 	border-width: 1px;
 	border-color: #DDDDDD;
     box-shadow: 5px 5px 5px #DDDDDD;
+    overflow-y: hidden; 
+	overflow-x: hidden; 
 }
 
 #left-column-wide-box, #right-column-narrow-box, #card-sized-box {

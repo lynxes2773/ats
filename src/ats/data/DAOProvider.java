@@ -1,9 +1,8 @@
 package ats.data;
 
 import java.util.List;
-
 import ats.entity.Application;
-import ats.entity.DummyApplication;
+import ats.entity.ApplicationContact;
 import ats.util.Provider;
 import example.hibernate.Candidate;
 
@@ -23,15 +22,15 @@ public interface DAOProvider extends Provider{
 
 	public Application getApplication(Integer applicationId);
 	
+	public ApplicationContact getApplicationContact(Integer contactId);
+	
 	public Integer addApplication(Application application);
+	
+	public Integer addApplicationContact(Application application, ApplicationContact contact);
 	
 	public List getApplicationStatuses();
 	
 	public List getPositionTypes();
 	
 	public List getJobSourceTypes();
-	
-	public Integer addDummyApplication();
-	
-
 }

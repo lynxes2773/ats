@@ -54,7 +54,6 @@ public class ApplicationController extends AbstractController {
 		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
 		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
 		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
-		modelAndView.addObject("dummyHandle", applicationService.getDummyHandle());
 		modelAndView.addObject("showContactForm", false);
 		return modelAndView;
 	}
@@ -77,6 +76,11 @@ public class ApplicationController extends AbstractController {
 		{
 			//returns successfully added application details back to front-end on detail screen 
 			Application newlyAddedApplication = applicationService.addApplication(applicationData.getApplication());
+			
+			if(applicationData.getApplicationContact().getContactName()!=null)
+			{
+				ApplicationContact newlyAddedContact = applicationService.addApplicationContact(newlyAddedApplication, applicationData.getApplicationContact());
+			}
 			applicationData.setApplication(newlyAddedApplication);
 			modelAndView =  new ModelAndView("ApplicationDetail", "applicationData", applicationData);
 			modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
@@ -87,7 +91,7 @@ public class ApplicationController extends AbstractController {
 	}
 	
 	//User has clicked Add link on Contacts card; we need to show the Contact entry form on the card.
-	@RequestMapping(value="/newApplicationContact.htm", method=RequestMethod.POST)
+	@RequestMapping(value="/newApplicationContact.htm", method=RequestMethod.GET)
 	public ModelAndView addApplicationContact(@ModelAttribute("applicationData") ApplicationData applicationData)
 	{
 		ModelAndView modelAndView = new ModelAndView("NewApplication", "applicationData", applicationData);
