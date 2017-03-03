@@ -104,7 +104,7 @@
 					 	&nbsp;
 					</div>
 					 <div class="col-lg-4" align='right'>
-						<input class="btn btn-default" type="button" value="Cancel"/>
+						<input class="btn btn-default" type="button" value="Cancel" action="http://localhost:8080/ats/applications.htm" />
 					 	&nbsp;&nbsp;
 						<input class="btn btn-primary" type="submit" value="Submit"/>
 					</div>

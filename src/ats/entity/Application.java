@@ -163,7 +163,7 @@ public class Application implements java.io.Serializable {
 		this.applicationStatus = applicationStatus;
 	}
 
-	@OneToMany(targetEntity=ApplicationAttachment.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=ApplicationAttachment.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="application_id")
 	public Set getAttachments() {
 		return attachments;
@@ -178,7 +178,7 @@ public class Application implements java.io.Serializable {
 		attachments.add(attachment);
 	}
 
-	@OneToMany(targetEntity=ApplicationContact.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=ApplicationContact.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="application_id")
 	public Set getContacts() {
 		return contacts;
@@ -193,7 +193,7 @@ public class Application implements java.io.Serializable {
 		contacts.add(contact);
 	}
 
-	@OneToMany(targetEntity=ApplicationComment.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=ApplicationComment.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="application_id")
 	public Set getComments() {
 		return comments;

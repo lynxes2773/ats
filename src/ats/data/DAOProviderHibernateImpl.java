@@ -22,10 +22,12 @@ import javax.sql.DataSource;
 
 import example.hibernate.Candidate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import ats.entity.*;
 
 @Repository("hibernateDAOProvider")
+@Transactional
 public class DAOProviderHibernateImpl implements DAOProvider{
 	static final Logger logger = LogManager.getLogger(DAOProviderHibernateImpl.class.getName());
 	private SessionFactory sessionFactory;
@@ -33,8 +35,6 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 	List candidates = new ArrayList();
 	List applications = new ArrayList();
 	
-	
-
 	@Autowired
 	public DAOProviderHibernateImpl(SessionFactory sessionFactory)
 	{
@@ -53,7 +53,7 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		try
 		{
 			tx = session.beginTransaction();
-			List list = session.createQuery("from " + Application.class.getName()).getResultList();
+			List list = session.createQuery("from Application a order by a.applicationDate desc").getResultList();
 			for (Iterator iter = list.iterator(); iter.hasNext();)
 			{
 					Application loadedApplication = (Application) iter.next();

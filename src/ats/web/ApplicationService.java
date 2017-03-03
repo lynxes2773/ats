@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Component("applicationService")
 @Service
 @Scope("request")
-@Transactional
+//@Transactional
 public class ApplicationService implements Serializable {
 
 	private DAOProvider manager;
@@ -39,10 +39,11 @@ public class ApplicationService implements Serializable {
 	}
 	
 	public List getApplications() {
+		manager.getApplications();
 		return applications;
 	}
 	
-	@Transactional(propagation=Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
+	//@Transactional(propagation=Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
 	public Application addApplication(Application application)
 	{
 		Integer applicationId = manager.addApplication(application);
@@ -50,7 +51,7 @@ public class ApplicationService implements Serializable {
 		return fetchedApplication;
 	}
 	
-	@Transactional(propagation=Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
+	//@Transactional(propagation=Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
 	public ApplicationContact addApplicationContact(Application application, ApplicationContact contact)
 	{
 		Integer contactId = manager.addApplicationContact(application, contact);
@@ -66,7 +67,7 @@ public class ApplicationService implements Serializable {
 	public ApplicationService(DAOProvider manager)
 	{
 		this.manager=manager;
-		//applications = manager.getApplications();
+		applications = manager.getApplications();
 		setApplicationStatusTypes(manager.getApplicationStatuses());
 		setPositionTypes(manager.getPositionTypes());
 		setJobSourceTypes(manager.getJobSourceTypes());

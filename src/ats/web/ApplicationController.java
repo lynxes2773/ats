@@ -11,7 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
 import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
+import java.util.HashSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -42,7 +45,7 @@ public class ApplicationController extends AbstractController {
 	@Override	
 	@RequestMapping("/applications.htm")
 	public ModelAndView handleRequestInternal(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
-		List applications=new ArrayList();
+		List applications= applicationService.getApplications();
 		return new ModelAndView("Applications", "applications", applications);
 	}
 	
@@ -74,18 +77,25 @@ public class ApplicationController extends AbstractController {
 		}
 		else
 		{
-			//returns successfully added application details back to front-end on detail screen 
-			Application newlyAddedApplication = applicationService.addApplication(applicationData.getApplication());
+			Application submittedApplication = applicationData.getApplication();
+			ApplicationContact submittedContact = applicationData.getApplicationContact();
 			
-			if(applicationData.getApplicationContact().getContactName()!=null)
+			if(submittedContact!=null && submittedContact.getContactName().trim().length()>0)
 			{
-				ApplicationContact newlyAddedContact = applicationService.addApplicationContact(newlyAddedApplication, applicationData.getApplicationContact());
+				submittedContact.setApplication(submittedApplication);
+				Set contacts = new HashSet();
+				contacts.add(submittedContact);
+				submittedApplication.setContacts(contacts);
 			}
+			//returns successfully added application details back to front-end on detail screen 
+			Application newlyAddedApplication = applicationService.addApplication(submittedApplication);
+			
 			applicationData.setApplication(newlyAddedApplication);
 			modelAndView =  new ModelAndView("ApplicationDetail", "applicationData", applicationData);
 			modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
 			modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
 			modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
+			modelAndView.addObject("applicationEditable", false);
 		}
 		return modelAndView;
 	}
@@ -112,8 +122,33 @@ public class ApplicationController extends AbstractController {
 		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
 		return modelAndView;
 	}
+	
+	public ModelAndView showApplicationDetailsAsEditable(@ModelAttribute("applicationData") ApplicationData applicationData)
+	{
+		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
+		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
+		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
+		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
+		modelAndView.addObject("showContactForm", false);
+		modelAndView.addObject("applicationEditable", true);
+		return modelAndView;
+	}
 
+	public ModelAndView updateApplicationDetails(@Valid @ModelAttribute("applicationData") ApplicationData applicationData, BindingResult errors)
+	{
+		ModelAndView modelAndView = null;
+		if(errors!=null && errors.hasErrors())
+		{
+			
+		}
+		else
+		{
+			
+		}
+		return modelAndView;
+	}
 
+	
 	
 	@Autowired
 	public void setApplicationService(ApplicationService applicationService) {
