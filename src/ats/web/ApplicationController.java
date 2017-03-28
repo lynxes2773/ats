@@ -83,7 +83,7 @@ public class ApplicationController extends AbstractController {
 			if(submittedContact!=null && submittedContact.getContactName().trim().length()>0)
 			{
 				submittedContact.setApplication(submittedApplication);
-				Set contacts = new HashSet();
+				List contacts = new ArrayList();
 				contacts.add(submittedContact);
 				submittedApplication.setContacts(contacts);
 			}
@@ -96,6 +96,79 @@ public class ApplicationController extends AbstractController {
 			modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
 			modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
 			modelAndView.addObject("applicationEditable", false);
+		}
+		return modelAndView;
+	}
+	
+	//Shows the screen with the selected Application detail
+	@RequestMapping(value="/showApplication.htm", method=RequestMethod.GET)
+	public ModelAndView showApplicationDetail(@ModelAttribute("id") Integer id)
+	{
+		Application application = applicationService.getApplication(id);
+		List<ApplicationContact> contacts = application.getContacts();
+		ApplicationContact contact = null;
+		if(contacts!=null && contacts.size()>0)
+		{
+			contact = contacts.get(0); 
+		}
+		ApplicationData applicationData = new ApplicationData();
+		applicationData.setApplication(application);
+		applicationData.setApplicationContact(contact);
+		
+		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
+		return modelAndView;
+	}
+	
+	//User has clicked Edit icon on Application Detail
+	@RequestMapping(value="/showApplicationEditable.htm", method=RequestMethod.GET)
+	public ModelAndView showApplicationDetailsAsEditable(@ModelAttribute("id") Integer id)
+	{
+		Application application = applicationService.getApplication(id);
+		List<ApplicationContact> contacts = application.getContacts();
+		ApplicationContact contact = null;
+		if(contacts!=null && contacts.size()>0)
+		{
+			contact = contacts.get(0); 
+		}
+		ApplicationData applicationData = new ApplicationData();
+		applicationData.setApplication(application);
+		applicationData.setApplicationContact(contact);
+
+		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
+		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
+		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
+		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
+		modelAndView.addObject("showContactForm", false);
+		modelAndView.addObject("applicationEditable", true);
+		return modelAndView;
+	}
+	
+	//User has submitted changes on Application Detail page
+	@RequestMapping(value="/updateApplication.htm", method=RequestMethod.POST)
+	public ModelAndView updateApplicationDetails(@ModelAttribute("applicationData") ApplicationData applicationData, BindingResult errors)
+	{
+		Application submittedApplication = applicationData.getApplication();
+		validator.validate(submittedApplication, errors);
+		
+		ModelAndView modelAndView = null;
+		if(errors!=null && errors.hasErrors())
+		{
+			modelAndView =  new ModelAndView("ApplicationDetail", "applicationData", applicationData);
+			modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
+			modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
+			modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
+			modelAndView.addObject("applicationEditable", true);
+		}
+		else
+		{
+			Application newlyUpdatedApplication = applicationService.updateApplication(submittedApplication);
+			applicationData.setApplication(newlyUpdatedApplication);
+			modelAndView =  new ModelAndView("ApplicationDetail", "applicationData", applicationData);
+			modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
+			modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
+			modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
+			modelAndView.addObject("applicationEditable", false);
+			
 		}
 		return modelAndView;
 	}
@@ -123,30 +196,7 @@ public class ApplicationController extends AbstractController {
 		return modelAndView;
 	}
 	
-	public ModelAndView showApplicationDetailsAsEditable(@ModelAttribute("applicationData") ApplicationData applicationData)
-	{
-		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
-		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
-		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
-		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
-		modelAndView.addObject("showContactForm", false);
-		modelAndView.addObject("applicationEditable", true);
-		return modelAndView;
-	}
 
-	public ModelAndView updateApplicationDetails(@Valid @ModelAttribute("applicationData") ApplicationData applicationData, BindingResult errors)
-	{
-		ModelAndView modelAndView = null;
-		if(errors!=null && errors.hasErrors())
-		{
-			
-		}
-		else
-		{
-			
-		}
-		return modelAndView;
-	}
 
 	
 	

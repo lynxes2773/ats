@@ -24,7 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Component("applicationService")
 @Service
 @Scope("request")
-//@Transactional
 public class ApplicationService implements Serializable {
 
 	private DAOProvider manager;
@@ -38,12 +37,20 @@ public class ApplicationService implements Serializable {
 		this.manager = manager;
 	}
 	
+	@Transactional
 	public List getApplications() {
-		manager.getApplications();
+		applications = manager.getApplications();
 		return applications;
 	}
 	
-	//@Transactional(propagation=Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
+	@Transactional
+	public Application getApplication(Integer applicationId)
+	{
+		Application application = manager.getApplication(applicationId);
+		return application;
+	}
+	
+	@Transactional
 	public Application addApplication(Application application)
 	{
 		Integer applicationId = manager.addApplication(application);
@@ -51,7 +58,13 @@ public class ApplicationService implements Serializable {
 		return fetchedApplication;
 	}
 	
-	//@Transactional(propagation=Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
+	public Application updateApplication(Application application)
+	{
+		Application updatedApplication = manager.updateApplication(application);
+		return updatedApplication;
+	}
+	
+	@Transactional
 	public ApplicationContact addApplicationContact(Application application, ApplicationContact contact)
 	{
 		Integer contactId = manager.addApplicationContact(application, contact);
@@ -73,14 +86,17 @@ public class ApplicationService implements Serializable {
 		setJobSourceTypes(manager.getJobSourceTypes());
 	}
 	
+	@Transactional
 	public List getApplicationStatusTypes() {
 		return applicationStatusTypes;
 	}
 
+	@Transactional
 	public void setApplicationStatusTypes(List applicationStatusTypes) {
 		this.applicationStatusTypes = applicationStatusTypes;
 	}
 
+	@Transactional
 	public List getPositionTypes() {
 		return positionTypes;
 	}
@@ -89,6 +105,7 @@ public class ApplicationService implements Serializable {
 		this.positionTypes = positionTypes;
 	}
 
+	@Transactional
 	public List getJobSourceTypes() {
 		return jobSourceTypes;
 	}

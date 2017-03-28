@@ -61,7 +61,7 @@
 				  </div>
 				  <div class="col-lg-4">
 				  	<sf:errors path="application.jobSourceType" cssClass="error" /><br>
-				  	<spring:message code="label.add_application.form.jon_source_type"/><br>
+				  	<spring:message code="label.add_application.form.job_source_type"/><br>
 				  	<sf:select class="form-control input-sm" path="application.jobSourceType">
 				  		<sf:option value="NONE" label="(select)"/>
 						<c:forEach items="${jobSourceTypes}" var="type">
@@ -104,7 +104,7 @@
 					 	&nbsp;
 					</div>
 					 <div class="col-lg-4" align='right'>
-						<input class="btn btn-default" type="button" value="Cancel" action="http://localhost:8080/ats/applications.htm" />
+						<input class="btn btn-default" type="button" value="Cancel" onClick="window.location.href='http://localhost:8080/ats/applications.htm';" />
 					 	&nbsp;&nbsp;
 						<input class="btn btn-primary" type="submit" value="Submit"/>
 					</div>

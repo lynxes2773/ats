@@ -14,7 +14,7 @@
 				</div>
 			</div>
 			<div id="main-content-box" style="padding-top: 15px; padding-bottom: 0px;">
-				<table class="listing" border=1 bordercolor='#EFEEEC' cellpadding=2 cellspacing=0 width=75%>
+				<table class="listing" border=1 bordercolor='#EFEEEC' cellpadding=2 cellspacing=2 width=75%>
 					<tr bgcolor='#EFEEEC'>
 						<td><spring:message code="label.applications.listcolumnheader.positionName"/></td>
 						<td><spring:message code="label.applications.listcolumnheader.endClient"/></td>
@@ -23,7 +23,7 @@
 					</tr>
 					<c:forEach items="${applications}" var="app">
 						<tr class="listing">
-							<td>${app.positionName}</td>
+							<td><a href="http://localhost:8080/ats/showApplication.htm?id=${app.id}">${app.positionName}</a></td>
 							<td>${app.endClient}</td>
 							<td>${app.applicationDate}</td>
 							<td>${app.applicationStatus}</td>

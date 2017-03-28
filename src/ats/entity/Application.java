@@ -1,6 +1,6 @@
 package ats.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.GroupSequence;
 import javax.validation.constraints.Size;
 
@@ -24,7 +26,7 @@ import ats.web.validation.Length;
 import ats.web.validation.Required;
 import example.hibernate.Candidate;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "APPLICATION")
@@ -42,9 +44,9 @@ public class Application implements java.io.Serializable {
 	private String jobSourceType;
 	private String positionType;
 	private String applicationStatus;
-	private Set<ApplicationAttachment> attachments = new HashSet();
-	private Set<ApplicationContact> contacts = new HashSet();
-	private Set<ApplicationComment> comments = new HashSet();
+	private List<ApplicationAttachment> attachments = new ArrayList();
+	private List<ApplicationContact> contacts = new ArrayList();
+	private List<ApplicationComment> comments = new ArrayList();
 
 	public Application()
 	{}
@@ -61,7 +63,7 @@ public class Application implements java.io.Serializable {
 	}
 
 	@Column(name = "application_date", updatable = true, nullable = false)
-	@DateTimeFormat(pattern="MMM dd, yyyy")
+	//@DateTimeFormat(pattern="MMM dd, yyyy")
 	public java.sql.Date getApplicationDate() {
 		return applicationDate;
 	}
@@ -165,11 +167,11 @@ public class Application implements java.io.Serializable {
 
 	@OneToMany(targetEntity=ApplicationAttachment.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="application_id")
-	public Set getAttachments() {
+	public List getAttachments() {
 		return attachments;
 	}
 
-	public void setAttachments(Set attachments) {
+	public void setAttachments(List attachments) {
 		this.attachments = attachments;
 	}
 
@@ -180,11 +182,11 @@ public class Application implements java.io.Serializable {
 
 	@OneToMany(targetEntity=ApplicationContact.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="application_id")
-	public Set getContacts() {
+	public List getContacts() {
 		return contacts;
 	}
 
-	public void setContacts(Set contacts) {
+	public void setContacts(List contacts) {
 		this.contacts = contacts;
 	}
 
@@ -195,11 +197,11 @@ public class Application implements java.io.Serializable {
 
 	@OneToMany(targetEntity=ApplicationComment.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="application_id")
-	public Set getComments() {
+	public List getComments() {
 		return comments;
 	}
 
-	public void setComments(Set comments) {
+	public void setComments(List comments) {
 		this.comments = comments;
 	}
 	

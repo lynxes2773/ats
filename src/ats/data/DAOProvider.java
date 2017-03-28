@@ -33,4 +33,6 @@ public interface DAOProvider extends Provider{
 	public List getPositionTypes();
 	
 	public List getJobSourceTypes();
+	
+	public Application updateApplication(Application applicationWithUpdates);
 }

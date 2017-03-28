@@ -66,12 +66,13 @@ table.entity-detail {
 }
 
 
+
 tr.listing {
 	transition: background 0.2s ease-in;
 }
 
 tr.listing:hover {
-  background-color: #BCC6CC;
+  background-color: #DFDFDF;
 }
 
 td.listing-header {
@@ -79,7 +80,7 @@ td.listing-header {
 	font-weight: bold;	
 }
 
-table.form {
+table.form, p, field-label {
     white-space: normal;
     line-height: normal;
     font-weight: normal;
@@ -88,6 +89,14 @@ table.form {
     color: -internal-quirk-inherit;
     text-align: start;
     font-variant: normal normal;
+}
+
+p {
+	font-size: 16px;
+}
+
+.field-label {
+	color: #AAAAAA;
 }
 
 a {

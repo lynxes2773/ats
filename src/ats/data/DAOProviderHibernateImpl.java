@@ -52,14 +52,22 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		Transaction tx = null;
 		try
 		{
+			applications.clear();
 			tx = session.beginTransaction();
-			List list = session.createQuery("from Application a order by a.applicationDate desc").getResultList();
+			List list = session.createQuery("FROM Application a JOIN FETCH a.contacts ac ORDER BY a.applicationDate DESC").getResultList();
+			tx.commit();
+			Transaction tx1 = session.beginTransaction();
 			for (Iterator iter = list.iterator(); iter.hasNext();)
 			{
 					Application loadedApplication = (Application) iter.next();
+//					Query query = session.createQuery("from ApplicationContact ac where ac.application.id = :applicationId");
+//					query.setParameter("applicationId", loadedApplication.getId());
+//					List contacts = query.getResultList();
+//					loadedApplication.setContacts(contacts);
 					applications.add(loadedApplication);
 			}
-			tx.commit();
+			tx1.commit();
+			
 		}
 		catch(HibernateException he)
 		{
@@ -117,13 +125,13 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		{
 			tx = session.getTransaction();
 			tx.begin();
-			Query query = session.createQuery("from Application a where a.id = :applicationId");
+			Query query = session.createQuery("FROM Application a JOIN FETCH a.contacts ac where a.id = :applicationId");
 			query.setParameter("applicationId", applicationId);
 			
 			List list = query.getResultList();
 					
 			
-			if(list!=null)
+			if(list!=null && list.size()>0)
 			{	
 				application = (Application)list.get(0);
 			}
@@ -141,6 +149,59 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 			session.close();
 		}
 		return application;
+	}
+
+	public Application updateApplication(Application applicationWithUpdates)
+	{
+		Application updatedApplication = applicationWithUpdates;
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+
+		try
+		{
+			tx = session.getTransaction();
+			tx.begin();
+			String hql = "update Application set applicationDate=?, "
+					+ "positionName=?, "
+					+ "positionId=?, "
+					+ "jobDescription=?, "
+					+ "endClient=?, "
+					+ "location=?, "
+					+ "jobSourceName=?, "
+					+ "jobSourceType=?, "
+					+ "positionType=?,"
+					+ "applicationStatus=? "
+					+ "where id=?";
+					
+			Query query = session.createQuery(hql);
+			query.setParameter(0, applicationWithUpdates.getApplicationDate());
+			query.setParameter(1, applicationWithUpdates.getPositionName());
+			query.setParameter(2, applicationWithUpdates.getPositionId());
+			query.setParameter(3, applicationWithUpdates.getJobDescription());
+			query.setParameter(4, applicationWithUpdates.getEndClient());
+			query.setParameter(5, applicationWithUpdates.getLocation());
+			query.setParameter(6, applicationWithUpdates.getJobSourceName());
+			query.setParameter(7, applicationWithUpdates.getJobSourceType());
+			query.setParameter(8, applicationWithUpdates.getPositionType());
+			query.setParameter(9, applicationWithUpdates.getApplicationStatus());
+			query.setParameter(10, applicationWithUpdates.getId());
+						
+			query.executeUpdate();
+			tx.commit();
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+		
+		return updatedApplication;
 	}
 	
 	public ApplicationContact getApplicationContact(Integer contactId)
@@ -300,7 +361,6 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		return candidateId;		
 	}
 	
-	
 	public List getPositionTypes()
 	{
 		List<PositionType> positionTypeList = null;
@@ -360,7 +420,6 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		
 		return jobSourceTypeList;
 	}
-	
 	
 	public List getApplicationStatuses()
 	{
