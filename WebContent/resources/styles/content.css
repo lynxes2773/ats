@@ -163,6 +163,13 @@ border: 2px solid red;
     font-weight: bolder;
 }
 
+.card-subordinate-text {
+    color: #999999;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-style: normal;
+    font-size: 12px;
+}
+
 .footer-text {
     color: #E5E4E2;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;

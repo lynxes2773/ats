@@ -173,8 +173,8 @@ public class ApplicationController extends AbstractController {
 		return modelAndView;
 	}
 	
-	//User has clicked Add link on Contacts card; we need to show the Contact entry form on the card.
-	@RequestMapping(value="/newApplicationContact.htm", method=RequestMethod.GET)
+	//User has clicked Edit link on Contacts card; we need to show the Contact entry form on the card.
+	@RequestMapping(value="/editApplicationContact.htm", method=RequestMethod.GET)
 	public ModelAndView addApplicationContact(@ModelAttribute("applicationData") ApplicationData applicationData)
 	{
 		ModelAndView modelAndView = new ModelAndView("NewApplication", "applicationData", applicationData);

@@ -35,7 +35,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 				<prop key="/showApplicationEditable.htm">applicationController</prop>
 				<prop key="/updateApplication.htm">applicationController</prop>
 				<prop key="/removeApplication.htm">applicationController</prop>
-				<prop key="/newApplicationContact.htm">applicationController</prop>
+				<prop key="/editApplicationContact.htm">applicationController</prop>
 				<prop key="/saveApplicationContact.htm">applicationController</prop>
 			</props>
 		</property>

@@ -149,7 +149,7 @@
 							<c:choose>
 								<c:when test="${!showContactForm}">
 									<div class="col-xs-1">
-										<a href="http://localhost:8080/ats/newApplicationContact.htm" class="card"><spring:message code="label.common.link.add"/></a>
+										<a href="http://localhost:8080/ats/editApplicationContact.htm" class="card"><spring:message code="label.common.link.edit"/></a>
 									</div>
 								</c:when>
 								<c:otherwise>
@@ -168,7 +168,8 @@
 							<div class="col-sm-12">
 								<c:choose>
 									<c:when test="${!showContactForm}">
-										<span class="card-empty-placeholder"><spring:message code="label.card.application_contacts.no_contact"/></span>
+										<p>${applicationData.applicationContact.contactName}</p>
+										<span class="card-subordinate-text">${applicationData.applicationContact.contactDescription}</span>
 									</c:when>	
 									<c:otherwise>
 										<div class="card-form-box">
