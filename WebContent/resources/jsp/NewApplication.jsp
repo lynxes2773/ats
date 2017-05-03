@@ -12,7 +12,7 @@
 				</table>
 			</div>
 			<div id="main-content-box">
-				<sf:form method="POST" commandName="applicationData" action="http://localhost:8080/ats/addSubmittedApplication.htm">
+				<sf:form method="POST" commandName="applicationData" action="${pageContext.servletContext.contextPath}/addSubmittedApplication.htm">
 				<div class="row" style="padding-top: 15px; padding-bottom: 0px;">
 				  <div class="col-lg-8">
 				  	<span class="heading3"><spring:message code="label.application_position_detail.header"/></span>
@@ -104,7 +104,7 @@
 					 	&nbsp;
 					</div>
 					 <div class="col-lg-4" align='right'>
-						<input class="btn btn-default" type="button" value="Cancel" onClick="window.location.href='http://localhost:8080/ats/applications.htm';" />
+						<input class="btn btn-default" type="button" value="Cancel" onClick="window.location.href='${pageContext.servletContext.contextPath}/applications.htm';" />
 					 	&nbsp;&nbsp;
 						<input class="btn btn-primary" type="submit" value="Submit"/>
 					</div>

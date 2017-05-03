@@ -1,8 +1,7 @@
 <%@ include file="/resources/jsp/header.jsp" %>
-
-<tr>
-<td>
-This is the home page.
-</td>
-</tr>
+<div id="invisible-placement-container">
+	<div id="main-content-box">
+		
+	</div>
+</div>
 <%@ include file="/resources/jsp/footer.jsp" %>

@@ -25,3 +25,63 @@ p {
     font-family: "Arial", Helvetica, sans-serif;
     font-size: 14px	
 }
+
+#square {
+	width: 100px;
+	height: 100px;
+	background: #0070C0;
+}
+
+#circle {
+	width: 100px;
+	height: 100px;
+	background: #0070C0;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+
+.container {
+   height: auto;
+   overflow: hidden;
+   float: none;
+}
+    
+.right {
+    width: 25%;
+    float: left;
+    margin-left:15px;
+}
+
+.left {
+    float: left;
+    width: 70%;
+    overflow: hidden;
+}
+
+
+tr.separator {
+	background-color: #93CDDD;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.panelHeader {
+	background-color: #BBDFEA;
+	height:10px;
+}
+
+table.panel {
+	background-color:#F9F9F9;
+	border-spacing:0px;
+	border: 1px solid #DEDEDE;
+}
+
+td, th {
+	border:medium;
+}
+
+textarea.colspanner {
+	width: 97%;
+}

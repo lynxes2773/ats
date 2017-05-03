@@ -6,7 +6,7 @@
 						<span class="heading2"><spring:message code="label.applications.header"/></span>
 					</div>
 					<div class="col-xs-9">
-						<a href="http://localhost:8080/ats/addNewApplication.htm" class="free"><spring:message code="label.common.link.addnew"/></a>
+						<a href="${pageContext.servletContext.contextPath}/addNewApplication.htm" class="free"><spring:message code="label.common.link.addnew"/></a>
 					</div>
 					<div class="col-sm-8">
 						&nbsp;
@@ -23,7 +23,7 @@
 					</tr>
 					<c:forEach items="${applications}" var="app">
 						<tr class="listing">
-							<td><a href="http://localhost:8080/ats/showApplication.htm?id=${app.id}">${app.positionName}</a></td>
+							<td><a href="${pageContext.servletContext.contextPath}/showApplication.htm?id=${app.id}">${app.positionName}</a></td>
 							<td>${app.endClient}</td>
 							<td>${app.applicationDate}</td>
 							<td>${app.applicationStatus}</td>

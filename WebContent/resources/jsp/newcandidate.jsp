@@ -12,7 +12,7 @@
 				</table>
 			</div>
 			<div id="main-content-box">
-				<sf:form method="POST" commandName="candidate" action="http://localhost:8080/ats/addSubmittedCandidate.htm">
+				<sf:form method="POST" commandName="candidate" action="${pageContext.servletContext.contextPath}/addSubmittedCandidate.htm">
 				<!-- Stack the columns on mobile by making one full-width and the other half-width -->
 					<div class="row" style="padding-top: 5px;">
 					  <div class="col-md-3">

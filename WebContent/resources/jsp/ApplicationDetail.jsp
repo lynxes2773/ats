@@ -8,12 +8,12 @@
 						<tr>
 							<td width='33%' valign='bottom'><span class="heading2"><spring:message code="label.application_detail.header"/></span></td>
 							<td width='33%'>&nbsp;</td>
-							<td width='34%' align='right'><a class="headerLinks" href="http://localhost:8080/ats/showApplicationEditable.htm?id=${applicationData.application.id}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+							<td width='34%' align='right'><a class="headerLinks" href="${pageContext.servletContext.contextPath}/showApplicationEditable.htm?id=${applicationData.application.id}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
 						</tr>
 					</table>
 				</div>
 				<div id="main-content-box">
-					<sf:form method="POST" commandName="applicationData" action="http://localhost:8080/ats/updateApplication.htm">
+					<sf:form method="POST" commandName="applicationData" action="${pageContext.servletContext.contextPath}/updateApplication.htm">
 					<sf:hidden path="application.id" />
 					<sf:hidden path="application.applicationDate" />
 					<div class="row" style="padding-top: 15px; padding-bottom: 0px;">
@@ -127,7 +127,7 @@
 							 	&nbsp;
 							</div>
 							 <div class="col-lg-4" align='right'>
-								<input class="btn btn-default" type="button" value="Cancel" onclick="window.location.href='http://localhost:8080/ats/showApplication.htm?id=${applicationData.application.id}'"/>
+								<input class="btn btn-default" type="button" value="Cancel" onclick="window.location.href='${pageContext.servletContext.contextPath}/showApplication.htm?id=${applicationData.application.id}'"/>
 								&nbsp;&nbsp;
 								<input class="btn btn-primary" type="submit" value="Submit"/>
 							</div>
@@ -149,7 +149,7 @@
 							<c:choose>
 								<c:when test="${!showContactForm}">
 									<div class="col-xs-1">
-										<a href="http://localhost:8080/ats/editApplicationContact.htm" class="card"><spring:message code="label.common.link.edit"/></a>
+										<a href="${pageContext.servletContext.contextPath}/editApplicationContact.htm" class="card"><spring:message code="label.common.link.edit"/></a>
 									</div>
 								</c:when>
 								<c:otherwise>
@@ -173,7 +173,7 @@
 									</c:when>	
 									<c:otherwise>
 										<div class="card-form-box">
-										<sf:form method="POST" commandName='applicationData' action="http://localhost:8080/ats/saveApplicationContact.htm">
+										<sf:form method="POST" commandName='applicationData' action="${pageContext.servletContext.contextPath}/saveApplicationContact.htm">
 											<div class="row">
 												<div class="col-sm-8">
 													<sf:errors path="applicationContact.contactName" cssClass="error" /><br>
@@ -218,7 +218,7 @@
 								<span class="heading3"><spring:message code="label.application.card_header.attachments"/></span>
 							</div>
 							<div class="col-xs-1">
-								<a href="http://localhost:8080/ats/addNewApplication.htm" class="card"><spring:message code="label.common.link.add"/></a>
+								<a href="${pageContext.servletContext.contextPath}/addNewApplication.htm" class="card"><spring:message code="label.common.link.add"/></a>
 							</div>
 							<div class="col-xs-1">
 								<span class="card-icon-area"><i class="fa fa-file-text-o fa-lg" style="color:#888888;"></i></span>
@@ -235,7 +235,7 @@
 								<span class="heading3"><spring:message code="label.application.card_header.comments"/></span>
 							</div>
 							<div class="col-xs-1">
-								<a href="http://localhost:8080/ats/addNewApplication.htm" class="card"><spring:message code="label.common.link.add"/></a>
+								<${pageContext.servletContext.contextPath}/addNewApplication.htm" class="card"><spring:message code="label.common.link.add"/></a>
 							</div>
 							<div class="col-xs-1">
 								<span class="card-icon-area"><i class="fa fa-comments-o fa-lg" style="color:#888888;"></i></span>

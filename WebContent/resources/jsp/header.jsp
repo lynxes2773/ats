@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="resources/styles/bootstrap.min.css">
 	<link rel="stylesheet" href="resources/styles/content.css">
 	<link rel="stylesheet" href="resources/styles/layouts.css">
+	<link rel="stylesheet" href="resources/styles/untested.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title><spring:message code="label.browser.title"/></title>
 </head>
@@ -30,9 +31,9 @@
 			<div id="nav">
 				<table class="nav-menu" cellpadding=0 cellspacing=0>
 					<tr>
-						<td><a class="headerLinks" href="http://localhost:8080/ats/candidates.htm"><spring:message code="label.header.menu.candidates"/></a></td>
+						<td><a class="headerLinks" href="${pageContext.servletContext.contextPath}/candidates.htm"><spring:message code="label.header.menu.candidates"/></a></td>
 						<td width=10>|</td>
-						<td><a class="headerLinks" href="http://localhost:8080/ats/applications.htm"><spring:message code="label.header.menu.applications"/></a></td>
+						<td><a class="headerLinks" href="${pageContext.servletContext.contextPath}/applications.htm"><spring:message code="label.header.menu.applications"/></a></td>
 					</tr>
 				</table>
 			</div>
