@@ -37,6 +37,8 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 				<prop key="/removeApplication.htm">applicationController</prop>
 				<prop key="/editApplicationContact.htm">applicationController</prop>
 				<prop key="/saveApplicationContact.htm">applicationController</prop>
+				<prop key="/cancelContactEditing.htm">applicationController</prop>
+				<prop key="/apps.htm">applicationController</prop>
 			</props>
 		</property>
 	</bean>	
@@ -45,8 +47,11 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
   		<property name="validationMessageSource" ref="messageSource"/>
 	</bean>
+	<bean id="contactValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+  		<property name="validationMessageSource" ref="messageSource"/>
+	</bean>	
 	
-	<mvc:annotation-driven validator="validator"/>
+	<mvc:annotation-driven/>
 
 	<!-- Beans related to database access through Hibernate -->
 	<bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
@@ -74,9 +79,6 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 				<prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
 				<prop key="show_sql">${show_sql}</prop>
 				<prop key="format_sql">${format_sql}</prop>
-				<!--  
-				<prop key="hibernate.connection.provider_class">${hibernate.connection.provider_class}</prop>
-				-->
 				<prop key="hibernate.c3p0.min_size">${hibernate.c3p0.min_size}</prop>
 				<prop key="hibernate.c3p0.max_size">${hibernate.c3p0.max_size}</prop>
 				<prop key="hibernate.c3p0.timeout">${hibernate.c3p0.timeout}</prop>

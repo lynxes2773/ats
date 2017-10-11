@@ -10,8 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import ats.web.validation.Required;
+
 @Entity
-@Table(name="application_contacts")
+@Table(name="APPLICATION_CONTACTS")
 public class ApplicationContact{
 	private Integer id;
 	private Application application;
@@ -38,6 +42,7 @@ public class ApplicationContact{
 	}
 
 	@Column(name = "contact_name", updatable = true, nullable = false)
+	@NotEmpty(message="{required}", groups=Required.class)
 	public String getContactName() {
 		return contactName;
 	}
@@ -45,7 +50,7 @@ public class ApplicationContact{
 		this.contactName = contactName;
 	}
 	
-	@Column(name = "contact_description", updatable = true, nullable = false)
+	@Column(name = "contact_description", updatable = true, nullable = true)
 	public String getContactDescription() {
 		return contactDescription;
 	}

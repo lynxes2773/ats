@@ -149,7 +149,7 @@
 							<c:choose>
 								<c:when test="${!showContactForm}">
 									<div class="col-xs-1">
-										<a href="${pageContext.servletContext.contextPath}/editApplicationContact.htm" class="card"><spring:message code="label.common.link.edit"/></a>
+										<a href="${pageContext.servletContext.contextPath}/editApplicationContact.htm?contactId=${applicationData.applicationContact.id}&applicationId=${applicationData.application.id}" class="card"><spring:message code="label.common.link.edit"/></a>
 									</div>
 								</c:when>
 								<c:otherwise>
@@ -165,15 +165,16 @@
 					</div>
 					<div id="card-content-area">
 						<div class="row">
-							<div class="col-sm-12">
+							<div class="col-sm-12" style="padding-top:10px">
 								<c:choose>
 									<c:when test="${!showContactForm}">
-										<p>${applicationData.applicationContact.contactName}</p>
+										${applicationData.applicationContact.contactName}
 										<span class="card-subordinate-text">${applicationData.applicationContact.contactDescription}</span>
 									</c:when>	
 									<c:otherwise>
 										<div class="card-form-box">
 										<sf:form method="POST" commandName='applicationData' action="${pageContext.servletContext.contextPath}/saveApplicationContact.htm">
+										<sf:hidden path="application.id" />
 											<div class="row">
 												<div class="col-sm-8">
 													<sf:errors path="applicationContact.contactName" cssClass="error" /><br>
@@ -183,7 +184,7 @@
 											</div>											
 											<div class="row">
 												<div class="col-sm-12">
-													<sf:errors path="applicationContact.contactDescription" cssClass="error" /><br>
+													<!--<sf:errors path="applicationContact.contactDescription" cssClass="error" /><br>-->
 					  								<spring:message code="label.form.add_application_contact.field.contact_description"/><br>
 													<sf:textarea class="form-control input-sm" path="applicationContact.contactDescription" rows='3' maxlength='255'/>
 												</div>
@@ -198,7 +199,7 @@
 												 	&nbsp;
 												</div>
 						 						<div class="col-sm-8" align='right'>
-													<input class="btn btn-default btn-xs" type="button" value="Cancel"/>
+													<input class="btn btn-default btn-xs" type="button" value="Cancel" onClick="locaton.href='${pageContext.servletContext.contextPath}/cancelContactEditing.htm'" />
 													&nbsp;&nbsp;
 													<input class="btn btn-primary btn-xs" type="submit" value="Save"/>
 												</div>

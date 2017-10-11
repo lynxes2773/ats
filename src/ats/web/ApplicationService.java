@@ -11,6 +11,8 @@ import ats.entity.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -44,6 +46,12 @@ public class ApplicationService implements Serializable {
 	}
 	
 	@Transactional
+	public Map getApplicationStatusCounts() {
+		Map statusCounts = manager.getApplicationCountsByStatus();
+		return statusCounts;
+	}	
+	
+	@Transactional
 	public Application getApplication(Integer applicationId)
 	{
 		Application application = manager.getApplication(applicationId);
@@ -70,6 +78,18 @@ public class ApplicationService implements Serializable {
 		Integer contactId = manager.addApplicationContact(application, contact);
 		ApplicationContact fetchedContact = manager.getApplicationContact(contactId);
 		return fetchedContact;
+	}
+	
+	@Transactional
+	public ApplicationData updateApplicationContact(Application application, ApplicationContact contact)
+	{
+		ApplicationContact updatedContact = manager.updateApplicationContact(contact);
+		
+		ApplicationData applicationData = new ApplicationData();
+		applicationData.setApplication(application);
+		applicationData.setApplicationContact(updatedContact);
+		
+		return applicationData;
 	}
 
 	public void setApplications(List applications) {

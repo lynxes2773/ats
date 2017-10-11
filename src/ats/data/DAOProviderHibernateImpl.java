@@ -2,7 +2,10 @@ package ats.data;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -54,7 +57,7 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		{
 			applications.clear();
 			tx = session.beginTransaction();
-			List list = session.createQuery("FROM Application a JOIN FETCH a.contacts ac ORDER BY a.applicationDate DESC").getResultList();
+			List list = session.createQuery("FROM Application a").getResultList();
 			tx.commit();
 			Transaction tx1 = session.beginTransaction();
 			for (Iterator iter = list.iterator(); iter.hasNext();)
@@ -82,6 +85,37 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		}
 
 		return applications;
+	}
+	
+	public Map getApplicationCountsByStatus()
+	{
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		Map resultsMap = new HashMap();
+		try
+		{
+			tx = session.beginTransaction();
+			List list = session.createQuery("SELECT a.applicationStatus, count(a.applicationStatus) FROM Application a GROUP BY a.applicationStatus").getResultList();
+			
+			for (Iterator iter = list.iterator(); iter.hasNext();)
+			{
+				Object[] row = (Object[])iter.next();
+				resultsMap.put(row[0], row[1]);
+			}
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+
+		return resultsMap;
 	}
 	
 	public void setApplications(List applications)
@@ -204,6 +238,43 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		return updatedApplication;
 	}
 	
+	public ApplicationContact updateApplicationContact(ApplicationContact contact)
+	{
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		ApplicationContact updatedContact=null;
+		
+		try
+		{
+			tx = session.getTransaction();
+			tx.begin();
+			String hql = "update ApplicationContact set contactName=?, "
+					+ "contactDescription=? "
+					+ "where id=?";
+					
+			Query query = session.createQuery(hql);
+			query.setParameter(0, contact.getContactName());
+			query.setParameter(1, contact.getContactDescription());
+			query.setParameter(2, contact.getId());
+						
+			query.executeUpdate();
+			tx.commit();			
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+		
+		return getApplicationContact(contact.getId());
+	}
+	
 	public ApplicationContact getApplicationContact(Integer contactId)
 	{
 		ApplicationContact contact = null;
@@ -268,7 +339,7 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		}
 		return contactId;		
 	}
-	
+		
 	public List getCandidates() {
 
 		Session session = sessionFactory.openSession();
@@ -457,4 +528,5 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		
 		return statusList;
 	}
+
 }

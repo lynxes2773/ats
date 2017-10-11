@@ -139,6 +139,7 @@
 			<fileset dir="${web.dir}">
 				<include name="**/resources/jsp/*.jsp"/>
 				<include name="**/resources/tld/*.tld"/>
+				<include name="**/resources/scripts/*.js"/>
 				<include name="**/index.html"/>
 				<include name="**/dispatcher-servlet.xml"/>
 				<include name="**/*.css"/>

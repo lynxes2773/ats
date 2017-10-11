@@ -1,8 +1,10 @@
 package ats.data;
 
 import java.util.List;
+import java.util.Map;
 import ats.entity.Application;
 import ats.entity.ApplicationContact;
+import ats.entity.ApplicationData;
 import ats.util.Provider;
 import example.hibernate.Candidate;
 
@@ -33,6 +35,10 @@ public interface DAOProvider extends Provider{
 	public List getPositionTypes();
 	
 	public List getJobSourceTypes();
+
+	public Application updateApplication(Application application);
 	
-	public Application updateApplication(Application applicationWithUpdates);
+	public ApplicationContact updateApplicationContact(ApplicationContact contact);
+
+	public Map getApplicationCountsByStatus();
 }
