@@ -1,44 +1,27 @@
-      // Load the Visualization API and the piechart package.
-      google.charts.load('current', {'packages':['corechart']});
+var chartData = '${chartData}';
+var obj = JSON.parse(chartData);  
 
-      // Set a callback to run when the Google Visualization API is loaded.
-     google.charts.setOnLoadCallback(drawChart);
-      
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart(dormant, applied, interviewsScheduled, contactInitiated) 
-      { 
-    	  window.alert("Sum: "+dormant+applied+interviewsScheduled+contactInitiated);
-          // Create our data table.
-          var data = new google.visualization.DataTable();
-          data.addColumn('string', 'Status');
-          data.addColumn('number', 'Position Count');
-//          data.addRows([
-//            ['Dormant', dormant],
-//            ['Applied', applied],
-//            ['Interviews Scheduled', interviewsScheduled],
-//            ['Contact Initiated', contactInitiated],
-//          ]);         
-          data.addRows([
-              ['Dormant', 23],
-              ['Applied', 34],
-              ['Interviews Scheduled', 45],
-              ['Contact Initiated', 56],
-            ]);        
-          // Set chart options
-          var options = {'title':'Application Status',
-                       'width':500,
-                       'height':400};
-    	  
-          // Instantiate and draw our chart, passing in some options.
-          var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-          google.visualization.events.addListener(chart, 'select', selectHandler);
-          chart.draw(data, options);
-      }
+var dormant = parseInt(obj['DORMANT']);
+var applied = parseInt(obj['APPLIED']);
+var interviewsScheduled = parseInt(obj['INTERVIEWS SCHEDULED']);
+var contactInitiated = parseInt(obj['CONTACT INITIATED']);	 
 
-      function selectHandler() {
-        var selectedItem = chart.getSelection()[0];
-        var value = data.getValue(selectedItem.row, 0);
-        alert('The user selected ' + value);
-      }
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+	 
+	 function drawChart() 
+	 { 
+		 var data = google.visualization.arrayToDataTable([
+		 ['Status', 'Positions'],
+		 ['Dormant', dormant],
+		 ['Applied', applied],
+		 ['Interviews Scheduled', interviewsScheduled],
+		 ['Contact Initiated', contactInitiated]    
+	]);
+	     // Set chart options
+	     var options = {'title':'Application Status', 'width':400, 'height':300};
+		  
+	     // Instantiate and draw our chart, passing in some options.
+	     var chart = new google.visualization.PieChart(document.getElementById('chartDiv'));
+	     chart.draw(data, options);
+	 }
