@@ -1,9 +1,9 @@
 <%@ include file="/resources/jsp/header.jsp" %>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-	var chartData = '${chartData}';
-</script>
 <script type="text/javascript" src="resources/scripts/charts.js"></script>
+<script type="text/javascript">
+pieChartModule.init('${chartData}');
+</script>
 <div id="invisible-placement-container">
 	<div id="left-column-wide-box" class="col-lg-9">
 			<div id="page-title-area">

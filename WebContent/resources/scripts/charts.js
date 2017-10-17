@@ -7,7 +7,7 @@ pieChartModule = function(){
 	var contactInitiated;	 
 	var rejected;
 	
-	var init = function(){
+	var init = function(chartData){
 		obj = JSON.parse(chartData);  
 		
 		dormant = parseInt(obj['DORMANT']);
@@ -42,4 +42,3 @@ pieChartModule = function(){
 	 
 	 return{init: init};
 }();
-pieChartModule.init();
