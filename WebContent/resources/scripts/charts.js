@@ -1,14 +1,26 @@
-var chartData = '${chartData}';
-var obj = JSON.parse(chartData);  
+pieChartModule = function(){
+	var obj;  
+	
+	var dormant;
+	var applied;
+	var interviewsScheduled;
+	var contactInitiated;	 
+	var rejected;
+	
+	var init = function(){
+		obj = JSON.parse(chartData);  
+		
+		dormant = parseInt(obj['DORMANT']);
+		applied = parseInt(obj['APPLIED']);
+		interviewsScheduled = parseInt(obj['INTERVIEWS SCHEDULED']);
+		contactInitiated = parseInt(obj['CONTACT INITIATED']);	 
+		rejected = parseInt(obj['REJECTED']);
 
-var dormant = parseInt(obj['DORMANT']);
-var applied = parseInt(obj['APPLIED']);
-var interviewsScheduled = parseInt(obj['INTERVIEWS SCHEDULED']);
-var contactInitiated = parseInt(obj['CONTACT INITIATED']);	 
-
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
-	 
+		google.charts.load('current', {'packages':['corechart']});
+		google.charts.setOnLoadCallback(drawChart);
+	};
+	
+	
 	 function drawChart() 
 	 { 
 		 var data = google.visualization.arrayToDataTable([
@@ -16,12 +28,18 @@ var contactInitiated = parseInt(obj['CONTACT INITIATED']);
 		 ['Dormant', dormant],
 		 ['Applied', applied],
 		 ['Interviews Scheduled', interviewsScheduled],
-		 ['Contact Initiated', contactInitiated]    
-	]);
-	     // Set chart options
-	     var options = {'title':'Application Status', 'width':400, 'height':300};
-		  
+		 ['Contact Initiated', contactInitiated],    
+		 ['Rejected', rejected]
+		]);
+
+		 // Set chart options
+	     var options = {'legend':'right', 'width':325, 'height':250};
 	     // Instantiate and draw our chart, passing in some options.
 	     var chart = new google.visualization.PieChart(document.getElementById('chartDiv'));
+		 
 	     chart.draw(data, options);
 	 }
+	 
+	 return{init: init};
+}();
+pieChartModule.init();

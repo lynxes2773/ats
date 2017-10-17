@@ -1,36 +1,9 @@
 <%@ include file="/resources/jsp/header.jsp" %>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-var chartData = '${chartData}';
-var obj = JSON.parse(chartData);  
-
-var dormant = parseInt(obj['DORMANT']);
-var applied = parseInt(obj['APPLIED']);
-var interviewsScheduled = parseInt(obj['INTERVIEWS SCHEDULED']);
-var contactInitiated = parseInt(obj['CONTACT INITIATED']);	 
-var rejected = parseInt(obj['REJECTED']);
-
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
-	 
-	 function drawChart() 
-	 { 
-		 var data = google.visualization.arrayToDataTable([
-		 ['Status', 'Positions'],
-		 ['Dormant', dormant],
-		 ['Applied', applied],
-		 ['Interviews Scheduled', interviewsScheduled],
-		 ['Contact Initiated', contactInitiated],    
-		 ['Rejected', rejected]
-	]);
-	     // Set chart options
-	     var options = {'legend':'right', 'width':325, 'height':250};
-		  
-	     // Instantiate and draw our chart, passing in some options.
-	     var chart = new google.visualization.PieChart(document.getElementById('chartDiv'));
-	     chart.draw(data, options);
-	 }
+	var chartData = '${chartData}';
 </script>
+<script type="text/javascript" src="resources/scripts/charts.js"></script>
 <div id="invisible-placement-container">
 	<div id="left-column-wide-box" class="col-lg-9">
 			<div id="page-title-area">
@@ -86,3 +59,4 @@ var rejected = parseInt(obj['REJECTED']);
 	</div>
 </div>
 <%@ include file="/resources/jsp/footer.jsp" %>
+
