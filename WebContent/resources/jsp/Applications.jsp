@@ -8,6 +8,7 @@ var dormant = parseInt(obj['DORMANT']);
 var applied = parseInt(obj['APPLIED']);
 var interviewsScheduled = parseInt(obj['INTERVIEWS SCHEDULED']);
 var contactInitiated = parseInt(obj['CONTACT INITIATED']);	 
+var rejected = parseInt(obj['REJECTED']);
 
 	google.charts.load('current', {'packages':['corechart']});
 	google.charts.setOnLoadCallback(drawChart);
@@ -19,10 +20,11 @@ var contactInitiated = parseInt(obj['CONTACT INITIATED']);
 		 ['Dormant', dormant],
 		 ['Applied', applied],
 		 ['Interviews Scheduled', interviewsScheduled],
-		 ['Contact Initiated', contactInitiated]    
+		 ['Contact Initiated', contactInitiated],    
+		 ['Rejected', rejected]
 	]);
 	     // Set chart options
-	     var options = {'width':325, 'height':250};
+	     var options = {'legend':'right', 'width':325, 'height':250};
 		  
 	     // Instantiate and draw our chart, passing in some options.
 	     var chart = new google.visualization.PieChart(document.getElementById('chartDiv'));
