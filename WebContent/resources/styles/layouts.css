@@ -51,7 +51,7 @@ body {
 
 #invisible-placement-container {
 	background-color: #EFEFEF;
-	max-width: 65%;
+	max-width: 70%;
 	height: auto;
 	overflow: auto;       /* footer positioning related */
 	padding-bottom: 50px; /* must be same height as the footer */
@@ -112,7 +112,7 @@ body {
 #card-sized-box{
 	float: bottom;
 	min-height: 200px;
-	max-height: 300px;
+	max-height: 350px;
 	margin-bottom: 20px;
 }
 

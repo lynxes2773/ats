@@ -2,7 +2,6 @@ barChartModule = function(){
 
 	var init = function(param)
 	{
-		window.alert('inside init(): '+param);
 		var obj = JSON.parse(param);
 		var dormant = parseInt(obj['Dormant']);
 		var applied = parseInt(obj['Applied']);
@@ -10,13 +9,6 @@ barChartModule = function(){
 		var contactInitiated = parseInt(obj['Contact Initiated']);	 
 		var rejected = parseInt(obj['Rejected']);
 
-		window.alert('dormant: '+dormant);
-		window.alert('applied: '+applied);
-		window.alert('interviewsScheduled: '+interviewsScheduled);
-		window.alert('contactInitiated: '+contactInitiated);
-		window.alert('rejected: '+rejected);
-		
-		
 		var ctx = document.getElementById('barChart').getContext('2d');
 
 		var statusCountChart = new Chart(ctx, 

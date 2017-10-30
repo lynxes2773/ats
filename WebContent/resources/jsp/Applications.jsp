@@ -55,7 +55,7 @@ pieChartModule.init(chartData);
 				</div>
 			</div>
 			<div id="card-content-area">			
-				<div id="pieChartDiv" width="325" height="250"></div>
+				<div id="pieChartDiv" width="300" height="250"></div>
 			</div>
 		</div>
 		<div id="card-sized-box">
@@ -67,7 +67,7 @@ pieChartModule.init(chartData);
 				</div>
 			</div>
 			<div id="card-content-area">			
-				<canvas id="barChart" width="325" height="250"></canvas>
+				<canvas id="barChart" width="275" height="250"></canvas>
 			</div>
 		</div>	
 	</div>

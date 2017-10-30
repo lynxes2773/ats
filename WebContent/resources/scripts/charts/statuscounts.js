@@ -33,7 +33,7 @@ pieChartModule = function(){
 		]);
 
 		 // Set chart options
-	     var options = {'legend':'right', 'width':325, 'height':250};
+	     var options = {'legend':'right', 'width':275, 'height':220};
 	     // Instantiate and draw our chart, passing in some options.
 	     var chart = new google.visualization.PieChart(document.getElementById('pieChartDiv'));
 		 
