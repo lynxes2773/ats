@@ -1,8 +1,10 @@
 <%@ include file="/resources/jsp/header.jsp" %>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="resources/scripts/charts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+<script type="text/javascript" src="resources/scripts/charts/statuscounts.js"></script>
 <script type="text/javascript">
-pieChartModule.init('${chartData}');
+var chartData = '${chartData}';
+pieChartModule.init(chartData);
 </script>
 <div id="invisible-placement-container">
 	<div id="left-column-wide-box" class="col-lg-9">
@@ -53,10 +55,27 @@ pieChartModule.init('${chartData}');
 				</div>
 			</div>
 			<div id="card-content-area">			
-				<div id="chartDiv"></div>
+				<div id="pieChartDiv" width="325" height="250"></div>
 			</div>
 		</div>
+		<div id="card-sized-box">
+			<div id="card-title-area">
+				<div class="row">
+					<div class="col-sm-9">
+						<span class="heading3"><spring:message code="label.applications.card_header.status_counts"/></span>
+					</div>
+				</div>
+			</div>
+			<div id="card-content-area">			
+				<canvas id="barChart" width="325" height="250"></canvas>
+			</div>
+		</div>	
 	</div>
 </div>
+<script type="text/javascript" src="resources/scripts/charts/barchart.js"></script>
+<script type="text/javascript">
+barChartModule.init(chartData);  
+</script>
+
 <%@ include file="/resources/jsp/footer.jsp" %>
 
