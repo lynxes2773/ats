@@ -23,11 +23,13 @@ pieChartModule.init(chartData);
 			</div>
 			
 			<div id="main-content-box" style="padding-top: 15px; padding-bottom: 0px;">
-				<table class="listing" border=1 bordercolor='#EFEEEC' cellpadding=2 cellspacing=2 width=75%>
+				<table class="listing" border=1 bordercolor='#EFEEEC' cellpadding=2 cellspacing=2 width=100%>
 					<tr bgcolor='#EFEEEC'>
 						<td><spring:message code="label.applications.listcolumnheader.positionName"/></td>
 						<td><spring:message code="label.applications.listcolumnheader.endClient"/></td>
 						<td><spring:message code="label.applications.listcolumnheader.appliedOn"/></td>
+						<td><spring:message code="label.applications.listcolumnheader.location"/></td>
+						<td><spring:message code="label.applications.listcolumnheader.positionType"/></td>
 						<td><spring:message code="label.applications.listcolumnheader.status"/></td>
 					</tr>
 					<c:forEach items="${applications}" var="app">
@@ -35,6 +37,8 @@ pieChartModule.init(chartData);
 							<td><a href="${pageContext.servletContext.contextPath}/showApplication.htm?id=${app.id}">${app.positionName}</a></td>
 							<td>${app.endClient}</td>
 							<td>${app.applicationDate}</td>
+							<td>${app.location}</td>
+							<td>${app.positionType}</td>
 							<td>${app.applicationStatus}</td>
 						</tr>
 					</c:forEach>

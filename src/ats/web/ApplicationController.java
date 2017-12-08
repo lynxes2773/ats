@@ -51,6 +51,7 @@ public class ApplicationController extends AbstractController {
 	@Override	
 	@RequestMapping(value="/applications.htm", method=RequestMethod.GET)
 	public ModelAndView handleRequestInternal(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
+		
 		List applications= applicationService.getApplications();
 		Map applicationStatusCounts = applicationService.getApplicationStatusCounts();
 		

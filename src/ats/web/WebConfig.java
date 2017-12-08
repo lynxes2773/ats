@@ -1,7 +1,6 @@
 package ats.web;
 
 import java.util.Locale;
-
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -49,8 +48,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         messageSource.setDefaultEncoding("UTF-8");
         String[] strBaseNames = {
                 "resources/i18/labels",
-                "resources/i18/validations",
-                "resources/system/config"
+                "resources/i18/validations"
+                //"resources/system/config"
         };
         
         messageSource.setBasenames(strBaseNames);

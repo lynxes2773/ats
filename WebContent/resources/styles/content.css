@@ -65,7 +65,9 @@ table.entity-detail {
     font-variant: normal normal;
 }
 
-
+td {
+	height: 30px;
+}
 
 tr.listing {
 	transition: background 0.2s ease-in;
