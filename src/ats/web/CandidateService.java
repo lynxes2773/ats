@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Scope("request")
 public class CandidateService implements java.io.Serializable{
 	
+	private static int PAGE_LIST_LENGTH = 10;
 	private List candidates = new ArrayList();
 	DAOProvider manager;
 	
@@ -34,7 +35,13 @@ public class CandidateService implements java.io.Serializable{
 	public CandidateService(DAOProvider manager)
 	{
 		this.manager=manager;
-		candidates = manager.getCandidates();
+		//candidates = manager.getCandidatesByPage(1, PAGE_LIST_LENGTH);
+	}
+	
+	public List getCandidatesByPage(int pageId)
+	{
+		candidates = manager.getCandidatesByPage(pageId, PAGE_LIST_LENGTH);
+		return candidates;
 	}
 
 	public List getCandidates() {

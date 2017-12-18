@@ -10,6 +10,8 @@ import example.hibernate.Candidate;
 
 public interface DAOProvider extends Provider{
 	
+	public List getCandidatesByPage(int pageId, int totalPageCount);
+	
 	public List getCandidates();
 	
 	public void setCandidates(List candidates);

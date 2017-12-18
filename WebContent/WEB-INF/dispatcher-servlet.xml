@@ -25,11 +25,11 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<bean id="simpleUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
-				<prop key="/candidates.htm">candidateController</prop>
+				<prop key="/candidates">candidateController</prop>
 				<prop key="/addNewCandidate.htm">candidateController</prop>
 				<prop key="/addSubmittedCandidate.htm">candidateController</prop>
 				<prop key="/layout.htm">candidateController</prop>
-				<prop key="/applications.htm">applicationController</prop>
+				<prop key="/applications">applicationController</prop>
 				<prop key="/addNewApplication.htm">applicationController</prop>
 				<prop key="/addSubmittedApplication.htm">applicationController</prop>
 				<prop key="/showApplicationEditable.htm">applicationController</prop>
@@ -92,6 +92,10 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
     	</property>
     </bean>
     
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
+		<property name="dataSource" ref="dataSource"></property>  
+	</bean>  
+    
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
     	<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
@@ -100,5 +104,6 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	
 	<bean id="hibernateDAOProvider" class="ats.data.DAOProviderHibernateImpl" scope="request">
 		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>		
 	</bean>
 </beans>

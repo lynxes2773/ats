@@ -22,6 +22,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.sql.DataSource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;  
 
 import example.hibernate.Candidate;
 import org.springframework.stereotype.Repository;
@@ -34,9 +36,15 @@ import ats.entity.*;
 public class DAOProviderHibernateImpl implements DAOProvider{
 	static final Logger logger = LogManager.getLogger(DAOProviderHibernateImpl.class.getName());
 	private SessionFactory sessionFactory;
+	private JdbcTemplate jdbcTemplate;
 	
 	List candidates = new ArrayList();
 	List applications = new ArrayList();
+	
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate)
+	{
+		this.jdbcTemplate=jdbcTemplate;
+	}
 	
 	@Autowired
 	public DAOProviderHibernateImpl(SessionFactory sessionFactory)
@@ -47,7 +55,48 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
-	}	
+	}
+	
+	public List getCandidatesByPage(int pageId, int totalPageCount)
+	{
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try
+		{
+			tx = session.beginTransaction();
+			Query query = session.createQuery("from Candidate c order by c.lastName");
+			if(pageId==1)
+			{
+				query.setFirstResult(0);
+			}
+			else
+			{
+				query.setFirstResult(pageId-1);
+			}
+			query.setMaxResults(totalPageCount);
+			List list = query.getResultList();
+			System.out.println("#### Results: "+list.size());
+			for (Iterator iter = list.iterator(); iter.hasNext();)
+			{
+					Candidate loadedCandidate = (Candidate) iter.next();
+					candidates.add(loadedCandidate);
+			}
+			tx.commit();
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+
+		return candidates;
+	}
 	
 	public List getApplications()
 	{
