@@ -17,10 +17,10 @@
 				<table id="candidatesTable" class="listing" border=1 bordercolor='#EFEEEC' cellpadding=2 cellspacing=0 width=100%>
 					<thead>
 						<tr bgcolor='#EFEEEC'>
+							<td><spring:message code="label.candidates.listcolumnheader.id"/></td>
 							<td><spring:message code="label.candidates.listcolumnheader.name"/></td>
 							<td align='center'><spring:message code="label.candidates.listcolumnheader.gender"/></td>
-							<td><spring:message code="label.candidates.listcolumnheader.email"/></td>
-							<td><spring:message code="label.candidates.listcolumnheader.id"/></td>
+							<td><spring:message code="label.candidates.listcolumnheader.address"/></td>
 							<td><spring:message code="label.candidates.listcolumnheader.status"/></td>
 							<td><spring:message code="label.candidates.listcolumnheader.summary"/></td>
 						</tr>
@@ -28,10 +28,18 @@
 					<tbody>
 					<c:forEach items="${candidates}" var="candidate">
 						<tr class="listing">
-							<td>${candidate.firstName} ${candidate.lastName}</td>
-							<td align='center'>${candidate.gender}</td>
-							<td>${candidate.email}</td>
 							<td>${candidate.candidateId}</td>
+							<td>
+								${candidate.firstName} ${candidate.lastName}<br>
+								<i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;&nbsp; ${candidate.email}<br>
+								<i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp; ${candidate.phone}
+							</td>
+							<td align='center'>${candidate.gender}</td>
+							<td>
+								${candidate.streetAddress1}, ${candidate.streetAddress2}, <br>
+								${candidate.city} ${candidate.state} ${candidate.zipCode} <br>
+								${candidate.country}
+							</td>
 							<td>${candidate.status}</td>
 							<td>${candidate.summary}</td>
 						</tr>
