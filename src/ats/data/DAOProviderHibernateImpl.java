@@ -400,7 +400,6 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 			for (Iterator iter = list.iterator(); iter.hasNext();)
 			{
 					Candidate loadedCandidate = (Candidate) iter.next();
-					//candidates.add(loadedCandidate.getFirstName() + " " + loadedCandidate.getLastName());
 					candidates.add(loadedCandidate);
 			}
 			tx.commit();

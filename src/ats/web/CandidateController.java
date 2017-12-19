@@ -44,7 +44,8 @@ public class CandidateController //extends AbstractController
 
 	@RequestMapping(value="/candidates.htm", method=RequestMethod.GET)
 	protected ModelAndView getCandidates(@RequestParam("pageId") int pageId) {
-		List candidates = service.getCandidatesByPage(pageId);
+		//List candidates = service.getCandidatesByPage(pageId);
+		List candidates = service.getCandidates();
 		return new ModelAndView("candidates", "candidates", candidates);
 	}	
 	

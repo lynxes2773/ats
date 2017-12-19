@@ -35,7 +35,7 @@ public class CandidateService implements java.io.Serializable{
 	public CandidateService(DAOProvider manager)
 	{
 		this.manager=manager;
-		//candidates = manager.getCandidatesByPage(1, PAGE_LIST_LENGTH);
+		
 	}
 	
 	public List getCandidatesByPage(int pageId)
@@ -45,6 +45,7 @@ public class CandidateService implements java.io.Serializable{
 	}
 
 	public List getCandidates() {
+		candidates = manager.getCandidates();
 		return candidates;
 	}
 
