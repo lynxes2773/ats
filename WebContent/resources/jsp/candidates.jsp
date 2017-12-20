@@ -2,6 +2,10 @@
 <script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+<script type="text/javascript" src="resources/scripts/formatting/atsDataTables.js"></script>
+<script type="text/javascript">
+candidateTableModule.init();
+</script>
 
 		<div id="content-area">
 			<div id="page-title-area">
@@ -45,19 +49,6 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<script>
-					$(document).ready( function () 
-					{
-						$.noConflict();
-				    	var table = $('#candidatesTable').DataTable({
-							"paging": 		true,
-							"searching": 	true,
-							"ordering": 	true,
-							"select": 		true,
-							"pageLength": 	10
-				    	});
-					});
-				</script>
  			</div>	
 			<div class="post-content-spacing">
 				&nbsp;
