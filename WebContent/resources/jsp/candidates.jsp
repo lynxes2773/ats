@@ -2,7 +2,7 @@
 <script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
-<script type="text/javascript" src="resources/scripts/formatting/atsDataTables.js"></script>
+<script type="text/javascript" src="resources/scripts/formatting/candidateDataTables.js"></script>
 <script type="text/javascript">
 candidateTableModule.init();
 </script>
@@ -11,9 +11,9 @@ candidateTableModule.init();
 			<div id="page-title-area">
 				<table border=0 cellspacing=0 cellpadding=0>
 					<tr>
-						<td valign='bottom'><span class="heading2"><spring:message code="label.candidates.header"/></span></td>
+						<td valign='center'><span class="heading2"><spring:message code="label.candidates.header"/></span></td>
 						<td width=25>&nbsp;</td>
-						<td valign='bottom'><a href="${pageContext.servletContext.contextPath}/addNewCandidate.htm" class="free"><spring:message code="label.common.link.addnew"/></a></td>
+						<td valign='center'><a href="${pageContext.servletContext.contextPath}/addNewCandidate.htm" class="free"><spring:message code="label.common.link.addnew"/></a></td>
 					</tr>
 				</table>
 			</div>
@@ -32,20 +32,20 @@ candidateTableModule.init();
 					<tbody>
 					<c:forEach items="${candidates}" var="candidate">
 						<tr class="listing">
-							<td>${candidate.candidateId}</td>
-							<td>
+							<td align='center' valign='top'>${candidate.candidateId}</td>
+							<td valign='top'>
 								${candidate.firstName} ${candidate.lastName}<br>
 								<i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;&nbsp; ${candidate.email}<br>
 								<i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp; ${candidate.phone}
 							</td>
-							<td align='center'>${candidate.gender}</td>
-							<td>
+							<td align='center' valign='top'>${candidate.gender}</td>
+							<td valign='top'>
 								${candidate.streetAddress1}, ${candidate.streetAddress2}, <br>
 								${candidate.city} ${candidate.state} ${candidate.zipCode} <br>
 								${candidate.country}
 							</td>
-							<td>${candidate.status}</td>
-							<td>${candidate.summary}</td>
+							<td valign='top'>${candidate.status}</td>
+							<td valign='top'>${candidate.summary}</td>
 						</tr>
 					</c:forEach>
 				</table>

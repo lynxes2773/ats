@@ -26,6 +26,7 @@ import ats.web.validation.Length;
 import ats.web.validation.Required;
 import example.hibernate.Candidate;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 @Entity

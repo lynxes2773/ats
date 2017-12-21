@@ -74,7 +74,7 @@ tr.listing {
 }
 
 tr.listing:hover {
-  background-color: #DFDFDF;
+  background-color: #FEEEBE;
 }
 
 td.listing-header {
@@ -106,12 +106,16 @@ a {
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
-a.free:link, a.free:visited, a.free:active, a.card:link, a.card:visited, a.card:active {
-	color: #3B838B;
+a.free, a.card {
+    text-decoration: none;
+}
+
+a.free:link, a.free:visited, a.card:link, a.card:visited, a.card:active {
+	color: #1BA5B5;
 }	
 
-a.free:hover, a.card:hover{
-	color: #00474F;
+a.free:hover, a.card:hover, a.free:active{
+	color: #343434;
 }
 
 a.free:link, a.free:visited, a.free:active, a.free:hover {
@@ -124,7 +128,7 @@ a.card:link, a.card:visited, a.card:active, a.card:hover {
 
 
 a.headerLinks:link, a.headerLinks:visited, a.headerLinks:active {
-    color: #3B838B;
+    color: #1BA5B5;
     padding: 5px 15px;
     text-align: left;
     text-decoration: none;
@@ -133,7 +137,7 @@ a.headerLinks:link, a.headerLinks:visited, a.headerLinks:active {
 }
 
 a.headerLinks:hover {
-    color: #00474F;
+    color: #343434;
     padding: 5px 15px;
     text-align: left;
     text-decoration: none;
