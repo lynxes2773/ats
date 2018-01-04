@@ -16,6 +16,7 @@
 	    padding: 0;
 	}
 	</style>
+	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
 	<link rel="stylesheet" href="resources/styles/bootstrap.min.css">
 	<link rel="stylesheet" href="resources/styles/content.css">
 	<link rel="stylesheet" href="resources/styles/layouts.css">

@@ -31,7 +31,10 @@ applicationsTableModule.init();
 						&nbsp;&nbsp;
 					</tr>
 					<tr>
-						<a href="${pageContext.servletContext.contextPath}/addNewApplication.htm" class="free"><spring:message code="label.common.link.addnew"/></a>
+						<a href="${pageContext.servletContext.contextPath}/addNewApplication.htm" class="free">
+							<i class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;
+							<spring:message code="label.common.link.addnew"/>
+						</a>
 					</tr>
 				</table>			
 			</div>

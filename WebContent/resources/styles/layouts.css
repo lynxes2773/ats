@@ -50,7 +50,7 @@ body {
 }
 
 #invisible-placement-container {
-	background-color: #EFEFEF;
+	background-color: #F8F8F8;
 	max-width: 70%;
 	height: auto;
 	overflow: auto;       /* footer positioning related */
@@ -195,7 +195,7 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 0;
-	margin-top: -50px; /* negative value of footer height */
+	margin-top: -73px; /* negative value of footer height */
 	clear: both;	   /* footer positioning related */
 	padding: 6px;
 	z-index: 99;

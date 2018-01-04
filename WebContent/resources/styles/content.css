@@ -9,7 +9,7 @@
 	color: #FBC113;
 	padding: 5px 15px;
     text-align: left;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-family: font-family: 'Oswald', sans-serif;
     font-style: normal;
     font-size: 24px;
 }
@@ -101,6 +101,17 @@ p {
 	color: #AAAAAA;
 }
 
+
+label {
+    color: #AAAAAA;
+    text-align: left;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-style: normal;
+    font-weight: normal; 
+    font-size: 12px;
+}
+
+
 a {
     text-decoration: none;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
@@ -183,5 +194,10 @@ border: 2px solid red;
     font-size: 11px;
 }
 
+/* Overridden Bootstrap CSS */
 
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #f9f9f9;
+    opacity: 1;
+}
 

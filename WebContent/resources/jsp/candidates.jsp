@@ -13,7 +13,12 @@ candidateTableModule.init();
 					<tr>
 						<td valign='center'><span class="heading2"><spring:message code="label.candidates.header"/></span></td>
 						<td width=25>&nbsp;</td>
-						<td valign='center'><a href="${pageContext.servletContext.contextPath}/addNewCandidate.htm" class="free"><spring:message code="label.common.link.addnew"/></a></td>
+						<td valign='center'>
+							<a href="${pageContext.servletContext.contextPath}/addNewCandidate.htm" class="free">
+								<i class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;
+								<spring:message code="label.common.link.addnew"/>
+							</a>
+						</td>
 					</tr>
 				</table>
 			</div>
