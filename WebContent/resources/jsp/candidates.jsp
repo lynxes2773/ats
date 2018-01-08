@@ -6,8 +6,8 @@
 <script type="text/javascript">
 candidateTableModule.init();
 </script>
-
-		<div id="content-area">
+<div id="invisible-placement-container">
+		<div id="left-column-wide-box">
 			<div id="page-title-area">
 				<table border=0 cellspacing=0 cellpadding=0>
 					<tr>
@@ -59,4 +59,5 @@ candidateTableModule.init();
 				&nbsp;
 			</div>
 		</div>
+</div>
 <%@ include file="/resources/jsp/footer.jsp" %>

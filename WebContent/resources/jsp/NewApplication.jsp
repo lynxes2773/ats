@@ -1,7 +1,8 @@
 <%@page import="example.hibernate.Candidate"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ include file="/resources/jsp/header.jsp" %>
-		<div id="content-area">
+	<div id="invisible-placement-container">
+		<div id="left-column-wide-box">
 			<div id="page-title-area">
 				<table border=0 cellspacing=0 cellpadding=0>
 					<tr>
@@ -114,5 +115,6 @@
 			<div class="post-content-spacing">
 				&nbsp;
 			</div>
-		</div>			
+		</div>
+	</div>			
 <%@ include file="/resources/jsp/footer.jsp" %>

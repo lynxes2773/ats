@@ -1,5 +1,6 @@
 <%@ include file="/resources/jsp/header.jsp" %>
-		<div id="content-area">
+<div id="invisible-placement-container">
+		<div id="left-column-wide-box">
 			<div id="page-title-area">
 				<table border=0 cellspacing=0 cellpadding=0>
 					<tr>
@@ -27,4 +28,5 @@
 				&nbsp;
 			</div>
 		</div>
+</div>
 <%@ include file="/resources/jsp/footer.jsp" %>
