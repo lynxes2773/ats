@@ -81,12 +81,12 @@ public class ApplicationService implements Serializable {
 	}
 	
 	@Transactional
-	public ApplicationData updateApplicationContact(Application application, ApplicationContact contact)
+	public ApplicationData updateApplicationContact(ApplicationContact contact)
 	{
 		ApplicationContact updatedContact = manager.updateApplicationContact(contact);
 		
 		ApplicationData applicationData = new ApplicationData();
-		applicationData.setApplication(application);
+		applicationData.setApplication(contact.getApplication());
 		applicationData.setApplicationContact(updatedContact);
 		
 		return applicationData;

@@ -206,6 +206,10 @@ public class ApplicationController extends AbstractController {
 		else
 		{
 			Application newlyUpdatedApplication = applicationService.updateApplication(submittedApplication);
+			
+			Integer applicationId = newlyUpdatedApplication.getId();
+			applicationData = getApplicationData(applicationId);
+			
 			applicationData.setApplication(newlyUpdatedApplication);
 			modelAndView =  new ModelAndView("ApplicationDetail", "applicationData", applicationData);
 			modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
@@ -219,9 +223,17 @@ public class ApplicationController extends AbstractController {
 	
 	//User has clicked Edit link on Contacts card; we need to show the Contact entry form on the card.
 	@RequestMapping(value="/editApplicationContact.htm", method=RequestMethod.GET)
-	public ModelAndView editApplicationContact(@ModelAttribute("applicationData") ApplicationData applicationData, @ModelAttribute("contactId") Integer contactId, @ModelAttribute("applicationId") Integer applicationId)
+	public ModelAndView editApplicationContact(@RequestParam("id") Integer applicationId)
 	{
-		applicationData = getApplicationData(applicationId);
+		System.out.println("##########");
+		Application application = applicationService.getApplication(applicationId);
+		
+		ApplicationContact contact = (ApplicationContact)application.getContacts().get(0); 
+		 
+		ApplicationData applicationData = new ApplicationData();
+		
+		applicationData.setApplication(application);
+		applicationData.setApplicationContact(contact);
 				
 		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
 		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
@@ -237,9 +249,15 @@ public class ApplicationController extends AbstractController {
 	public ModelAndView saveApplicationContact(@Valid @ModelAttribute("applicationData") ApplicationData applicationData, BindingResult errors)
 	{
 		//contactValidator.validate(applicationData.getApplicationContact(), errors);
-		//applicationData = getApplicationData(applicationData.getApplication().getId());
+
+		ApplicationContact contact = applicationData.getApplicationContact();
+		applicationService.updateApplicationContact(contact);
 		
-		applicationData = applicationService.updateApplicationContact(applicationData.getApplication(), applicationData.getApplicationContact());
+		Integer applicationId = applicationData.getApplication().getId();
+		applicationData = getApplicationData(applicationId);
+		
+		System.out.println("XXXXXXXXX");
+		System.out.println("Position Name: "+applicationData.getApplication().getPositionName());
 		
 		ModelAndView modelAndView = null;
 		modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
@@ -247,14 +265,17 @@ public class ApplicationController extends AbstractController {
 		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
 		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
 		modelAndView.addObject("applicationEditable", false);
+		
+		boolean showContactForm = false;
 		if(errors!=null && errors.hasErrors())
 		{
-			modelAndView.addObject("showContactForm", true);
+			String errorStr = errors.toString();
+			if(errorStr.contains("contactName"))
+			{	
+				showContactForm = true;
+			}
 		}
-		else
-		{
-			modelAndView.addObject("showContactForm", false);
-		}
+		modelAndView.addObject("showContactForm", showContactForm);
 		
 		return modelAndView;
 	}

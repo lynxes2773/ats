@@ -79,14 +79,14 @@ body {
 	overflow-x: hidden; 
 }
 
-#left-column-wide-box, #right-column-narrow-box, #card-sized-box {
+#left-column-wide-box, #right-column-narrow-box, #card-sized-box, #full-width-box {
     padding-top: 0px;  
     padding-bottom: 0px;  
     padding-right: 0px;  
     padding-left: 0px;  
 }
 
-#left-column-wide-box, #card-sized-box {
+#left-column-wide-box, #card-sized-box, #full-width-box {
 	background-color: #FFFFFF;
 	border-style: solid;
 	border-width: 1px;
@@ -94,7 +94,7 @@ body {
     box-shadow: 5px 5px 5px #DDDDDD;
 }
 
-#left-column-wide-box, #right-column-narrow-box {
+#left-column-wide-box, #right-column-narrow-box, #full-width-box {
 	height: auto;
 	float: left;
 }
@@ -107,6 +107,13 @@ body {
 #right-column-narrow-box{
 	width: 27%;
 	margin-left: 10px;
+}
+
+#full-width-box{
+	width: 100%;
+	margin-left: 0px;
+	margin-right: 0px;
+    box-shadow: 0px 0px 0px 0px #DDDDDD;
 }
 
 #card-sized-box{

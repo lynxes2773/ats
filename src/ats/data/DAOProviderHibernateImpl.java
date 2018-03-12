@@ -311,6 +311,9 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		}
 		catch(HibernateException he)
 		{
+			System.out.println("################ EXCEPTION START ###############");
+			System.out.println(he.toString());
+			System.out.println("################ EXCEPTION END ###############");
 			if(tx!=null){
 				tx.rollback();
 				he.printStackTrace();

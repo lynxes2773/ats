@@ -11,11 +11,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.stereotype.Component;
 
 import ats.web.validation.Required;
 
 @Entity
 @Table(name="APPLICATION_CONTACTS")
+@Component("applicationContact")
 public class ApplicationContact{
 	private Integer id;
 	private Application application;

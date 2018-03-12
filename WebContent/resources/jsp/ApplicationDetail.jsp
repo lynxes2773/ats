@@ -149,7 +149,7 @@
 							<c:choose>
 								<c:when test="${!showContactForm}">
 									<div class="col-xs-1">
-										<a href="${pageContext.servletContext.contextPath}/editApplicationContact.htm?contactId=${applicationData.applicationContact.id}&applicationId=${applicationData.application.id}" class="card"><spring:message code="label.common.link.edit"/></a>
+										<a href="${pageContext.servletContext.contextPath}/editApplicationContact.htm?id=${applicationData.application.id}" class="card"><spring:message code="label.common.link.edit"/></a>
 									</div>
 								</c:when>
 								<c:otherwise>
@@ -165,26 +165,29 @@
 					</div>
 					<div id="card-content-area">
 						<div class="row">
+							<sf:form method="POST" commandName='applicationData' action="${pageContext.servletContext.contextPath}/saveApplicationContact.htm">
+							<sf:hidden path="applicationContact.id" />
+							<sf:hidden path="application.id" />
+						
 							<div class="col-sm-12" style="padding-top:10px">
 								<c:choose>
 									<c:when test="${!showContactForm}">
-										${applicationData.applicationContact.contactName}
-										<span class="card-subordinate-text">${applicationData.applicationContact.contactDescription}</span>
+										<div class="card-sub-header">
+											${applicationData.applicationContact.contactName}
+										</div>
+										<br>
+						  				<sf:textarea class="form-control input-sm" path="applicationContact.contactDescription" rows='7' maxlength='255' readonly='true'/>
 									</c:when>	
 									<c:otherwise>
 										<div class="card-form-box">
-										<sf:form method="POST" commandName='applicationData' action="${pageContext.servletContext.contextPath}/saveApplicationContact.htm">
-										<sf:hidden path="application.id" />
 											<div class="row">
 												<div class="col-sm-8">
-													<sf:errors path="applicationContact.contactName" cssClass="error" /><br>
-					  								<spring:message code="label.form.add_application_contact.field.contact_name"/><br>
-					  								<sf:input path="applicationContact.contactName" class="form-control input-sm" aria-describedby="sizing-addon3" size='15' maxlength='50'/>
+				  									<spring:message code="label.form.add_application_contact.field.contact_name"/>
+				  									<sf:input path="applicationContact.contactName" class="form-control input-sm" aria-describedby="sizing-addon3" size='15' maxlength='50'/>
 												</div>
 											</div>											
 											<div class="row">
 												<div class="col-sm-12">
-													<!--<sf:errors path="applicationContact.contactDescription" cssClass="error" /><br>-->
 					  								<spring:message code="label.form.add_application_contact.field.contact_description"/><br>
 													<sf:textarea class="form-control input-sm" path="applicationContact.contactDescription" rows='3' maxlength='255'/>
 												</div>
@@ -199,17 +202,17 @@
 												 	&nbsp;
 												</div>
 						 						<div class="col-sm-8" align='right'>
-													<input class="btn btn-default btn-xs" type="button" value="Cancel" onClick="locaton.href='${pageContext.servletContext.contextPath}/cancelContactEditing.htm'" />
+													<input class="btn btn-default btn-xs" type="button" value="Cancel" onclick="window.location.href='${pageContext.servletContext.contextPath}/showApplication.htm?id=${applicationData.application.id}'"/>
 													&nbsp;&nbsp;
 													<input class="btn btn-primary btn-xs" type="submit" value="Save"/>
 												</div>
 											</div>
-										</sf:form>					
 										</div>
 									</c:otherwise>							
 								</c:choose>
 							</div>
 						</div>
+						</sf:form>					
 					</div>
 				</div>
 				<div id="card-sized-box">

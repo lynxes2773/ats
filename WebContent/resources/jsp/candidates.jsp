@@ -7,7 +7,7 @@
 candidateTableModule.init();
 </script>
 <div id="invisible-placement-container">
-		<div id="left-column-wide-box">
+		<div id="full-width-box">
 			<div id="page-title-area">
 				<table border=0 cellspacing=0 cellpadding=0>
 					<tr>
