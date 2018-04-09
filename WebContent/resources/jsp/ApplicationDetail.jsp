@@ -1,14 +1,7 @@
 <%@page import="example.hibernate.Candidate"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<script type="text/javascript" src="resources/scripts/pagewise/applicationdetail.js"></script>
 <%@ include file="/resources/jsp/header.jsp" %>
-<script language='JavaScript'>
-	function getFileData(myFile)
-	{
-	   var file = myFile.files[0];  
-	   var filename = file.name;
-	   document.getElementById('attachmentFilename').value=filename;
-	}
-</script>
 		<div id="invisible-placement-container">
 			<div id="left-column-wide-box" class="col-lg-9">
 				<div id="page-title-area">
@@ -265,7 +258,7 @@
 											</div>
 											<div class="row">
 												<div class="col-sm-10">
-													<input class="btn btn-default btn-xs" type="file" name="attachmentContent" onchange="getFileData(this);"/>
+													<input class="btn btn-default btn-xs" type="file" name="attachmentContent" onchange="javascript:fileUploadModule.init(this,'attachmentFilename');"/>
 													<br>
 												</div>
 											</div>
