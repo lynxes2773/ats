@@ -9,3 +9,24 @@ fileUploadModule = function(){
 	 
 	 return{init: init};
 }();
+
+removeAttachmentLinkModule = function(){
+	
+	var init = function(rowNumber, action)
+	{
+		if(action=='0')
+		{
+			document.getElementById('removeColumnRow'+rowNumber).style.visibility='hidden';
+		}
+		else
+		{
+			document.getElementById('removeColumnRow'+rowNumber).style.visibility='visible';
+		}	
+		
+	};
+	 
+	 return{init: init};
+}();
+
+
+

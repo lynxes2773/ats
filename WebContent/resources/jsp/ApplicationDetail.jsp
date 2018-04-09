@@ -1,5 +1,6 @@
 <%@page import="example.hibernate.Candidate"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <script type="text/javascript" src="resources/scripts/pagewise/applicationdetail.js"></script>
 <%@ include file="/resources/jsp/header.jsp" %>
 		<div id="invisible-placement-container">
@@ -235,10 +236,10 @@
 						</div>
 					</div>
 					<div id="card-content-area">
-						<div class="row">
-							<div class="col-sm-12" style="padding-top:10px">
-								<c:choose>
-									<c:when test="${showNewAttachmentForm}">
+						<c:choose>
+							<c:when test="${showNewAttachmentForm}">
+								<div class="row">
+									<div class="col-sm-12" style="padding-top:10px">
 										<sf:form id="attachmentForm" method="POST" commandName='applicationData' encType="multipart/form-data" action="${pageContext.servletContext.contextPath}/saveNewAttachment.htm">
 										<sf:hidden path="application.id" value="${applicationData.application.id}"/>
 										<sf:hidden id="attachmentFilename" path="newAttachment.attachmentFilename" />
@@ -273,17 +274,39 @@
 												</div>
 											</div>
 										</sf:form>						
-									</c:when>
-									<c:otherwise>
-										<div class="col-sm-12">
-											<c:if test="${applicationData.attachments.size()<1}">
-													<spring:message code="label.card.application_attachments.no_attachment"/>
-											</c:if>
-										</div>																	
-									</c:otherwise>
-								</c:choose>
-							</div>
-						</div>
+									</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+									<c:choose>
+										<c:when test="${applicationData.attachments.size()<1}">
+											<spring:message code="label.card.application_attachments.no_attachment"/>
+										</c:when>
+										<c:otherwise>
+											<table cellpadding='2' width='95%'>
+												<c:forEach items="${applicationData.attachments}" var="item" varStatus="loop">
+													<tr class="listing" height='20' onmouseover="javascript:removeAttachmentLinkModule.init(${loop.index},'1')" onmouseleave="javascript:removeAttachmentLinkModule.init(${loop.index},'0')">
+														<td height='20'><font size='1'>&nbsp;&nbsp;</font></td>
+														<td height='20' width='60%'><font size='1'>${fn:substring(item.attachmentFilename,0,30)}</font></td>
+														<td height='20'><font size='1'>&nbsp;&nbsp;</font></td>
+														<td height='20' width='23%'><font size='1'>${item.attachmentType}</font></td>
+														<td height='20' width='10%' align='right'>
+															<div id='removeColumnRow${loop.index}' style='visibility:hidden'>
+															<font size='1'>
+																<a href="${pageContext.servletContext.contextPath}/deleteAttachment.htm?id=${item.id}">
+																	<spring:message code="label.card.application_attachments.remove_link"/>
+																</a>
+															</font>
+															</div>
+														</td>
+														<td height='20'><font size='1'>&nbsp;&nbsp;</font></td>
+													</tr>
+												</c:forEach>
+											</table>
+										</c:otherwise>
+									</c:choose>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 				<div id="card-sized-box">

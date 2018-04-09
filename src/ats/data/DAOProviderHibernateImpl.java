@@ -555,6 +555,33 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		return attachmentTypes;
 	}
 	
+	public List getApplicationAttachments(Integer applicationId)
+	{
+		List<ApplicationAttachment> attachments = null;
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try
+		{
+			tx = session.getTransaction();
+			tx.begin();
+			attachments = session.createQuery("from ApplicationAttachment aa where aa.application.id="+applicationId.toString()).getResultList();
+			
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+		
+		return attachments;
+	}
+	
 	public List getPositionTypes()
 	{
 		List<PositionType> positionTypeList = null;

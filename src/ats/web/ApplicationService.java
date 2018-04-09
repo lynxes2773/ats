@@ -127,7 +127,13 @@ public class ApplicationService implements Serializable {
 		setJobSourceTypes(manager.getJobSourceTypes());
 		setAttachmentTypes(manager.getAttachmentTypes());
 	}
-	
+
+	@Transactional
+	public List getAttachments(Integer applicationId) {
+		List attachments = manager.getApplicationAttachments(applicationId);
+		return attachments;
+	}
+
 	@Transactional
 	public List getApplicationStatusTypes() {
 		return applicationStatusTypes;

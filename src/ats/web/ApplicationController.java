@@ -132,8 +132,9 @@ public class ApplicationController extends AbstractController {
 			}
 			//returns successfully added application details back to front-end on detail screen 
 			Application newlyAddedApplication = applicationService.addApplication(submittedApplication);
-			
 			applicationData.setApplication(newlyAddedApplication);
+			applicationData = getApplicationData(applicationData.getApplication().getId());
+			
 			modelAndView =  new ModelAndView("ApplicationDetail", "applicationData", applicationData);
 			modelAndView.addObject("applicationEditable", false);
 		}
@@ -147,16 +148,8 @@ public class ApplicationController extends AbstractController {
 	@RequestMapping(value="/showApplication.htm", method=RequestMethod.GET)
 	public ModelAndView showApplicationDetail(@ModelAttribute("id") Integer id)
 	{
-		Application application = applicationService.getApplication(id);
-		List<ApplicationContact> contacts = application.getContacts();
-		ApplicationContact contact = null;
-		if(contacts!=null && contacts.size()>0)
-		{
-			contact = contacts.get(0); 
-		}
-		ApplicationData applicationData = new ApplicationData();
-		applicationData.setApplication(application);
-		applicationData.setApplicationContact(contact);
+		System.out.println("#### Application ID: " +id);
+		ApplicationData applicationData = getApplicationData(id);
 		
 		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
 		modelAndView.addObject("showContactForm", false);
@@ -169,16 +162,7 @@ public class ApplicationController extends AbstractController {
 	@RequestMapping(value="/showApplicationEditable.htm", method=RequestMethod.GET)
 	public ModelAndView showApplicationDetailsAsEditable(@ModelAttribute("id") Integer id)
 	{
-		Application application = applicationService.getApplication(id);
-		List<ApplicationContact> contacts = application.getContacts();
-		ApplicationContact contact = null;
-		if(contacts!=null && contacts.size()>0)
-		{
-			contact = contacts.get(0); 
-		}
-		ApplicationData applicationData = new ApplicationData();
-		applicationData.setApplication(application);
-		applicationData.setApplicationContact(contact);
+		ApplicationData applicationData = getApplicationData(id);
 
 		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
 		modelAndView = setMasterData(modelAndView);
@@ -222,16 +206,9 @@ public class ApplicationController extends AbstractController {
 	@RequestMapping(value="/editApplicationContact.htm", method=RequestMethod.GET)
 	public ModelAndView editApplicationContact(@RequestParam("id") Integer applicationId)
 	{
-		System.out.println("##########");
-		Application application = applicationService.getApplication(applicationId);
+	 
+		ApplicationData applicationData = getApplicationData(applicationId);
 		
-		ApplicationContact contact = (ApplicationContact)application.getContacts().get(0); 
-		 
-		ApplicationData applicationData = new ApplicationData();
-		
-		applicationData.setApplication(application);
-		applicationData.setApplicationContact(contact);
-				
 		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
 		modelAndView = setMasterData(modelAndView);
 		modelAndView.addObject("applicationEditable", false);
@@ -250,8 +227,7 @@ public class ApplicationController extends AbstractController {
 		ApplicationContact contact = applicationData.getApplicationContact();
 		applicationService.updateApplicationContact(contact);
 		
-		Integer applicationId = applicationData.getApplication().getId();
-		applicationData = getApplicationData(applicationId);
+		applicationData = getApplicationData(applicationData.getApplication().getId());
 		
 		ModelAndView modelAndView = null;
 		modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
@@ -277,6 +253,8 @@ public class ApplicationController extends AbstractController {
 	@RequestMapping(value="/cancelContactEditing.htm", method=RequestMethod.GET)
 	public ModelAndView cancelContactEditing(@ModelAttribute("applicationData") ApplicationData applicationData)
 	{
+		applicationData = getApplicationData(applicationData.getApplication().getId());
+		
 		ModelAndView modelAndView = null;
 		modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
 		modelAndView = setMasterData(modelAndView);
@@ -290,14 +268,8 @@ public class ApplicationController extends AbstractController {
 	@RequestMapping(value="/addNewAttachment.htm", method=RequestMethod.GET)
 	public ModelAndView addAttachment(@RequestParam("id") Integer applicationId)
 	{
-		Application application = applicationService.getApplication(applicationId);
-		ApplicationContact contact = (ApplicationContact)application.getContacts().get(0); 
+		ApplicationData applicationData = getApplicationData(applicationId);
 		
-		ApplicationData applicationData = new ApplicationData();
-		
-		applicationData.setApplication(application);
-		applicationData.setApplicationContact(contact);
-				
 		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
 		modelAndView = setMasterData(modelAndView);
 		modelAndView.addObject("applicationEditable", false);
@@ -309,12 +281,12 @@ public class ApplicationController extends AbstractController {
 	@RequestMapping(value = "/saveNewAttachment.htm", method = RequestMethod.POST)
 	public ModelAndView uploadAttachment(@ModelAttribute("applicationData") ApplicationData applicationData,  @RequestParam("attachmentContent") CommonsMultipartFile attachmentContent)
 	{
-		Integer applicationId = applicationData.getApplication().getId();
-		Application application = applicationService.getApplication(applicationId);
-		
 		ApplicationAttachment attachment = applicationData.getNewAttachment();
 		attachment.setAttachmentContent(attachmentContent.getBytes());
 		
+		Integer applicationId = applicationData.getApplication().getId();
+
+		Application application = applicationData.getApplication();
 		List<ApplicationAttachment> attachments = application.getAttachments();
 		if(attachments == null)
 		{
@@ -324,11 +296,8 @@ public class ApplicationController extends AbstractController {
 		application.setAttachments(attachments);
 		
 		attachment.setApplication(application);
-		
 		applicationData = applicationService.addApplicationAttachment(attachment);
-		applicationData.setApplication(application);
-		ApplicationContact contact = (ApplicationContact)application.getContacts().get(0); 
-		applicationData.setApplicationContact(contact);
+		applicationData = getApplicationData(applicationId);
 		
 		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
 		modelAndView = setMasterData(modelAndView);
@@ -345,20 +314,27 @@ public class ApplicationController extends AbstractController {
 		ApplicationData applicationData = new ApplicationData();
 		
 		Application application = applicationService.getApplication(applicationId);
+		System.out.println("### " + application.getPositionName());
+		System.out.println("### " + application.getApplicationStatus());
+		
 		List<ApplicationContact> contacts = application.getContacts();
 		ApplicationContact contact = null;
 		if(contacts!=null && contacts.size()>0)
 		{
 			contact = contacts.get(0); 
 		}
-		List<ApplicationAttachment> attachments = application.getAttachments(); 
-		applicationData.setApplication(application);
-		applicationData.setApplicationContact(contact);
-		applicationData.setAttachments(attachments);
+		System.out.println("### " + contact.getContactName());
+		System.out.println("### " + contact.getContactDescription());
 		
+		List<ApplicationAttachment> attachments = applicationService.getAttachments(applicationId); 
+		application.setAttachments(attachments);
+		applicationData.setApplication(application);
+		applicationData.setAttachments(attachments);
+		applicationData.setApplicationContact(contact);
 		return applicationData;
 	}
 	
+
 	public ModelAndView setMasterData(ModelAndView modelAndView)
 	{
 		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
