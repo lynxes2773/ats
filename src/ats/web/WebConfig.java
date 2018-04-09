@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.web.accept.ContentNegotiationManager;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
@@ -41,6 +42,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return resolver;
 	}
 	
+	@Bean(name="multipartResolver")
+	public CommonsMultipartResolver multipartResolver() {
+	    CommonsMultipartResolver resolver=new CommonsMultipartResolver();
+	    resolver.setDefaultEncoding("utf-8");
+	    resolver.setMaxUploadSize(10485760);
+	    resolver.setMaxInMemorySize(15728640);
+	    return resolver;
+	}
 	
     @Bean(name="messageSource")
     public MessageSource messageSource() {

@@ -166,7 +166,7 @@ public class Application implements java.io.Serializable {
 		this.applicationStatus = applicationStatus;
 	}
 
-	@OneToMany(targetEntity=ApplicationAttachment.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(targetEntity=ApplicationAttachment.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="application_id")
 	public List getAttachments() {
 		return attachments;

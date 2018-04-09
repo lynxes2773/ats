@@ -3,6 +3,7 @@ package ats.data;
 import java.util.List;
 import java.util.Map;
 import ats.entity.Application;
+import ats.entity.ApplicationAttachment;
 import ats.entity.ApplicationContact;
 import ats.entity.ApplicationData;
 import ats.util.Provider;
@@ -37,10 +38,16 @@ public interface DAOProvider extends Provider{
 	public List getPositionTypes();
 	
 	public List getJobSourceTypes();
+	
+	public List getAttachmentTypes();
 
 	public Application updateApplication(Application application);
 	
 	public ApplicationContact updateApplicationContact(ApplicationContact contact);
 
 	public Map getApplicationCountsByStatus();
+	
+	public Integer addApplicationAttachment(ApplicationAttachment attachment);
+	
+	public void removeApplicationAttachment(Integer attachmentId);
 }

@@ -1,6 +1,5 @@
 package ats.entity;
 import java.sql.Blob;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,14 +11,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
 @Table(name = "application_attachments")
+@Component("applicationAttachment")
 public class ApplicationAttachment {
 	private Integer id;
 	private Application application;
 	private String attachmentFilename;
 	private String attachmentType;
-	private Blob attachmentContent;
+	private byte[] attachmentContent;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
@@ -57,10 +59,10 @@ public class ApplicationAttachment {
 	}
 	
 	@Column(name = "attachment_content", updatable = true, nullable = false)
-	public Blob getAttachmentContent() {
+	public byte[] getAttachmentContent() {
 		return attachmentContent;
 	}
-	public void setAttachmentContent(Blob attachmentContent) {
+	public void setAttachmentContent(byte[] attachmentContent) {
 		this.attachmentContent = attachmentContent;
 	}
 	

@@ -1,6 +1,7 @@
 package ats.web;
 
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.io.StringWriter;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -31,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.bind.annotation.RestController;
 import ats.entity.*;
 import ats.web.validation.ApplicationContactValidator;
@@ -98,10 +101,9 @@ public class ApplicationController extends AbstractController {
 	public ModelAndView addNewApplication()
 	{
 		ModelAndView modelAndView = new ModelAndView("NewApplication", "applicationData", new ApplicationData());
-		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
-		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
-		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
+		modelAndView = setMasterData(modelAndView);
 		modelAndView.addObject("showContactForm", false);
+		modelAndView.addObject("showNewAttachmentForm", false);
 		return modelAndView;
 	}
 	
@@ -115,9 +117,6 @@ public class ApplicationController extends AbstractController {
 		if(errors!=null && errors.hasErrors())
 		{
 			modelAndView =  new ModelAndView("NewApplication", "applicationData", applicationData); 
-			modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
-			modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
-			modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
 		}
 		else
 		{
@@ -136,11 +135,11 @@ public class ApplicationController extends AbstractController {
 			
 			applicationData.setApplication(newlyAddedApplication);
 			modelAndView =  new ModelAndView("ApplicationDetail", "applicationData", applicationData);
-			modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
-			modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
-			modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
 			modelAndView.addObject("applicationEditable", false);
 		}
+		modelAndView = setMasterData(modelAndView);
+		modelAndView.addObject("showContactForm", false);
+		modelAndView.addObject("showNewAttachmentForm", false);
 		return modelAndView;
 	}
 	
@@ -160,6 +159,9 @@ public class ApplicationController extends AbstractController {
 		applicationData.setApplicationContact(contact);
 		
 		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
+		modelAndView.addObject("showContactForm", false);
+		modelAndView.addObject("showNewAttachmentForm", false);
+		modelAndView.addObject("applicationEditable", false);
 		return modelAndView;
 	}
 	
@@ -179,10 +181,9 @@ public class ApplicationController extends AbstractController {
 		applicationData.setApplicationContact(contact);
 
 		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
-		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
-		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
-		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
+		modelAndView = setMasterData(modelAndView);
 		modelAndView.addObject("showContactForm", false);
+		modelAndView.addObject("showNewAttachmentForm", false);
 		modelAndView.addObject("applicationEditable", true);
 		return modelAndView;
 	}
@@ -195,12 +196,12 @@ public class ApplicationController extends AbstractController {
 		validator.validate(submittedApplication, errors);
 		
 		ModelAndView modelAndView = null;
+		modelAndView = setMasterData(modelAndView);
+		modelAndView.addObject("showNewAttachmentForm", false);
+
 		if(errors!=null && errors.hasErrors())
 		{
 			modelAndView =  new ModelAndView("ApplicationDetail", "applicationData", applicationData);
-			modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
-			modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
-			modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
 			modelAndView.addObject("applicationEditable", true);
 		}
 		else
@@ -209,12 +210,8 @@ public class ApplicationController extends AbstractController {
 			
 			Integer applicationId = newlyUpdatedApplication.getId();
 			applicationData = getApplicationData(applicationId);
-			
 			applicationData.setApplication(newlyUpdatedApplication);
 			modelAndView =  new ModelAndView("ApplicationDetail", "applicationData", applicationData);
-			modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
-			modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
-			modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
 			modelAndView.addObject("applicationEditable", false);
 			
 		}
@@ -236,11 +233,11 @@ public class ApplicationController extends AbstractController {
 		applicationData.setApplicationContact(contact);
 				
 		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
-		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
-		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
-		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
+		modelAndView = setMasterData(modelAndView);
 		modelAndView.addObject("applicationEditable", false);
 		modelAndView.addObject("showContactForm", true);
+		modelAndView.addObject("showNewAttachmentForm", false);
+		
 		return modelAndView;
 	}
 	
@@ -256,16 +253,12 @@ public class ApplicationController extends AbstractController {
 		Integer applicationId = applicationData.getApplication().getId();
 		applicationData = getApplicationData(applicationId);
 		
-		System.out.println("XXXXXXXXX");
-		System.out.println("Position Name: "+applicationData.getApplication().getPositionName());
-		
 		ModelAndView modelAndView = null;
 		modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
-		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
-		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
-		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
+		modelAndView = setMasterData(modelAndView);
 		modelAndView.addObject("applicationEditable", false);
-		
+		modelAndView.addObject("showNewAttachmentForm", false);
+
 		boolean showContactForm = false;
 		if(errors!=null && errors.hasErrors())
 		{
@@ -286,13 +279,65 @@ public class ApplicationController extends AbstractController {
 	{
 		ModelAndView modelAndView = null;
 		modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
-		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
-		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
-		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
+		modelAndView = setMasterData(modelAndView);
 		modelAndView.addObject("applicationEditable", false);
 		modelAndView.addObject("showContactForm", false);
+		modelAndView.addObject("showNewAttachmentForm", false);
 		return modelAndView;
 	}	
+	
+	//User has clicked Add link on Attachments card; we need to show the attachment upload form on the card.
+	@RequestMapping(value="/addNewAttachment.htm", method=RequestMethod.GET)
+	public ModelAndView addAttachment(@RequestParam("id") Integer applicationId)
+	{
+		Application application = applicationService.getApplication(applicationId);
+		ApplicationContact contact = (ApplicationContact)application.getContacts().get(0); 
+		
+		ApplicationData applicationData = new ApplicationData();
+		
+		applicationData.setApplication(application);
+		applicationData.setApplicationContact(contact);
+				
+		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
+		modelAndView = setMasterData(modelAndView);
+		modelAndView.addObject("applicationEditable", false);
+		modelAndView.addObject("showContactForm", false);
+		modelAndView.addObject("showNewAttachmentForm", true);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/saveNewAttachment.htm", method = RequestMethod.POST)
+	public ModelAndView uploadAttachment(@ModelAttribute("applicationData") ApplicationData applicationData,  @RequestParam("attachmentContent") CommonsMultipartFile attachmentContent)
+	{
+		Integer applicationId = applicationData.getApplication().getId();
+		Application application = applicationService.getApplication(applicationId);
+		
+		ApplicationAttachment attachment = applicationData.getNewAttachment();
+		attachment.setAttachmentContent(attachmentContent.getBytes());
+		
+		List<ApplicationAttachment> attachments = application.getAttachments();
+		if(attachments == null)
+		{
+			attachments = new ArrayList();
+		}
+		attachments.add(attachment);
+		application.setAttachments(attachments);
+		
+		attachment.setApplication(application);
+		
+		applicationData = applicationService.addApplicationAttachment(attachment);
+		applicationData.setApplication(application);
+		ApplicationContact contact = (ApplicationContact)application.getContacts().get(0); 
+		applicationData.setApplicationContact(contact);
+		
+		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
+		modelAndView = setMasterData(modelAndView);
+		modelAndView.addObject("applicationEditable", false);
+		modelAndView.addObject("showContactForm", false);
+		modelAndView.addObject("showNewAttachmentForm", false);
+		return modelAndView;
+	}
+	
 	
 	
 	public ApplicationData getApplicationData(Integer applicationId)
@@ -306,11 +351,22 @@ public class ApplicationController extends AbstractController {
 		{
 			contact = contacts.get(0); 
 		}
-		
+		List<ApplicationAttachment> attachments = application.getAttachments(); 
 		applicationData.setApplication(application);
 		applicationData.setApplicationContact(contact);
+		applicationData.setAttachments(attachments);
 		
 		return applicationData;
+	}
+	
+	public ModelAndView setMasterData(ModelAndView modelAndView)
+	{
+		modelAndView.addObject("applicationStatusTypes", applicationService.getApplicationStatusTypes());
+		modelAndView.addObject("positionTypes", applicationService.getPositionTypes());
+		modelAndView.addObject("jobSourceTypes", applicationService.getJobSourceTypes());
+		modelAndView.addObject("attachmentTypes", applicationService.getAttachmentTypes());
+		
+		return modelAndView;
 	}
 	
 	@Autowired

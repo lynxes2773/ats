@@ -1,6 +1,14 @@
 <%@page import="example.hibernate.Candidate"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ include file="/resources/jsp/header.jsp" %>
+<script language='JavaScript'>
+	function getFileData(myFile)
+	{
+	   var file = myFile.files[0];  
+	   var filename = file.name;
+	   document.getElementById('attachmentFilename').value=filename;
+	}
+</script>
 		<div id="invisible-placement-container">
 			<div id="left-column-wide-box" class="col-lg-9">
 				<div id="page-title-area">
@@ -222,7 +230,11 @@
 								<span class="heading3"><spring:message code="label.application.card_header.attachments"/></span>
 							</div>
 							<div class="col-xs-1">
-								<a href="${pageContext.servletContext.contextPath}/addNewApplication.htm" class="card"><spring:message code="label.common.link.add"/></a>
+								<c:choose>
+									<c:when test="${!showNewAttachmentForm}">
+										<a href="${pageContext.servletContext.contextPath}/addNewAttachment.htm?id=${applicationData.application.id}" class="card"><spring:message code="label.common.link.add"/></a>
+									</c:when>
+								</c:choose>
 							</div>
 							<div class="col-xs-1">
 								<span class="card-icon-area"><i class="fa fa-file-text-o fa-lg" style="color:#888888;"></i></span>
@@ -230,6 +242,55 @@
 						</div>
 					</div>
 					<div id="card-content-area">
+						<div class="row">
+							<div class="col-sm-12" style="padding-top:10px">
+								<c:choose>
+									<c:when test="${showNewAttachmentForm}">
+										<sf:form id="attachmentForm" method="POST" commandName='applicationData' encType="multipart/form-data" action="${pageContext.servletContext.contextPath}/saveNewAttachment.htm">
+										<sf:hidden path="application.id" value="${applicationData.application.id}"/>
+										<sf:hidden id="attachmentFilename" path="newAttachment.attachmentFilename" />
+											<div class="row">
+												<div class="col-sm-10">
+													<br>
+													<spring:message code="label.card.application_attachments.attachment_type"/>
+													<!-- space for attachment types -->
+													<sf:select class="form-control input-sm+" path="newAttachment.attachmentType">
+														<sf:option value="NONE" label="(select)"/>
+														<c:forEach items="${attachmentTypes}" var="type">
+															<sf:option value="${type.attachmentTypeName}" label="${type.attachmentTypeName}"/>
+														</c:forEach>						  		
+													</sf:select>
+													<br>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-10">
+													<input class="btn btn-default btn-xs" type="file" name="attachmentContent" onchange="getFileData(this);"/>
+													<br>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-4">
+												 	&nbsp;
+												</div>
+						 						<div class="col-sm-8" align='right'>
+													<input class="btn btn-default btn-xs" type="button" value="Cancel" onclick="window.location.href='${pageContext.servletContext.contextPath}/showApplication.htm?id=${applicationData.application.id}'"/>
+													&nbsp;&nbsp;
+													<input class="btn btn-primary btn-xs" type="submit" value="Upload" name="submit"/>
+												</div>
+											</div>
+										</sf:form>						
+									</c:when>
+									<c:otherwise>
+										<div class="col-sm-12">
+											<c:if test="${applicationData.attachments.size()<1}">
+													<spring:message code="label.card.application_attachments.no_attachment"/>
+											</c:if>
+										</div>																	
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div id="card-sized-box">

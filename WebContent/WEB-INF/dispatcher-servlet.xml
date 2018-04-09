@@ -38,6 +38,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 				<prop key="/editApplicationContact.htm">applicationController</prop>
 				<prop key="/saveApplicationContact.htm">applicationController</prop>
 				<prop key="/cancelContactEditing.htm">applicationController</prop>
+				<prop key="/saveNewAttachment.htm">applicationController</prop>
 				<prop key="/apps.htm">applicationController</prop>
 			</props>
 		</property>

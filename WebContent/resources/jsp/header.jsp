@@ -4,7 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <html margin-top=0 padding=0>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
 	<meta http-equiv="Cache-Control" content="no-cache"><meta http-equiv="Pragma" content="no-cache">
 	<meta http-equiv="Expires" content="0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">

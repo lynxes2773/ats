@@ -3,6 +3,8 @@ package ats.data;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -391,6 +393,46 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		}
 		return contactId;		
 	}
+	
+	public Integer addApplicationAttachment(ApplicationAttachment attachment)
+	{
+		Integer attachmentId = null;
+		
+		Integer applicationId = attachment.getApplication().getId();
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try
+		{
+			tx = session.getTransaction();
+			tx.begin();
+			
+			attachmentId = (Integer)session.save(attachment);
+			tx.commit();
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+		
+		
+		return attachmentId;
+	}
+	
+
+	public void removeApplicationAttachment(Integer attachmentId)
+	{
+		// implementation pending
+	}
+
+	
 		
 	public List getCandidates() {
 
@@ -481,6 +523,36 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 			session.close();
 		}
 		return candidateId;		
+	}
+	
+	public List getAttachmentTypes()
+	{
+		List<AttachmentType> attachmentTypes = null;
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		
+		try
+		{
+			tx = session.getTransaction();
+			tx.begin();
+			String query = "from " + AttachmentType.class.getName();
+			attachmentTypes = session.createQuery(query).getResultList();
+			tx.commit();
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+		
+		return attachmentTypes;
 	}
 	
 	public List getPositionTypes()

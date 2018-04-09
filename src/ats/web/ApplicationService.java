@@ -33,6 +33,7 @@ public class ApplicationService implements Serializable {
 	private List applicationStatusTypes = new ArrayList();
 	private List positionTypes = new ArrayList();
 	private List jobSourceTypes = new ArrayList();
+	private List attachmentTypes = new ArrayList();
 	
 	@Autowired
 	public void setManager(DAOProvider manager) {
@@ -88,9 +89,29 @@ public class ApplicationService implements Serializable {
 		ApplicationData applicationData = new ApplicationData();
 		applicationData.setApplication(contact.getApplication());
 		applicationData.setApplicationContact(updatedContact);
+
+		try
+		{
+			List<ApplicationAttachment> attachments = contact.getApplication().getAttachments();
+			applicationData.setAttachments(attachments);
+		}
+		catch(Exception e)
+		{}
 		
 		return applicationData;
 	}
+	
+	@Transactional
+	public ApplicationData addApplicationAttachment(ApplicationAttachment applicationAttachment)
+	{
+		Integer attachmentId = manager.addApplicationAttachment(applicationAttachment);
+		ApplicationData applicationData = new ApplicationData();
+		//applicationData.setAttachments(attachments);
+		
+		return applicationData;
+		
+	}
+	
 
 	public void setApplications(List applications) {
 		this.applications = applications;
@@ -104,6 +125,7 @@ public class ApplicationService implements Serializable {
 		setApplicationStatusTypes(manager.getApplicationStatuses());
 		setPositionTypes(manager.getPositionTypes());
 		setJobSourceTypes(manager.getJobSourceTypes());
+		setAttachmentTypes(manager.getAttachmentTypes());
 	}
 	
 	@Transactional
@@ -121,6 +143,7 @@ public class ApplicationService implements Serializable {
 		return positionTypes;
 	}
 
+	@Transactional
 	public void setPositionTypes(List positionTypes) {
 		this.positionTypes = positionTypes;
 	}
@@ -130,7 +153,19 @@ public class ApplicationService implements Serializable {
 		return jobSourceTypes;
 	}
 
+	@Transactional
 	public void setJobSourceTypes(List jobSourceTypes) {
 		this.jobSourceTypes = jobSourceTypes;
 	}
+	
+	@Transactional
+	public List getAttachmentTypes() {
+		return attachmentTypes;
+	}
+
+	@Transactional
+	public void setAttachmentTypes(List attachmentTypes) {
+		this.attachmentTypes = attachmentTypes;
+	}
+	
 }
