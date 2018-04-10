@@ -166,7 +166,7 @@ public class Application implements java.io.Serializable {
 		this.applicationStatus = applicationStatus;
 	}
 
-	@OneToMany(targetEntity=ApplicationAttachment.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=ApplicationAttachment.class, orphanRemoval=true, cascade=CascadeType.DETACH, fetch=FetchType.EAGER)
 	@JoinColumn(name="application_id")
 	public List getAttachments() {
 		return attachments;
@@ -211,4 +211,36 @@ public class Application implements java.io.Serializable {
 		comment.setApplication(this);
 		comments.add(comment);
 	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		boolean result=false;
+		if(obj==null)
+			result=false;
+		if(!(obj instanceof Application))
+			result=false;
+
+		Application application = (Application)obj;
+		
+		if(application.getPositionName().equals(this.getPositionName()) &&
+		   application.getJobDescription().equals(this.getJobDescription()) &&
+		   application.getId().equals(this.getId())) 
+		{
+			result = true;
+		}
+		
+		
+		return result;
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		int hash = 3;
+		hash = 7 * hash + this.getPositionName().length();
+		hash = 7 * hash + this.getPositionType().length();
+		
+		return hash;
+	}	
 }

@@ -313,9 +313,7 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		}
 		catch(HibernateException he)
 		{
-			System.out.println("################ EXCEPTION START ###############");
 			System.out.println(he.toString());
-			System.out.println("################ EXCEPTION END ###############");
 			if(tx!=null){
 				tx.rollback();
 				he.printStackTrace();
@@ -426,14 +424,7 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		return attachmentId;
 	}
 	
-
-	public void removeApplicationAttachment(Integer attachmentId)
-	{
-		// implementation pending
-	}
-
 	
-		
 	public List getCandidates() {
 
 		Session session = sessionFactory.openSession();
@@ -553,6 +544,53 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		}
 		
 		return attachmentTypes;
+	}
+	
+	/***
+	 * This deletion finally worked after doing the following:
+	 * 1) Setting the Cascade property to DETACH in the parent Application entity for the one-to-many association
+	 * 2) Retrieving the collection of attachments from the parent application
+	 * 3) Removing the child attachment from the collection - achieved by implementing a robust .equals() & .hashCode() method in ApplicationAttachment entity class.
+	 * 4) The deleted the child attachment
+	 * 5) Then set the collection back to the parent Application object
+	 */
+	public boolean deleteAttachment(Integer applicationId, Integer attachmentId)
+	{
+		boolean attachmentDeleted=false;
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try
+		{
+			tx = session.getTransaction();
+			tx.begin();
+			ApplicationAttachment attachment = session.load(ApplicationAttachment.class, attachmentId);
+		
+			Application application = getApplication(applicationId);
+			
+			List attachments = application.getAttachments();
+			attachments.remove(attachment);
+			session.delete(attachment);
+			application.setAttachments(attachments);
+
+			tx.commit();
+			attachmentDeleted=true;
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				attachmentDeleted=false;
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+			System.out.println("attachmentDeleted: "+attachmentDeleted);
+		}
+		
+		return attachmentDeleted;
 	}
 	
 	public List getApplicationAttachments(Integer applicationId)

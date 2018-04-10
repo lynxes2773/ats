@@ -293,7 +293,7 @@
 														<td height='20' width='10%' align='right'>
 															<div id='removeColumnRow${loop.index}' style='visibility:hidden'>
 															<font size='1'>
-																<a href="${pageContext.servletContext.contextPath}/deleteAttachment.htm?id=${item.id}">
+																<a href="${pageContext.servletContext.contextPath}/deleteAttachment.htm?id=${item.id}&applicationId=${applicationData.application.id}">
 																	<spring:message code="label.card.application_attachments.remove_link"/>
 																</a>
 															</font>

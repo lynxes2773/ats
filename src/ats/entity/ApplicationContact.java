@@ -59,6 +59,38 @@ public class ApplicationContact{
 	public void setContactDescription(String contactDescription) {
 		this.contactDescription = contactDescription;
 	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		boolean result=false;
+		
+		if(obj==null)
+			result=false;
+		if(!(obj instanceof ApplicationContact))
+			result=false;
+	
+		ApplicationContact contact = (ApplicationContact)obj;
+		
+		if(contact.getContactName().equals(this.getContactName()) &&
+		   contact.getApplication().getPositionName().equals(this.getApplication().getId()) &&		
+		   contact.getId().equals(this.getId())) 
+		{
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		int hash = 3;
+		hash = 7 * hash + this.getId();
+		hash = 7 * hash + this.getApplication().getId();
+		hash = 7 * hash + this.getApplication().getPositionName().length();
+		
+		return hash;
+	}
 	
 	
 }

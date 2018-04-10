@@ -65,7 +65,36 @@ public class ApplicationAttachment {
 	public void setAttachmentContent(byte[] attachmentContent) {
 		this.attachmentContent = attachmentContent;
 	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		boolean result=false;
+		
+		if(obj==null)
+			result=false;
+		if(!(obj instanceof ApplicationAttachment))
+			result=false;
 	
+		ApplicationAttachment attachment = (ApplicationAttachment)obj;
+		
+		if(attachment.getAttachmentFilename().equals(this.getAttachmentFilename()) &&
+		   attachment.getAttachmentType().equals(this.getAttachmentType()) &&
+		   attachment.getId().equals(this.getId())) 
+		{
+			result = true;
+		}
+		return result;
+	}
 	
+	@Override
+	public int hashCode()
+	{
+		int hash = 3;
+		hash = 7 * hash + this.getAttachmentFilename().length();
+		hash = 7 * hash + this.getAttachmentType().length();
+		
+		return hash;
+	}
 	
 }

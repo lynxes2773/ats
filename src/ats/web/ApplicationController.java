@@ -307,6 +307,22 @@ public class ApplicationController extends AbstractController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value = "/deleteAttachment.htm", method = RequestMethod.GET)
+	public ModelAndView deleteAttachment(@RequestParam("id") Integer attachmentId, @RequestParam("applicationId") Integer applicationId)
+	{
+		applicationService.deleteAttachment(applicationId, attachmentId);
+
+		ApplicationData applicationData = getApplicationData(applicationId);
+		
+		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
+		modelAndView = setMasterData(modelAndView);
+		modelAndView.addObject("applicationEditable", false);
+		modelAndView.addObject("showContactForm", false);
+		modelAndView.addObject("showNewAttachmentForm", false);
+		return modelAndView;
+		
+	}
+	
 	
 	
 	public ApplicationData getApplicationData(Integer applicationId)
@@ -314,8 +330,6 @@ public class ApplicationController extends AbstractController {
 		ApplicationData applicationData = new ApplicationData();
 		
 		Application application = applicationService.getApplication(applicationId);
-		System.out.println("### " + application.getPositionName());
-		System.out.println("### " + application.getApplicationStatus());
 		
 		List<ApplicationContact> contacts = application.getContacts();
 		ApplicationContact contact = null;
@@ -323,8 +337,6 @@ public class ApplicationController extends AbstractController {
 		{
 			contact = contacts.get(0); 
 		}
-		System.out.println("### " + contact.getContactName());
-		System.out.println("### " + contact.getContactDescription());
 		
 		List<ApplicationAttachment> attachments = applicationService.getAttachments(applicationId); 
 		application.setAttachments(attachments);

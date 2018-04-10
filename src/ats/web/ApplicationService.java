@@ -112,6 +112,13 @@ public class ApplicationService implements Serializable {
 		
 	}
 	
+	@Transactional
+	public boolean deleteAttachment(Integer applicationId, Integer attachmentId)
+	{
+		boolean result = manager.deleteAttachment(applicationId, attachmentId);
+		return result;
+	}
+	
 
 	public void setApplications(List applications) {
 		this.applications = applications;

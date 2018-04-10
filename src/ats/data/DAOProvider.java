@@ -49,7 +49,7 @@ public interface DAOProvider extends Provider{
 	
 	public Integer addApplicationAttachment(ApplicationAttachment attachment);
 	
-	public void removeApplicationAttachment(Integer attachmentId);
-	
 	public List getApplicationAttachments(Integer applicationId);
+	
+	public boolean deleteAttachment(Integer applicationId, Integer attachmentId);
 }

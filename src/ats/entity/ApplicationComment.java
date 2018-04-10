@@ -53,6 +53,36 @@ public class ApplicationComment {
 	public void setCommentDate(Date commentDate) {
 		this.commentDate = commentDate;
 	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		boolean result=false;
+		if(obj==null)
+			result=false;
+		if(!(obj instanceof ApplicationComment))
+			result=false;
 	
+		ApplicationComment comment = (ApplicationComment)obj;
+		
+		if(comment.getId().equals(this.getId()) &&
+		   comment.getCommentDate().toString().equals(this.getCommentDate().toString())) 
+		{
+			result = true;
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		int hash = 3;
+		hash = 7 * hash + this.getId();
+		hash = 7 * hash + this.getApplication().getId();
+		hash = 7 * hash + this.getApplication().getPositionName().length();
+		
+		return hash;
+	}
 	
 }
