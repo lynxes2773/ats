@@ -40,6 +40,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 				<prop key="/cancelContactEditing.htm">applicationController</prop>
 				<prop key="/saveNewAttachment.htm">applicationController</prop>
 				<prop key="/deleteAttachment.htm">applicationController</prop>
+				<prop key="/downloadAttachment.htm">applicationController</prop>
 				<prop key="/apps.htm">applicationController</prop>
 			</props>
 		</property>
@@ -86,7 +87,8 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 				<prop key="hibernate.c3p0.timeout">${hibernate.c3p0.timeout}</prop>
 				<prop key="hibernate.c3p0.max_statements">${hibernate.c3p0.max_statements}</prop>
 				<prop key="hibernate.c3p0.idle_test_period">${hibernate.c3p0.idle_test_period}</prop>
-				<prop key="max_allowed_packet">${hibernate.max_allowed_packet}</prop>
+				<prop key="hibernate.query.startup_check">${hibernate.query.startup_check}</prop>
+				<prop key="max_allowed_packet">${max_allowed_packet}</prop>
 				<prop key="preferredTestQuery">${preferredTestQuery}</prop>
 				<prop key="testConnectionOnCheckin">${testConnectionOnCheckin}</prop>
 				<prop key="testConnectionOnCheckout">${testConnectionOnCheckout}</prop>

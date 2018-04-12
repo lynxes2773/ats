@@ -287,7 +287,13 @@
 												<c:forEach items="${applicationData.attachments}" var="item" varStatus="loop">
 													<tr class="listing" height='20' onmouseover="javascript:removeAttachmentLinkModule.init(${loop.index},'1')" onmouseleave="javascript:removeAttachmentLinkModule.init(${loop.index},'0')">
 														<td height='20'><font size='1'>&nbsp;&nbsp;</font></td>
-														<td height='20' width='60%'><font size='1'>${fn:substring(item.attachmentFilename,0,30)}</font></td>
+														<td height='20' width='60%'>
+															<font size='1'>
+																<a href="${pageContext.servletContext.contextPath}/downloadAttachment.htm?id=${item.id}&applicationId=${applicationData.application.id}">
+																	${fn:substring(item.attachmentFilename,0,30)}
+																</a>	
+															</font>
+														</td>
 														<td height='20'><font size='1'>&nbsp;&nbsp;</font></td>
 														<td height='20' width='23%'><font size='1'>${item.attachmentType}</font></td>
 														<td height='20' width='10%' align='right'>

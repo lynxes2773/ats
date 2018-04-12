@@ -144,6 +144,7 @@ a.headerLinks:link, a.headerLinks:visited, a.headerLinks:active {
     padding: 5px 15px;
     text-align: left;
     text-decoration: none;
+    font-weight: bold; 
     display: inline-block;    
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
@@ -153,6 +154,7 @@ a.headerLinks:hover {
     padding: 5px 15px;
     text-align: left;
     text-decoration: none;
+    font-weight: bold; 
     display: inline-block;    
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;    
 }

@@ -25,6 +25,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -322,6 +323,40 @@ public class ApplicationController extends AbstractController {
 		return modelAndView;
 		
 	}
+	
+	@RequestMapping(value = "/downloadAttachment.htm", method = RequestMethod.GET)
+	public ModelAndView downloadAttachment(@RequestParam("id") Integer attachmentId, @RequestParam("applicationId") Integer applicationId, HttpServletResponse response) throws java.io.IOException
+	{
+		List<ApplicationAttachment> attachments = applicationService.getAttachments(applicationId);
+		
+		
+		ApplicationAttachment attachment = null;
+		for(int i=0; i< attachments.size(); i++)
+		{
+			ApplicationAttachment obj = attachments.get(i);
+			if(attachmentId==obj.getId())
+			{
+				attachment = obj;
+			}
+		}
+		response.setContentLength(attachment.getAttachmentContent().length);
+		response.setHeader("Content-Disposition","attachment; filename=\"" + attachment.getAttachmentFilename() +"\"");
+		
+		
+		ApplicationData applicationData = getApplicationData(applicationId);
+		
+		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
+		modelAndView = setMasterData(modelAndView);
+		modelAndView.addObject("applicationEditable", false);
+		modelAndView.addObject("showContactForm", false);
+		modelAndView.addObject("showNewAttachmentForm", false);
+
+		FileCopyUtils.copy(attachment.getAttachmentContent(), response.getOutputStream());
+
+		return modelAndView;
+		
+	}
+	
 	
 	
 	
