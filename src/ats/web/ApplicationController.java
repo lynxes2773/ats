@@ -181,8 +181,6 @@ public class ApplicationController extends AbstractController {
 		validator.validate(submittedApplication, errors);
 		
 		ModelAndView modelAndView = null;
-		modelAndView = setMasterData(modelAndView);
-		modelAndView.addObject("showNewAttachmentForm", false);
 
 		if(errors!=null && errors.hasErrors())
 		{
@@ -198,8 +196,10 @@ public class ApplicationController extends AbstractController {
 			applicationData.setApplication(newlyUpdatedApplication);
 			modelAndView =  new ModelAndView("ApplicationDetail", "applicationData", applicationData);
 			modelAndView.addObject("applicationEditable", false);
-			
 		}
+		modelAndView.addObject("showContactForm", false);
+		modelAndView.addObject("showNewAttachmentForm", false);
+		modelAndView = setMasterData(modelAndView);
 		return modelAndView;
 	}
 	

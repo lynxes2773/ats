@@ -6,10 +6,9 @@
 }
 
 .heading1 {
-	color: #FBC113;
 	padding: 5px 15px;
     text-align: left;
-    font-family: font-family: 'Oswald', sans-serif;
+    font-family: font-family: 'Calibri', sans-serif;
     font-style: normal;
     font-size: 24px;
     font-weight: bold;
@@ -83,6 +82,10 @@ td.listing-header {
 	font-weight: bold;	
 }
 
+td.minor-listing {
+    border-bottom: 1pt solid #DFDFDF;
+}
+
 table.form, p, field-label {
     white-space: normal;
     line-height: normal;
@@ -115,10 +118,10 @@ label {
 
 a {
     text-decoration: none;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-a.free, a.card {
+a.free, a.card, a.panel {
     text-decoration: none;
 }
 
@@ -126,7 +129,7 @@ a.free:link, a.free:visited, a.card:link, a.card:visited, a.card:active {
 	color: #1BA5B5;
 }	
 
-a.free:hover, a.card:hover, a.free:active{
+a.free:hover, a.card:hover, a.free:active {
 	color: #343434;
 }
 
@@ -138,25 +141,25 @@ a.card:link, a.card:visited, a.card:active, a.card:hover {
     font-size: 9px;
 }
 
-
-a.headerLinks:link, a.headerLinks:visited, a.headerLinks:active {
-    color: #1BA5B5;
+a.headerLinks {
+	font-size: 12px;
+    text-transform: uppercase;
+    font-weight: normal;
+    letter-spacing: .0625em;
     padding: 5px 15px;
     text-align: left;
     text-decoration: none;
-    font-weight: bold; 
     display: inline-block;    
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+a.headerLinks:link, a.headerLinks:visited, a.headerLinks:active {
+    color: #ffffff;
 }
 
 a.headerLinks:hover {
-    color: #343434;
-    padding: 5px 15px;
-    text-align: left;
-    text-decoration: none;
-    font-weight: bold; 
-    display: inline-block;    
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;    
+    color: #E7AD00;
 }
 
 #listTable {

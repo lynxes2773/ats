@@ -11,7 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
+
+import ats.web.validation.Required;
 
 @Entity
 @Table(name = "application_attachments")
@@ -43,6 +46,7 @@ public class ApplicationAttachment {
 	}
 	
 	@Column(name = "attachment_filename", updatable = true, nullable = false)
+	@NotEmpty(message="{required}", groups=Required.class)
 	public String getAttachmentFilename() {
 		return attachmentFilename;
 	}
@@ -51,6 +55,7 @@ public class ApplicationAttachment {
 	}
 	
 	@Column(name = "attachment_type_name", updatable = true, nullable = false)
+	@NotEmpty(message="{required}", groups=Required.class)
 	public String getAttachmentType() {
 		return attachmentType;
 	}
@@ -59,6 +64,7 @@ public class ApplicationAttachment {
 	}
 	
 	@Column(name = "attachment_content", updatable = true, nullable = false)
+	@NotEmpty(message="{required}", groups=Required.class)
 	public byte[] getAttachmentContent() {
 		return attachmentContent;
 	}

@@ -141,6 +141,7 @@
 				<include name="**/resources/tld/*.tld"/>
 				<include name="**/resources/scripts/*.js"/>
 				<include name="**/resources/scripts/**/*.js"/>
+				<include name="**/resources/images/*.*"/>
 				<include name="**/index.html"/>
 				<include name="**/dispatcher-servlet.xml"/>
 				<include name="**/*.css"/>

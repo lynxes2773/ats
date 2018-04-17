@@ -8,9 +8,24 @@
 				<div id="page-title-area">
 					<table border=0 cellspacing=0 cellpadding=0 width='100%'>
 						<tr>
-							<td width='33%' valign='bottom'><span class="heading2"><spring:message code="label.application_detail.header"/></span></td>
+							<td width='33%' valign='bottom'>
+								<span class="heading2">
+								<c:choose>
+									<c:when test="${!applicationEditable}">
+										${applicationData.application.positionName}
+									</c:when>
+									<c:otherwise>
+										<spring:message code="label.application_detail.header"/>
+									</c:otherwise>
+								</c:choose>
+								</span>
+							</td>
 							<td width='33%'>&nbsp;</td>
-							<td width='34%' align='right'><a class="headerLinks" href="${pageContext.servletContext.contextPath}/showApplicationEditable.htm?id=${applicationData.application.id}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+							<td width='34%' align='right'>
+								<a class="free" href="${pageContext.servletContext.contextPath}/showApplicationEditable.htm?id=${applicationData.application.id}"><spring:message code="label.common.link.edit"/></a>
+								&nbsp;&nbsp;&nbsp;
+								<i class="fa fa-id-badge" aria-hidden="true"></i>
+							</td>
 						</tr>
 					</table>
 				</div>
@@ -18,18 +33,15 @@
 					<sf:form method="POST" commandName="applicationData" action="${pageContext.servletContext.contextPath}/updateApplication.htm">
 					<sf:hidden path="application.id" />
 					<sf:hidden path="application.applicationDate" />
-					<div class="row" style="padding-top: 15px; padding-bottom: 0px;">
-					  <div class="col-lg-8">
-					  	<span style='field-label'><spring:message code="label.add_application.form.position_name"/></span><br>
-					  	<c:if test="${applicationEditable}">
-						  	<sf:errors path="application.positionName" cssClass="error" /><br>	
-						  	<sf:input path="application.positionName" class="form-control input-sm" aria-describedby="sizing-addon3" size='50' maxlength='255'/>
-					  	</c:if>
-					  	<c:if test="${!applicationEditable}">
-					  		<p>${applicationData.application.positionName}</p>
-					  	</c:if>
-					  </div>
-					</div>
+				  	<c:if test="${applicationEditable}">
+						<div class="row" style="padding-top: 15px; padding-bottom: 0px;">
+						  <div class="col-lg-8">
+							  	<span style='field-label'><spring:message code="label.add_application.form.position_name"/></span><br>
+							  	<sf:errors path="application.positionName" cssClass="error" /><br>	
+							  	<sf:input path="application.positionName" class="form-control input-sm" aria-describedby="sizing-addon3" size='50' maxlength='255'/>
+						  </div>
+						</div>
+				  	</c:if>
 					<div class="row" style="padding-top: 15px; padding-bottom: 0px;">
 					  <div class="col-lg-4">
 					  	<span style='field-label'><spring:message code="label.add_application.form.position_id"/></span><br>
@@ -283,24 +295,25 @@
 											<spring:message code="label.card.application_attachments.no_attachment"/>
 										</c:when>
 										<c:otherwise>
-											<table cellpadding='2' width='95%'>
+											<table cellpadding='2' width='95%' style="border: 1px solid #DFDFDF; border-collapse:collapse; background-color:#FAFAFA">
 												<c:forEach items="${applicationData.attachments}" var="item" varStatus="loop">
 													<tr class="listing" height='20' onmouseover="javascript:removeAttachmentLinkModule.init(${loop.index},'1')" onmouseleave="javascript:removeAttachmentLinkModule.init(${loop.index},'0')">
 														<td height='20'><font size='1'>&nbsp;&nbsp;</font></td>
-														<td height='20' width='60%'>
+														<td height='20' class='minor-listing' width='60%'>
 															<font size='1'>
 																<a href="${pageContext.servletContext.contextPath}/downloadAttachment.htm?id=${item.id}&applicationId=${applicationData.application.id}">
 																	${fn:substring(item.attachmentFilename,0,30)}
 																</a>	
 															</font>
 														</td>
-														<td height='20'><font size='1'>&nbsp;&nbsp;</font></td>
-														<td height='20' width='23%'><font size='1'>${item.attachmentType}</font></td>
-														<td height='20' width='10%' align='right'>
+														<td height='20' class='minor-listing'><font size='1'>&nbsp;&nbsp;</font></td>
+														<td height='20' class='minor-listing' width='23%'><font size='1'>${item.attachmentType}</font></td>
+														<td height='20' class='minor-listing' width='10%' align='right'>
 															<div id='removeColumnRow${loop.index}' style='visibility:hidden'>
 															<font size='1'>
-																<a href="${pageContext.servletContext.contextPath}/deleteAttachment.htm?id=${item.id}&applicationId=${applicationData.application.id}">
-																	<spring:message code="label.card.application_attachments.remove_link"/>
+																<a href="${pageContext.servletContext.contextPath}/deleteAttachment.htm?id=${item.id}&applicationId=${applicationData.application.id}" data-title='Remove attachment'>
+																	<span class="card-icon-area"><i class="fa fa-trash-o fa-lg" style="color:#888888;"></i></span>
+																	<!--<spring:message code="label.card.application_attachments.remove_link"/>-->
 																</a>
 															</font>
 															</div>

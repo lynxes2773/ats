@@ -27,9 +27,18 @@
 <body>
 	<div id="outer-container">
 			<div id="header">
-				<p class="heading1"><spring:message code="label.header.title"/></p>
+				<table class="nav-menu" cellpadding=0 cellspacing=0>
+					<tr>
+						<td>&nbsp;&nbsp;</td>
+						<td><img src="resources/images/headerlogo.jpg"></td>
+						<td><a class="headerLinks" href="${pageContext.servletContext.contextPath}/candidates.htm?pageId=1"><spring:message code="label.header.menu.candidates"/></a></td>
+						<td width=10><span style="color:#ffffff">|</span></td>
+						<td><a class="headerLinks" href="${pageContext.servletContext.contextPath}/applications.htm"><spring:message code="label.header.menu.applications"/></a></td>
+					</tr>
+				</table>
 			</div>
 			<div id="nav">
+				<!-- 
 				<table class="nav-menu" cellpadding=0 cellspacing=0>
 					<tr>
 						<td><a class="headerLinks" href="${pageContext.servletContext.contextPath}/candidates.htm?pageId=1"><spring:message code="label.header.menu.candidates"/></a></td>
@@ -37,4 +46,5 @@
 						<td><a class="headerLinks" href="${pageContext.servletContext.contextPath}/applications.htm"><spring:message code="label.header.menu.applications"/></a></td>
 					</tr>
 				</table>
+				 -->
 			</div>
