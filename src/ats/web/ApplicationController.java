@@ -117,7 +117,7 @@ public class ApplicationController extends AbstractController {
 		ModelAndView modelAndView = null;
 		if(errors!=null && errors.hasErrors())
 		{
-			modelAndView =  new ModelAndView("NewApplication", "applicationData", applicationData); 
+			modelAndView =  new ModelAndView("NewApplication", "applicationData", applicationData);
 		}
 		else
 		{
@@ -149,7 +149,6 @@ public class ApplicationController extends AbstractController {
 	@RequestMapping(value="/showApplication.htm", method=RequestMethod.GET)
 	public ModelAndView showApplicationDetail(@ModelAttribute("id") Integer id)
 	{
-		System.out.println("#### Application ID: " +id);
 		ApplicationData applicationData = getApplicationData(id);
 		
 		ModelAndView modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
@@ -224,11 +223,13 @@ public class ApplicationController extends AbstractController {
 	public ModelAndView saveApplicationContact(@Valid @ModelAttribute("applicationData") ApplicationData applicationData, BindingResult errors)
 	{
 		//contactValidator.validate(applicationData.getApplicationContact(), errors);
-
+		System.out.println("### 1");
 		ApplicationContact contact = applicationData.getApplicationContact();
 		applicationService.updateApplicationContact(contact);
+		System.out.println("### 2");
 		
 		applicationData = getApplicationData(applicationData.getApplication().getId());
+		System.out.println("### 3");
 		
 		ModelAndView modelAndView = null;
 		modelAndView = new ModelAndView("ApplicationDetail", "applicationData", applicationData);
@@ -366,7 +367,7 @@ public class ApplicationController extends AbstractController {
 		
 		Application application = applicationService.getApplication(applicationId);
 		
-		List<ApplicationContact> contacts = application.getContacts();
+		List<ApplicationContact> contacts = applicationService.getContacts(applicationId);
 		ApplicationContact contact = null;
 		if(contacts!=null && contacts.size()>0)
 		{

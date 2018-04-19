@@ -73,7 +73,7 @@ public class ApplicationContact{
 		ApplicationContact contact = (ApplicationContact)obj;
 		
 		if(contact.getContactName().equals(this.getContactName()) &&
-		   contact.getApplication().getPositionName().equals(this.getApplication().getId()) &&		
+		   contact.getApplication().getPositionName().equals(this.getApplication().getPositionName()) &&		
 		   contact.getId().equals(this.getId())) 
 		{
 			result = true;
@@ -85,8 +85,7 @@ public class ApplicationContact{
 	public int hashCode()
 	{
 		int hash = 3;
-		hash = 7 * hash + this.getId();
-		hash = 7 * hash + this.getApplication().getId();
+		hash = 7 * hash + this.getContactName().length();
 		hash = 7 * hash + this.getApplication().getPositionName().length();
 		
 		return hash;

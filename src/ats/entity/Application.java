@@ -225,7 +225,7 @@ public class Application implements java.io.Serializable {
 		
 		if(application.getPositionName().equals(this.getPositionName()) &&
 		   application.getJobDescription().equals(this.getJobDescription()) &&
-		   application.getId().equals(this.getId())) 
+		   application.getJobSourceName().equals(this.getJobSourceName())) 
 		{
 			result = true;
 		}
@@ -239,7 +239,7 @@ public class Application implements java.io.Serializable {
 	{
 		int hash = 3;
 		hash = 7 * hash + this.getPositionName().length();
-		hash = 7 * hash + this.getPositionType().length();
+		hash = 7 * hash + this.getJobSourceType().length();
 		
 		return hash;
 	}	

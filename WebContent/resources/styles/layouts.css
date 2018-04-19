@@ -94,7 +94,7 @@ body {
 	border-style: solid;
 	border-width: 1px;
 	border-color: #DDDDDD;
-    box-shadow: 5px 5px 5px #DDDDDD;
+    box-shadow: 0px 0px #DDDDDD;
 }
 
 #left-column-wide-box, #right-column-narrow-box, #full-width-box {

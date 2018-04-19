@@ -180,12 +180,24 @@ div.errors {
 
 .card-sub-header {
 	height: 25px;
-    padding-top: 2px;
+    padding-top: 0px;
     padding-left: 0px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
-	color: #E7AD00;
+	color: #1BA5B5;
 }
+
+.card-sub-content {
+    padding-top: 0px;
+    padding-left: 0px;
+    width: 90%;
+    float: left;
+    overflow-y: auto;
+    font-size: 12px;
+    font-weight: normal;
+	color: #4c4c4c;
+}
+
 
 .card-empty-placeholder {
     color: #DEDEDE;

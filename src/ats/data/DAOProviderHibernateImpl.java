@@ -220,6 +220,18 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 			{	
 				application = (Application)list.get(0);
 			}
+			else
+			{
+				query = session.createQuery("FROM Application a where a.id = :applicationId");
+				query.setParameter("applicationId", applicationId);
+				
+				list = query.getResultList();
+				if(list!=null && list.size()>0)
+				{	
+					application = (Application)list.get(0);
+				}
+				
+			}
 			tx.commit();
 		}
 		catch(HibernateException he)
@@ -591,6 +603,33 @@ public class DAOProviderHibernateImpl implements DAOProvider{
 		}
 		
 		return attachmentDeleted;
+	}
+	
+	public List getApplicationContacts(Integer applicationId)
+	{
+		List<ApplicationContact> contacts =null;
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try
+		{
+			tx = session.getTransaction();
+			tx.begin();
+			contacts = session.createQuery("from ApplicationContact ac where ac.application.id="+applicationId.toString()).getResultList();
+			
+		}
+		catch(HibernateException he)
+		{
+			if(tx!=null){
+				tx.rollback();
+				he.printStackTrace();
+			}
+		}
+		finally
+		{
+			session.close();
+		}
+		
+		return contacts;
 	}
 	
 	public List getApplicationAttachments(Integer applicationId)

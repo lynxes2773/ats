@@ -44,6 +44,8 @@ public interface DAOProvider extends Provider{
 	public Application updateApplication(Application application);
 	
 	public ApplicationContact updateApplicationContact(ApplicationContact contact);
+	
+	public List getApplicationContacts(Integer applicationId);
 
 	public Map getApplicationCountsByStatus();
 	

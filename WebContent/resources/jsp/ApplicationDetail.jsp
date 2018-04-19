@@ -8,7 +8,7 @@
 				<div id="page-title-area">
 					<table border=0 cellspacing=0 cellpadding=0 width='100%'>
 						<tr>
-							<td width='33%' valign='bottom'>
+							<td width='76%' valign='bottom'>
 								<span class="heading2">
 								<c:choose>
 									<c:when test="${!applicationEditable}">
@@ -20,8 +20,7 @@
 								</c:choose>
 								</span>
 							</td>
-							<td width='33%'>&nbsp;</td>
-							<td width='34%' align='right'>
+							<td width='24%' align='right'>
 								<a class="free" href="${pageContext.servletContext.contextPath}/showApplicationEditable.htm?id=${applicationData.application.id}"><spring:message code="label.common.link.edit"/></a>
 								&nbsp;&nbsp;&nbsp;
 								<i class="fa fa-id-badge" aria-hidden="true"></i>
@@ -182,15 +181,21 @@
 							<sf:form method="POST" commandName='applicationData' action="${pageContext.servletContext.contextPath}/saveApplicationContact.htm">
 							<sf:hidden path="applicationContact.id" />
 							<sf:hidden path="application.id" />
+							<sf:hidden path="application.positionName" />
+							<sf:hidden path="application.jobSourceType" />
 						
-							<div class="col-sm-12" style="padding-top:10px">
+							<div class="col-sm-12" style="padding-top:2px">
 								<c:choose>
 									<c:when test="${!showContactForm}">
 										<div class="card-sub-header">
 											${applicationData.applicationContact.contactName}
 										</div>
-										<br>
+										<div class="card-sub-content">
+											${applicationData.applicationContact.contactDescription}
+										</div>
+										<!--  
 						  				<sf:textarea class="form-control input-sm" path="applicationContact.contactDescription" rows='7' maxlength='255' readonly='true'/>
+						  				-->
 									</c:when>	
 									<c:otherwise>
 										<div class="card-form-box">
