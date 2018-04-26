@@ -12,7 +12,7 @@ CREATE TABLE application_attachments (
 	FOREIGN KEY fk_app_attach (application_id) REFERENCES application(application_id),
 	attachment_filename VARCHAR(255) NOT NULL,
 	attachment_type_name VARCHAR(50) NOT NULL,
-	attachment_content BLOB
+	attachment_content MEDIUMBLOB
 );
 
 CREATE TABLE application_comments (
